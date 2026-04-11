@@ -1,0 +1,56 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+    <text class="hero-emoji">🎲</text>
+    <text class="hero-title">随机数生成</text>
+  </view>
+
+  <!-- 结果展示 -->
+  <view class="result-area">
+    <text class="result-number">{{result !== null ? result : '?'}}</text>
+  </view>
+
+  <!-- 设置 -->
+  <view class="card">
+    <view class="setting-row">
+      <text class="setting-label">最小值</text>
+      <input class="setting-input" type="number" value="{{min}}" bindinput="onMinChange" />
+    </view>
+    <view class="setting-row">
+      <text class="setting-label">最大值</text>
+      <input class="setting-input" type="number" value="{{max}}" bindinput="onMaxChange" />
+    </view>
+    <view class="setting-row">
+      <text class="setting-label">生成个数</text>
+      <input class="setting-input" type="number" value="{{count}}" bindinput="onCountChange" />
+    </view>
+  </view>
+
+  <view class="action-area">
+    <view class="btn-primary" style="text-align:center;" bindtap="onGenerate">
+      <text>🎲 生成随机数</text>
+    </view>
+  </view>
+
+  <!-- 多个结果 -->
+  <view class="card" wx:if="{{results.length > 1}}">
+    <text class="section-title">生成结果</text>
+    <view class="result-list">
+      <view class="result-tag" wx:for="{{results}}" wx:key="index">
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史 -->
+  <view class="card" wx:if="{{history.length > 0}}">
+    <view class="flex-between" style="margin-bottom: 16rpx;">
+      <text class="section-title">历史记录</text>
+      <text class="clear-btn" bindtap="onClear">清空</text>
+    </view>
+    <view class="history-item" wx:for="{{history}}" wx:key="index">
+      <text class="history-text">{{item}}</text>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>

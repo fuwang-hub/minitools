@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "周公解梦",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

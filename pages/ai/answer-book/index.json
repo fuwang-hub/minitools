@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "答案之书",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

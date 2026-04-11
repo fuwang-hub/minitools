@@ -1,0 +1,97 @@
+.calc-page {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============ 显示屏 ============ */
+.display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 40rpx 40rpx 20rpx;
+  min-height: 280rpx;
+}
+
+.expression {
+  font-size: 32rpx;
+  color: #888;
+  margin-bottom: 8rpx;
+}
+
+.result {
+  font-size: 96rpx;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1.1;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* ============ 按键区 ============ */
+.keypad {
+  padding: 12rpx 16rpx;
+}
+
+.key-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.key {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+}
+
+.key:active {
+  opacity: 0.7;
+}
+
+.key text {
+  color: inherit;
+}
+
+/* 数字键 */
+.key.num {
+  background: #333;
+  color: #fff;
+}
+
+/* 0 键 */
+.key.zero {
+  width: 336rpx;
+  border-radius: 80rpx;
+  justify-content: flex-start;
+  padding-left: 64rpx;
+}
+
+/* 功能键 */
+.key.func {
+  background: #a5a5a5;
+  color: #000;
+}
+
+/* 运算键 */
+.key.op {
+  background: #ff9f0a;
+  color: #fff;
+}
+
+.key.op.active {
+  background: #fff;
+  color: #ff9f0a;
+}
+
+.key.op.equals {
+  background: #ff9f0a;
+  color: #fff;
+}

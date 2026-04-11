@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "生辰八字",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

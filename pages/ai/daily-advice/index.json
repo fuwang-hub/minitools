@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "今日宜忌",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

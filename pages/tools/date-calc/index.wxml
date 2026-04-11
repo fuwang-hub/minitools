@@ -1,0 +1,81 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+    <text class="hero-emoji">📅</text>
+    <text class="hero-title">日期计算</text>
+  </view>
+
+  <!-- Tab -->
+  <view class="tab-bar">
+    <view class="tab-item {{mode === 'diff' ? 'active' : ''}}" bindtap="switchMode" data-mode="diff">
+      <text>日期差</text>
+    </view>
+    <view class="tab-item {{mode === 'add' ? 'active' : ''}}" bindtap="switchMode" data-mode="add">
+      <text>推算日期</text>
+    </view>
+    <view class="tab-item {{mode === 'countdown' ? 'active' : ''}}" bindtap="switchMode" data-mode="countdown">
+      <text>倒计时</text>
+    </view>
+  </view>
+
+  <!-- 日期差模式 -->
+  <view class="card" wx:if="{{mode === 'diff'}}">
+    <view class="date-row">
+      <text class="date-label">开始日期</text>
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+        <view class="date-picker">{{startDate}} ▾</view>
+      </picker>
+    </view>
+    <view class="date-row">
+      <text class="date-label">结束日期</text>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+        <view class="date-picker">{{endDate}} ▾</view>
+      </picker>
+    </view>
+    <view class="result-box" wx:if="{{diffResult !== null}}">
+      <text class="result-big">{{diffResult}}</text>
+      <text class="result-unit">天</text>
+      <text class="result-detail">约 {{diffWeeks}} 周 {{diffRemainDays}} 天</text>
+    </view>
+  </view>
+
+  <!-- 推算模式 -->
+  <view class="card" wx:if="{{mode === 'add'}}">
+    <view class="date-row">
+      <text class="date-label">起始日期</text>
+      <picker mode="date" value="{{baseDate}}" bindchange="onBaseDateChange">
+        <view class="date-picker">{{baseDate}} ▾</view>
+      </picker>
+    </view>
+    <view class="date-row">
+      <text class="date-label">增加天数</text>
+      <input class="days-input" type="number" value="{{addDays}}" bindinput="onAddDaysChange" placeholder="输入天数" />
+    </view>
+    <view class="result-box" wx:if="{{addResult}}">
+      <text class="result-big">{{addResult}}</text>
+      <text class="result-detail">{{addWeekday}}</text>
+    </view>
+  </view>
+
+  <!-- 倒计时 -->
+  <view class="card" wx:if="{{mode === 'countdown'}}">
+    <view class="date-row">
+      <text class="date-label">目标日期</text>
+      <picker mode="date" value="{{targetDate}}" bindchange="onTargetDateChange">
+        <view class="date-picker">{{targetDate}} ▾</view>
+      </picker>
+    </view>
+    <view class="date-row">
+      <text class="date-label">事件名称</text>
+      <input class="days-input" value="{{eventName}}" bindinput="onEventNameChange" placeholder="如：生日、纪念日" />
+    </view>
+    <view class="result-box" wx:if="{{countdownDays !== null}}">
+      <text class="result-prefix">距离 {{eventName || '目标'}}</text>
+      <text class="result-big {{countdownDays < 0 ? 'past' : ''}}">
+        {{countdownDays < 0 ? '已过去' : '还有'}} {{absCountdownDays}}
+      </text>
+      <text class="result-unit">天</text>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>

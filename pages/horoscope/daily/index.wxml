@@ -1,0 +1,100 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+    <text class="hero-emoji">⭐</text>
+    <text class="hero-title">今日运势</text>
+    <text class="hero-desc">{{today}}</text>
+  </view>
+
+  <!-- 星座选择 -->
+  <scroll-view scroll-x class="zodiac-scroll">
+    <view class="zodiac-list">
+      <view class="zodiac-item {{activeZodiac === index ? 'active' : ''}}"
+            wx:for="{{zodiacs}}" wx:key="id"
+            bindtap="onZodiacTap" data-index="{{index}}">
+        <text class="zodiac-emoji">{{item.emoji}}</text>
+        <text class="zodiac-name">{{item.name}}</text>
+        <text class="zodiac-date">{{item.date}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 运势详情 -->
+  <view class="card fortune-card" wx:if="{{fortune}}">
+    <view class="fortune-header">
+      <text class="fortune-emoji">{{zodiacs[activeZodiac].emoji}}</text>
+      <view class="fortune-info">
+        <text class="fortune-name">{{zodiacs[activeZodiac].name}}</text>
+        <text class="fortune-overall">综合运势</text>
+      </view>
+      <view class="fortune-stars">
+        <text wx:for="{{5}}" wx:key="*this" class="star {{index < fortune.overall ? 'filled' : ''}}">★</text>
+      </view>
+    </view>
+
+    <!-- 运势分项 -->
+    <view class="fortune-items">
+      <view class="fortune-item">
+        <view class="fi-header">
+          <text class="fi-icon">❤️</text>
+          <text class="fi-label">爱情运势</text>
+          <view class="fi-stars">
+            <text wx:for="{{5}}" wx:key="*this" class="star-sm {{index < fortune.love ? 'filled' : ''}}">★</text>
+          </view>
+        </view>
+        <text class="fi-text">{{fortune.loveText}}</text>
+      </view>
+
+      <view class="fortune-item">
+        <view class="fi-header">
+          <text class="fi-icon">💼</text>
+          <text class="fi-label">事业运势</text>
+          <view class="fi-stars">
+            <text wx:for="{{5}}" wx:key="*this" class="star-sm {{index < fortune.career ? 'filled' : ''}}">★</text>
+          </view>
+        </view>
+        <text class="fi-text">{{fortune.careerText}}</text>
+      </view>
+
+      <view class="fortune-item">
+        <view class="fi-header">
+          <text class="fi-icon">💰</text>
+          <text class="fi-label">财运</text>
+          <view class="fi-stars">
+            <text wx:for="{{5}}" wx:key="*this" class="star-sm {{index < fortune.money ? 'filled' : ''}}">★</text>
+          </view>
+        </view>
+        <text class="fi-text">{{fortune.moneyText}}</text>
+      </view>
+
+      <view class="fortune-item">
+        <view class="fi-header">
+          <text class="fi-icon">💪</text>
+          <text class="fi-label">健康运势</text>
+          <view class="fi-stars">
+            <text wx:for="{{5}}" wx:key="*this" class="star-sm {{index < fortune.health ? 'filled' : ''}}">★</text>
+          </view>
+        </view>
+        <text class="fi-text">{{fortune.healthText}}</text>
+      </view>
+    </view>
+
+    <!-- 幸运信息 -->
+    <view class="lucky-section">
+      <view class="lucky-item">
+        <text class="lucky-label">幸运颜色</text>
+        <view class="lucky-color" style="background: {{fortune.luckyColor}};"></view>
+        <text class="lucky-value">{{fortune.luckyColorName}}</text>
+      </view>
+      <view class="lucky-item">
+        <text class="lucky-label">幸运数字</text>
+        <text class="lucky-value lucky-num">{{fortune.luckyNumber}}</text>
+      </view>
+      <view class="lucky-item">
+        <text class="lucky-label">速配星座</text>
+        <text class="lucky-value">{{fortune.matchZodiac}}</text>
+      </view>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>

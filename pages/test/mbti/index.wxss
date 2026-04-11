@@ -1,0 +1,63 @@
+.hero { padding: 40rpx 32rpx; text-align: center; }
+.hero-emoji { font-size: 56rpx; display: block; margin-bottom: 8rpx; }
+.hero-title { font-size: 36rpx; font-weight: 700; color: #fff; display: block; }
+.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
+
+/* 进度 */
+.progress-bar {
+  height: 8rpx; background: #f0f0f0; margin: 16rpx 24rpx 8rpx;
+  border-radius: 4rpx; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #f093fb, #f5576c);
+  border-radius: 4rpx; transition: width 0.3s;
+}
+.progress-text { font-size: 24rpx; color: #999; text-align: center; display: block; }
+
+/* 题目 */
+.question-card { margin-top: 16rpx; }
+.q-number {
+  font-size: 24rpx; color: #f5576c; font-weight: 700;
+  display: inline-block; padding: 4rpx 16rpx; background: #fff0f3;
+  border-radius: 12rpx; margin-bottom: 16rpx;
+}
+.q-text { font-size: 34rpx; font-weight: 600; color: #333; display: block; margin-bottom: 32rpx; line-height: 1.5; }
+
+.options { }
+.option-item {
+  padding: 28rpx 24rpx; background: #f8f9fa; border-radius: 16rpx;
+  margin-bottom: 16rpx; font-size: 28rpx; color: #555; line-height: 1.5;
+  border: 2rpx solid transparent; transition: all 0.2s;
+}
+.option-item:active {
+  background: #fff0f3; border-color: #f5576c; color: #f5576c;
+}
+
+/* 结果 */
+.result-hero {
+  padding: 60rpx 32rpx; text-align: center;
+}
+.result-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
+.result-type { font-size: 56rpx; font-weight: 700; color: #fff; display: block; }
+.result-name { font-size: 32rpx; color: rgba(255,255,255,0.9); display: block; margin-top: 8rpx; }
+
+.section-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; margin-bottom: 16rpx; }
+.desc-text { font-size: 28rpx; color: #666; line-height: 1.8; display: block; }
+
+.trait-item { display: flex; align-items: flex-start; margin-bottom: 12rpx; }
+.trait-dot { color: #f5576c; margin-right: 12rpx; font-size: 28rpx; }
+.trait-text { font-size: 28rpx; color: #666; line-height: 1.6; flex: 1; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.tag {
+  padding: 10rpx 20rpx; background: #fff0f3; color: #f5576c;
+  border-radius: 20rpx; font-size: 24rpx;
+}
+
+.match-text { font-size: 28rpx; color: #666; display: block; }
+
+.action-area { padding: 24rpx; }
+.btn-share {
+  text-align: center; padding: 24rpx; margin-top: 16rpx;
+  font-size: 28rpx; color: #667eea;
+}

@@ -1,0 +1,59 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+    <text class="hero-emoji">🪙</text>
+    <text class="hero-title">抛硬币</text>
+    <text class="hero-desc">让命运帮你做决定</text>
+  </view>
+
+  <!-- 硬币展示 -->
+  <view class="coin-area">
+    <view class="coin {{flipping ? 'flipping' : ''}}">
+      <text class="coin-face">{{result === null ? '?' : (result === 0 ? '正' : '反')}}</text>
+    </view>
+    <view class="coin-label" wx:if="{{result !== null && !flipping}}">
+      <text>{{result === 0 ? '🎉 正面!' : '🎊 反面!'}}</text>
+    </view>
+  </view>
+
+  <!-- 按钮 -->
+  <view class="action-area">
+    <view class="btn-flip" bindtap="onFlip">
+      <text>{{flipping ? '抛掷中...' : '抛一次'}}</text>
+    </view>
+  </view>
+
+  <!-- 统计 -->
+  <view class="card stats-card" wx:if="{{history.length > 0}}">
+    <text class="stats-title">📊 统计 (共 {{history.length}} 次)</text>
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="stat-num" style="color: #667eea;">{{headCount}}</text>
+        <text class="stat-label">正面</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num" style="color: #f5576c;">{{tailCount}}</text>
+        <text class="stat-label">反面</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num" style="color: #4facfe;">{{headRate}}%</text>
+        <text class="stat-label">正面率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史 -->
+  <view class="card" wx:if="{{history.length > 0}}">
+    <view class="flex-between" style="margin-bottom: 16rpx;">
+      <text class="stats-title">📋 历史记录</text>
+      <text class="clear-btn" bindtap="onClear">清空</text>
+    </view>
+    <view class="history-list">
+      <view class="history-item" wx:for="{{history}}" wx:key="index">
+        <text class="history-index">#{{history.length - index}}</text>
+        <text class="history-result {{item === 0 ? 'head' : 'tail'}}">{{item === 0 ? '正面' : '反面'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>

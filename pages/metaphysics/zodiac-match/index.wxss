@@ -1,0 +1,24 @@
+.hero { padding: 48rpx 32rpx; text-align: center; }
+.hero-emoji { font-size: 64rpx; display: block; margin-bottom: 12rpx; }
+.hero-title { font-size: 40rpx; font-weight: 700; color: #fff; display: block; }
+.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
+
+.coming-soon {
+  margin: 24rpx; background: #fff; border-radius: 24rpx; padding: 48rpx 32rpx;
+  text-align: center; box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+.cs-icon { font-size: 80rpx; margin-bottom: 20rpx; }
+.cs-title { font-size: 36rpx; font-weight: 700; color: #333; margin-bottom: 12rpx; }
+.cs-desc { font-size: 26rpx; color: #999; margin-bottom: 32rpx; }
+
+.cs-features { text-align: left; padding: 0 24rpx; }
+.cs-feature {
+  display: flex; align-items: center; padding: 16rpx 0;
+  font-size: 26rpx; color: #666;
+}
+.cs-dot { margin-right: 12rpx; }
+
+.back-btn {
+  display: inline-block; margin-top: 32rpx; padding: 20rpx 48rpx;
+  background: #f5f7fa; border-radius: 40rpx; font-size: 28rpx; color: #667eea;
+}

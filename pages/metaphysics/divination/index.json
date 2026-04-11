@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "求签算卦",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

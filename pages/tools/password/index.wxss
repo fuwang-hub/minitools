@@ -1,0 +1,50 @@
+.hero { padding: 40rpx 32rpx; text-align: center; }
+.hero-emoji { font-size: 56rpx; display: block; margin-bottom: 8rpx; }
+.hero-title { font-size: 36rpx; font-weight: 700; color: #fff; display: block; }
+
+.password-card { text-align: center; }
+.password-text {
+  display: block; font-size: 36rpx; font-weight: 600; color: #333;
+  word-break: break-all; padding: 16rpx; background: #f8f9fa;
+  border-radius: 12rpx; font-family: 'Courier New', monospace;
+}
+.copy-hint { font-size: 22rpx; color: #999; display: block; margin-top: 8rpx; }
+
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20rpx 0; border-bottom: 1rpx solid #f8f8f8;
+}
+.setting-label { font-size: 28rpx; color: #666; flex-shrink: 0; }
+.setting-slider { flex: 1; margin-left: 16rpx; }
+
+/* 开关 */
+.toggle {
+  width: 88rpx; height: 48rpx; border-radius: 24rpx;
+  background: #ddd; position: relative; transition: all 0.3s;
+}
+.toggle.on { background: #667eea; }
+.toggle-dot {
+  width: 40rpx; height: 40rpx; border-radius: 50%; background: #fff;
+  position: absolute; top: 4rpx; left: 4rpx; transition: all 0.3s;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.15);
+}
+.toggle.on .toggle-dot { left: 44rpx; }
+
+/* 强度条 */
+.strength-bar {
+  height: 12rpx; background: #f0f0f0; border-radius: 6rpx;
+  margin: 16rpx 0 8rpx; overflow: hidden;
+}
+.strength-fill { height: 100%; border-radius: 6rpx; transition: all 0.3s; }
+.strength-text { font-size: 24rpx; font-weight: 500; }
+
+.action-area { padding: 24rpx; }
+.section-title { font-size: 30rpx; font-weight: 600; color: #333; }
+.clear-btn { font-size: 24rpx; color: #999; }
+
+.history-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16rpx 0; border-bottom: 1rpx solid #f8f8f8;
+}
+.history-pw { font-size: 24rpx; color: #666; font-family: monospace; flex: 1; word-break: break-all; }
+.history-copy { font-size: 24rpx; color: #667eea; margin-left: 16rpx; flex-shrink: 0; }

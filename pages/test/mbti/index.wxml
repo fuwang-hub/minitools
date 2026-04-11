@@ -1,0 +1,75 @@
+<view class="page-container">
+  <!-- 答题中 -->
+  <block wx:if="{{!showResult}}">
+    <view class="hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+      <text class="hero-emoji">🧠</text>
+      <text class="hero-title">MBTI 性格测试</text>
+      <text class="hero-desc">回答8个问题，探索你的性格类型</text>
+    </view>
+
+    <!-- 进度 -->
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{(currentQ + 1) / questions.length * 100}}%;"></view>
+    </view>
+    <text class="progress-text">{{currentQ + 1}} / {{questions.length}}</text>
+
+    <!-- 题目 -->
+    <view class="card question-card">
+      <text class="q-number">Q{{currentQ + 1}}</text>
+      <text class="q-text">{{questions[currentQ].text}}</text>
+      <view class="options">
+        <view class="option-item" wx:for="{{questions[currentQ].options}}" wx:key="index"
+              bindtap="onAnswer" data-index="{{index}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 结果页 -->
+  <block wx:if="{{showResult}}">
+    <view class="result-hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+      <text class="result-emoji">{{resultInfo.emoji}}</text>
+      <text class="result-type">{{result}}</text>
+      <text class="result-name">{{resultInfo.name}}</text>
+    </view>
+
+    <view class="card">
+      <text class="section-title">🎯 性格描述</text>
+      <text class="desc-text">{{resultInfo.desc}}</text>
+    </view>
+
+    <view class="card">
+      <text class="section-title">✨ 性格特点</text>
+      <view class="trait-item" wx:for="{{resultInfo.traits}}" wx:key="index">
+        <text class="trait-dot">•</text>
+        <text class="trait-text">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <text class="section-title">💼 适合职业</text>
+      <view class="tag-list">
+        <view class="tag" wx:for="{{resultInfo.careers}}" wx:key="index">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <text class="section-title">❤️ 最佳配对</text>
+      <text class="match-text">{{resultInfo.match}}</text>
+    </view>
+
+    <view class="action-area">
+      <view class="btn-primary" style="text-align:center;" bindtap="onRestart">
+        <text>🔄 重新测试</text>
+      </view>
+      <view class="btn-share" bindtap="onShare">
+        <text>📤 分享结果</text>
+      </view>
+    </view>
+  </block>
+
+  <ad-banner type="banner" />
+</view>

@@ -1,0 +1,8 @@
+<view class="ad-wrapper" wx:if="{{show}}">
+  <!-- 正式环境使用真实广告 -->
+  <ad wx:if="{{adUnitId}}" unit-id="{{adUnitId}}" ad-intervals="30" binderror="onAdError"></ad>
+  <!-- 开发环境占位 -->
+  <view wx:else class="ad-dev-placeholder">
+    <text class="ad-label">📢 广告位</text>
+  </view>
+</view>

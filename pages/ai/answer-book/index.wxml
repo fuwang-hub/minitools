@@ -1,0 +1,30 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #6366f1);">
+    <text class="hero-emoji">📖</text>
+    <text class="hero-title">答案之书</text>
+    <text class="hero-desc">翻开书页寻找答案</text>
+  </view>
+  <view class="coming-soon">
+    <view class="cs-icon">🚀</view>
+    <view class="cs-title">功能开发中</view>
+    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
+    <view class="cs-features">
+      <view class="cs-feature">
+        <text class="cs-dot">✨</text>
+        <text>精心打磨的交互体验</text>
+      </view>
+      <view class="cs-feature">
+        <text class="cs-dot">🎯</text>
+        <text>准确可靠的计算结果</text>
+      </view>
+      <view class="cs-feature">
+        <text class="cs-dot">🎨</text>
+        <text>精美的界面设计</text>
+      </view>
+    </view>
+    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
+      <text>← 返回首页</text>
+    </navigator>
+  </view>
+  <ad-banner type="banner" />
+</view>

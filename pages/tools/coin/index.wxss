@@ -1,0 +1,90 @@
+.hero {
+  padding: 48rpx 32rpx;
+  text-align: center;
+}
+.hero-emoji { font-size: 64rpx; display: block; margin-bottom: 12rpx; }
+.hero-title { font-size: 40rpx; font-weight: 700; color: #fff; display: block; }
+.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
+
+/* 硬币 */
+.coin-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0 40rpx;
+}
+
+.coin {
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 40rpx rgba(255, 215, 0, 0.3);
+  transition: transform 0.1s;
+}
+
+.coin.flipping {
+  animation: coinFlip 0.6s ease-in-out;
+}
+
+@keyframes coinFlip {
+  0% { transform: rotateY(0deg) scale(1); }
+  25% { transform: rotateY(180deg) scale(1.1); }
+  50% { transform: rotateY(360deg) scale(1.2); }
+  75% { transform: rotateY(540deg) scale(1.1); }
+  100% { transform: rotateY(720deg) scale(1); }
+}
+
+.coin-face {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #8B6914;
+}
+
+.coin-label {
+  margin-top: 24rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 按钮 */
+.action-area {
+  padding: 0 48rpx 32rpx;
+}
+
+.btn-flip {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  text-align: center;
+  padding: 28rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.btn-flip:active { opacity: 0.85; }
+
+/* 统计 */
+.stats-card { }
+.stats-title { font-size: 30rpx; font-weight: 600; color: #333; display: block; }
+.stats-row { display: flex; margin-top: 20rpx; }
+.stat-item { flex: 1; text-align: center; }
+.stat-num { font-size: 44rpx; font-weight: 700; display: block; }
+.stat-label { font-size: 24rpx; color: #999; display: block; margin-top: 4rpx; }
+
+/* 历史 */
+.clear-btn { font-size: 24rpx; color: #999; }
+.history-list { max-height: 400rpx; overflow-y: auto; }
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.history-index { font-size: 24rpx; color: #bbb; width: 80rpx; }
+.history-result { font-size: 28rpx; font-weight: 500; }
+.history-result.head { color: #667eea; }
+.history-result.tail { color: #f5576c; }

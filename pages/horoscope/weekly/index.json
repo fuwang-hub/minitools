@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "本周运势",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

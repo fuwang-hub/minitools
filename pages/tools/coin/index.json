@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "抛硬币",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

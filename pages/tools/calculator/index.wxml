@@ -1,0 +1,42 @@
+<view class="calc-page">
+  <!-- 显示屏 -->
+  <view class="display">
+    <text class="expression">{{expression || ' '}}</text>
+    <text class="result">{{display}}</text>
+  </view>
+
+  <!-- 按键区 -->
+  <view class="keypad">
+    <view class="key-row">
+      <view class="key func" bindtap="onClear"><text>AC</text></view>
+      <view class="key func" bindtap="onToggleSign"><text>+/-</text></view>
+      <view class="key func" bindtap="onPercent"><text>%</text></view>
+      <view class="key op {{activeOp === '/' ? 'active' : ''}}" bindtap="onOperator" data-op="/"><text>÷</text></view>
+    </view>
+    <view class="key-row">
+      <view class="key num" bindtap="onDigit" data-digit="7"><text>7</text></view>
+      <view class="key num" bindtap="onDigit" data-digit="8"><text>8</text></view>
+      <view class="key num" bindtap="onDigit" data-digit="9"><text>9</text></view>
+      <view class="key op {{activeOp === '*' ? 'active' : ''}}" bindtap="onOperator" data-op="*"><text>×</text></view>
+    </view>
+    <view class="key-row">
+      <view class="key num" bindtap="onDigit" data-digit="4"><text>4</text></view>
+      <view class="key num" bindtap="onDigit" data-digit="5"><text>5</text></view>
+      <view class="key num" bindtap="onDigit" data-digit="6"><text>6</text></view>
+      <view class="key op {{activeOp === '-' ? 'active' : ''}}" bindtap="onOperator" data-op="-"><text>−</text></view>
+    </view>
+    <view class="key-row">
+      <view class="key num" bindtap="onDigit" data-digit="1"><text>1</text></view>
+      <view class="key num" bindtap="onDigit" data-digit="2"><text>2</text></view>
+      <view class="key num" bindtap="onDigit" data-digit="3"><text>3</text></view>
+      <view class="key op {{activeOp === '+' ? 'active' : ''}}" bindtap="onOperator" data-op="+"><text>+</text></view>
+    </view>
+    <view class="key-row">
+      <view class="key num zero" bindtap="onDigit" data-digit="0"><text>0</text></view>
+      <view class="key num" bindtap="onDot"><text>.</text></view>
+      <view class="key op equals" bindtap="onEquals"><text>=</text></view>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>

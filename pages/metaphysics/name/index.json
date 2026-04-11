@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "姓名测试",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

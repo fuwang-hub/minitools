@@ -1,0 +1,75 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+    <text class="hero-emoji">🔑</text>
+    <text class="hero-title">密码生成器</text>
+  </view>
+
+  <!-- 密码展示 -->
+  <view class="card password-card">
+    <text class="password-text" bindtap="onCopy">{{password || '点击下方按钮生成'}}</text>
+    <text class="copy-hint" wx:if="{{password}}">点击复制</text>
+  </view>
+
+  <!-- 设置 -->
+  <view class="card">
+    <view class="setting-row">
+      <text class="setting-label">密码长度: {{length}}</text>
+      <slider class="setting-slider" min="4" max="64" step="1"
+              value="{{length}}" bindchange="onLengthChange"
+              activeColor="#667eea" block-size="20" />
+    </view>
+    <view class="setting-row" bindtap="toggleOption" data-key="uppercase">
+      <text class="setting-label">大写字母 (A-Z)</text>
+      <view class="toggle {{uppercase ? 'on' : ''}}">
+        <view class="toggle-dot"></view>
+      </view>
+    </view>
+    <view class="setting-row" bindtap="toggleOption" data-key="lowercase">
+      <text class="setting-label">小写字母 (a-z)</text>
+      <view class="toggle {{lowercase ? 'on' : ''}}">
+        <view class="toggle-dot"></view>
+      </view>
+    </view>
+    <view class="setting-row" bindtap="toggleOption" data-key="numbers">
+      <text class="setting-label">数字 (0-9)</text>
+      <view class="toggle {{numbers ? 'on' : ''}}">
+        <view class="toggle-dot"></view>
+      </view>
+    </view>
+    <view class="setting-row" bindtap="toggleOption" data-key="symbols">
+      <text class="setting-label">特殊字符 (!@#$...)</text>
+      <view class="toggle {{symbols ? 'on' : ''}}">
+        <view class="toggle-dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 强度 -->
+  <view class="card" wx:if="{{password}}">
+    <text class="setting-label">密码强度</text>
+    <view class="strength-bar">
+      <view class="strength-fill" style="width: {{strengthPercent}}%; background: {{strengthColor}};"></view>
+    </view>
+    <text class="strength-text" style="color: {{strengthColor}};">{{strengthLabel}}</text>
+  </view>
+
+  <view class="action-area">
+    <view class="btn-primary" style="text-align:center;" bindtap="onGenerate">
+      <text>🔑 生成密码</text>
+    </view>
+  </view>
+
+  <!-- 历史 -->
+  <view class="card" wx:if="{{history.length > 0}}">
+    <view class="flex-between" style="margin-bottom: 16rpx;">
+      <text class="section-title">历史记录</text>
+      <text class="clear-btn" bindtap="onClear">清空</text>
+    </view>
+    <view class="history-item" wx:for="{{history}}" wx:key="index" bindtap="onCopyHistory" data-pw="{{item}}">
+      <text class="history-pw">{{item}}</text>
+      <text class="history-copy">复制</text>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>

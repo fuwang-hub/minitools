@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/tools/calculator/index",
+    "pages/tools/coin/index",
+    "pages/tools/converter/index",
+    "pages/tools/qrcode/index",
+    "pages/tools/random/index",
+    "pages/tools/date-calc/index",
+    "pages/tools/password/index",
+    "pages/test/mbti/index",
+    "pages/test/enneagram/index",
+    "pages/test/career/index",
+    "pages/test/love-language/index",
+    "pages/test/fun/index",
+    "pages/horoscope/daily/index",
+    "pages/horoscope/weekly/index",
+    "pages/horoscope/match/index",
+    "pages/horoscope/chart/index",
+    "pages/metaphysics/name/index",
+    "pages/metaphysics/bazi/index",
+    "pages/metaphysics/dream/index",
+    "pages/metaphysics/divination/index",
+    "pages/metaphysics/zodiac-match/index",
+    "pages/ai/acrostic/index",
+    "pages/ai/name-gen/index",
+    "pages/ai/answer-book/index",
+    "pages/ai/daily-advice/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#667eea",
+    "navigationBarTitleText": "万能工具箱",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f7fa"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

@@ -1,0 +1,46 @@
+<view class="page-container">
+  <view class="hero" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+    <text class="hero-emoji">📐</text>
+    <text class="hero-title">单位换算</text>
+  </view>
+
+  <!-- 分类 Tab -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === index ? 'active' : ''}}"
+          wx:for="{{categories}}" wx:key="key"
+          bindtap="onTabChange" data-index="{{index}}">
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 输入区域 -->
+  <view class="card convert-card">
+    <!-- From -->
+    <view class="unit-row">
+      <picker class="unit-picker" range="{{currentUnits}}" range-key="name"
+              value="{{fromIndex}}" bindchange="onFromChange">
+        <view class="picker-text">{{currentUnits[fromIndex].name}} ▾</view>
+      </picker>
+      <input class="unit-input" type="digit" value="{{fromValue}}"
+             bindinput="onInputChange" placeholder="输入数值" />
+    </view>
+
+    <!-- 交换按钮 -->
+    <view class="swap-btn" bindtap="onSwap">
+      <text>🔄</text>
+    </view>
+
+    <!-- To -->
+    <view class="unit-row">
+      <picker class="unit-picker" range="{{currentUnits}}" range-key="name"
+              value="{{toIndex}}" bindchange="onToChange">
+        <view class="picker-text">{{currentUnits[toIndex].name}} ▾</view>
+      </picker>
+      <view class="unit-result">
+        <text class="result-value">{{toValue}}</text>
+      </view>
+    </view>
+  </view>
+
+  <ad-banner type="banner" />
+</view>
