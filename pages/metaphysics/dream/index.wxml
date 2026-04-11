@@ -1,30 +1,55 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
-    <text class="hero-emoji">💭</text>
+<!--pages/metaphysics/dream/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #4338ca, #6366F1);">
+    <text class="hero-emoji">🌙</text>
     <text class="hero-title">周公解梦</text>
-    <text class="hero-desc">解读梦境中的含义</text>
+    <text class="hero-desc">解读梦境的神秘密码</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+
+  <block wx:if="{{!showResult}}">
+    <view class="search-card">
+      <view class="search-box">
+        <input class="search-input" placeholder="输入梦境关键词，如：蛇、飞、水" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="searchDream" />
+        <view class="search-btn" bindtap="searchDream">解梦</view>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+    <view class="hot-section">
+      <text class="hot-title">🔥 热门梦境</text>
+      <view class="hot-tags">
+        <text class="hot-tag" wx:for="{{hotWords}}" wx:key="index" bindtap="tapHot" data-word="{{item}}">{{item}}</text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{showResult && result}}">
+    <view class="dream-header">
+      <text class="dream-emoji">{{result.emoji}}</text>
+      <text class="dream-title">梦见「{{searchWord}}」</text>
+      <text class="dream-luck" style="background: {{result.luck === '吉' ? '#dcfce7' : result.luck === '凶' ? '#fef2f2' : '#fef9c3'}}; color: {{result.luck === '吉' ? '#059669' : result.luck === '凶' ? '#dc2626' : '#b45309'}};">{{result.luck}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🔮 基本含义</text>
+      <text class="card-content">{{result.meaning}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">📖 详细解读</text>
+      <text class="card-content">{{result.detail}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💡 行动建议</text>
+      <text class="card-content">{{result.advice}}</text>
+    </view>
+
+    <view class="disclaimer">
+      <text>⚠️ 以上解读仅供娱乐参考，请理性看待</text>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">再解一梦</button>
+      <button class="btn-share" open-type="share">分享解读</button>
+    </view>
+  </block>
 </view>

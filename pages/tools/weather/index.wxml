@@ -1,0 +1,147 @@
+<!-- pages/tools/weather/index.wxml -->
+<view class="container" style="{{bgStyle}}">
+
+  <!-- 未配置提示 -->
+  <view class="config-tip" wx:if="{{!configured}}">
+    <text class="tip-emoji">🔑</text>
+    <text class="tip-title">需要配置高德地图 API Key</text>
+    <text class="tip-step">1. 打开 console.amap.com 注册账号</text>
+    <text class="tip-step">2. 控制台 → 应用管理 → 创建应用</text>
+    <text class="tip-step">3. 添加Key（服务平台选"Web服务"）</text>
+    <text class="tip-step">4. 复制Key填入 index.js 中的 AMAP_KEY</text>
+    <text class="tip-note">个人开发者免费 30万次/天</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-mask" wx:if="{{loading && configured}}">
+    <text class="loading-icon">🌤️</text>
+    <text class="loading-text">加载天气中...</text>
+  </view>
+
+  <!-- 错误提示 -->
+  <view class="error-tip" wx:if="{{error && !loading}}">
+    <text class="error-icon">⚠️</text>
+    <text class="error-text">{{error}}</text>
+    <view class="retry-btn" bindtap="loadWeather">重试</view>
+  </view>
+
+  <!-- 天气内容 -->
+  <view class="weather-content" wx:if="{{now && !loading}}">
+
+    <!-- 顶部：城市 + 刷新时间 -->
+    <view class="top-bar">
+      <view class="city-btn" bindtap="toggleCityPicker">
+        <text class="city-name">📍 {{cityName}}</text>
+        <text class="city-arrow">▾</text>
+      </view>
+      <text class="update-time" wx:if="{{now.reportTime}}">{{now.reportTime}} 更新</text>
+    </view>
+
+    <!-- 核心天气 -->
+    <view class="main-weather">
+      <text class="temp-big">{{now.temperature}}°</text>
+      <view class="weather-meta">
+        <text class="weather-text">{{weatherIcon}} {{now.weather}}</text>
+        <text class="feels-like">体感 {{now.feelsLike}}°C</text>
+      </view>
+      <view class="weather-detail-row">
+        <text class="detail-item">💧 {{now.humidity}}%</text>
+        <text class="detail-item">🌬️ {{now.windDesc}}</text>
+        <view class="aqi-tag" wx:if="{{aqiInfo}}" style="background: {{aqiInfo.bg}};">
+          <text style="color: {{aqiInfo.color}};">AQI {{aqiInfo.aqi}} {{aqiInfo.category}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 24小时预报 -->
+    <view class="card" wx:if="{{hourly.length > 0}}">
+      <text class="card-title">⏰ 逐小时预报</text>
+      <scroll-view class="hourly-scroll" scroll-x="true" enhanced="true" show-scrollbar="false">
+        <view class="hourly-list">
+          <view class="hourly-item" wx:for="{{hourly}}" wx:key="index" wx:if="{{index < 24}}">
+            <text class="h-time">{{item.time}}</text>
+            <text class="h-icon">{{item.icon}}</text>
+            <text class="h-temp">{{item.temp}}°</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 多日预报 -->
+    <view class="card" wx:if="{{daily.length > 0}}">
+      <text class="card-title">📅 {{daily.length}}天预报</text>
+      <view class="daily-list">
+        <view class="daily-row" wx:for="{{daily}}" wx:key="index">
+          <text class="d-day">{{item.dateLabel}}</text>
+          <text class="d-icon">{{item.iconDay}}</text>
+          <text class="d-text">{{item.textDay}}</text>
+          <view class="d-temp-bar">
+            <text class="d-lo">{{item.tempMin}}°</text>
+            <view class="d-bar-bg">
+              <view class="d-bar-fill" style="left: {{item.barLeft}}%; width: {{item.barWidth}}%;"></view>
+            </view>
+            <text class="d-hi">{{item.tempMax}}°</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 日出日落 -->
+    <view class="card sun-card">
+      <text class="card-title">🌅 日出日落</text>
+      <view class="sun-row">
+        <view class="sun-item">
+          <text class="sun-icon">🌅</text>
+          <text class="sun-label">日出</text>
+          <text class="sun-time">{{sunrise}}</text>
+        </view>
+        <view class="sun-arc">──── ☀️ ────</view>
+        <view class="sun-item">
+          <text class="sun-icon">🌇</text>
+          <text class="sun-label">日落</text>
+          <text class="sun-time">{{sunset}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 生活指数 -->
+    <view class="card" wx:if="{{indices.length > 0}}">
+      <text class="card-title">🧘 生活指数</text>
+      <view class="indices-grid">
+        <view class="index-item" wx:for="{{indices}}" wx:key="index">
+          <text class="idx-emoji">{{item.emoji}}</text>
+          <text class="idx-name">{{item.name}}</text>
+          <text class="idx-value">{{item.category}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部信息 -->
+    <view class="footer">
+      <text class="footer-text">数据来源：高德天气</text>
+      <button class="share-btn" open-type="share" size="mini">分享天气</button>
+    </view>
+  </view>
+
+  <!-- 城市选择器 -->
+  <view class="city-picker-mask" wx:if="{{showCityPicker}}" bindtap="toggleCityPicker"></view>
+  <view class="city-picker" wx:if="{{showCityPicker}}">
+    <view class="picker-header">
+      <text class="picker-title">选择城市</text>
+      <text class="picker-close" bindtap="toggleCityPicker">✕</text>
+    </view>
+    <view class="search-bar">
+      <input class="search-input" placeholder="搜索城市" value="{{searchKey}}" bindinput="onCitySearch" />
+    </view>
+    <view class="relocate-btn" bindtap="relocate">📍 重新定位</view>
+    <scroll-view class="city-list" scroll-y="true">
+      <view class="city-item" wx:for="{{filteredCities}}" wx:key="adcode" bindtap="selectCity" data-idx="{{index}}">
+        <text>{{item.name}}</text>
+      </view>
+      <view class="no-result" wx:if="{{filteredCities.length === 0}}">
+        <text>未找到匹配城市</text>
+      </view>
+    </scroll-view>
+  </view>
+
+</view>

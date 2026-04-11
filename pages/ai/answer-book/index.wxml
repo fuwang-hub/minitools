@@ -1,30 +1,44 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #6366f1);">
-    <text class="hero-emoji">📖</text>
-    <text class="hero-title">答案之书</text>
-    <text class="hero-desc">翻开书页寻找答案</text>
-  </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+<!--pages/ai/answer-book/index.wxml-->
+<view class="container">
+  <block wx:if="{{phase === 'input'}}">
+    <view class="hero" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
+      <text class="hero-emoji">📖</text>
+      <text class="hero-title">答案之书</text>
+      <text class="hero-desc">心中默想问题，翻开书页</text>
+    </view>
+    <view class="input-card">
+      <text class="input-hint">在心中想一个问题...</text>
+      <textarea class="input-area" placeholder="输入你的问题（选填）" value="{{question}}" bindinput="onInput" maxlength="100" />
+      <button class="btn-ask" bindtap="askQuestion">✨ 翻开答案之书</button>
+    </view>
+    <view class="history-section" wx:if="{{history.length > 0}}">
+      <text class="h-title">📝 历史记录</text>
+      <view class="h-item" wx:for="{{history}}" wx:key="index">
+        <text class="h-q">Q: {{item.q}}</text>
+        <text class="h-a">A: {{item.a.emoji}} {{item.a.text}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <block wx:if="{{phase === 'thinking'}}">
+    <view class="thinking-page">
+      <text class="thinking-emoji">📖</text>
+      <text class="thinking-text">正在翻阅答案之书...</text>
+      <view class="thinking-dots">
+        <text class="t-dot">•</text><text class="t-dot">•</text><text class="t-dot">•</text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{phase === 'result' && answer}}">
+    <view class="result-page" style="background: {{answer.type === 'positive' ? 'linear-gradient(135deg, #059669, #10b981)' : answer.type === 'neutral' ? 'linear-gradient(135deg, #d97706, #f59e0b)' : 'linear-gradient(135deg, #dc2626, #ef4444)'}};">
+      <text class="result-emoji">{{answer.emoji}}</text>
+      <text class="result-text">{{answer.text}}</text>
+      <text class="result-hint">— 答案之书 —</text>
+    </view>
+    <view class="actions">
+      <button class="btn-again" bindtap="askAgain">再问一次</button>
+      <button class="btn-share" open-type="share">分享答案</button>
+    </view>
+  </block>
 </view>

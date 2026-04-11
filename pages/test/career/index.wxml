@@ -1,30 +1,66 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-    <text class="hero-emoji">💼</text>
-    <text class="hero-title">职业倾向测试</text>
-    <text class="hero-desc">发现最适合你的职业方向</text>
-  </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+<!--pages/test/career/index.wxml-->
+<view class="container">
+  <block wx:if="{{!showResult}}">
+    <view class="hero" style="background: linear-gradient(135deg, #F59E0B, #F97316);">
+      <text class="hero-emoji">💼</text>
+      <text class="hero-title">职业倾向测试</text>
+      <text class="hero-desc">发现最适合你的职业方向</text>
+    </view>
+
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%; background: linear-gradient(90deg, #F59E0B, #F97316);"></view>
+    </view>
+    <text class="progress-text">{{currentQuestion + 1}} / 6</text>
+
+    <view class="question-card">
+      <text class="question-text">{{currentQuestion + 1}}. {{questions[currentQuestion].text}}</text>
+      <view class="options">
+        <view class="option" wx:for="{{questions[currentQuestion].options}}" wx:key="index" bindtap="handleAnswer" data-index="{{index}}">
+          <text class="option-label">{{['A','B','C','D','E','F'][index]}}</text>
+          <text class="option-text">{{item}}</text>
+        </view>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <block wx:if="{{showResult}}">
+    <view class="result-hero" style="background: linear-gradient(135deg, {{result.color}}, {{result.color}}cc);">
+      <text class="result-emoji">{{result.emoji}}</text>
+      <text class="result-name">{{result.name}}</text>
+      <text class="result-title">{{result.title}}</text>
+      <text class="result-code">Holland代码：{{hollandCode}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">📝 性格描述</text>
+      <text class="card-content">{{result.desc}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🏷️ 核心特质</text>
+      <view class="traits">
+        <text class="trait-tag" wx:for="{{result.traits}}" wx:key="index" style="background: {{result.color}}15; color: {{result.color}};">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🎯 推荐职业</text>
+      <view class="careers">
+        <text class="career-tag" wx:for="{{result.careers}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🔄 第二倾向：{{subResult.name}} {{subResult.emoji}}</text>
+      <text class="card-content">{{subResult.desc}}</text>
+      <view class="sub-careers">
+        <text class="career-tag sub" wx:for="{{subResult.careers}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新测试</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+  </block>
 </view>

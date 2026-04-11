@@ -1,30 +1,53 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #6366f1);">
+<!--pages/ai/daily-advice/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #059669, #10b981);">
     <text class="hero-emoji">📿</text>
     <text class="hero-title">今日宜忌</text>
-    <text class="hero-desc">每日运势指南</text>
+    <text class="hero-desc">{{today.year}}年{{today.month}}月{{today.day}}日 周{{today.weekday}}</text>
+    <text class="hero-lunar">{{lunar}}</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+
+  <view class="score-section">
+    <view class="score-ring">
+      <text class="score-num">{{overallScore}}</text>
+      <text class="score-label">今日指数</text>
+    </view>
+    <text class="mood-text">今日心情：{{mood}}</text>
+  </view>
+
+  <view class="yi-ji-card">
+    <view class="yi-section">
+      <text class="section-title yi-title">✅ 宜</text>
+      <view class="tag-list">
+        <text class="yi-tag" wx:for="{{yiList}}" wx:key="index">{{item}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
+    <view class="divider"></view>
+    <view class="ji-section">
+      <text class="section-title ji-title">❌ 忌</text>
+      <view class="tag-list">
+        <text class="ji-tag" wx:for="{{jiList}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
   </view>
-  <ad-banner type="banner" />
+
+  <view class="lucky-card">
+    <text class="lucky-title">🍀 今日幸运</text>
+    <view class="lucky-row">
+      <view class="lucky-item"><text class="l-label">幸运色</text><text class="l-value">{{luckyColor}}</text></view>
+      <view class="lucky-item"><text class="l-label">幸运数</text><text class="l-value">{{luckyNum}}</text></view>
+      <view class="lucky-item"><text class="l-label">方位</text><text class="l-value">{{luckyDir}}</text></view>
+    </view>
+  </view>
+
+  <view class="quote-card">
+    <text class="quote-icon">💬</text>
+    <text class="quote-text">{{quote}}</text>
+  </view>
+
+  <view class="share-section">
+    <button class="btn-share" open-type="share">分享今日运势</button>
+  </view>
+
+  <ad wx:if="{{false}}" unit-id="adunit-xxx" ad-type="banner"></ad>
 </view>

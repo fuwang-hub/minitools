@@ -1,30 +1,65 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-    <text class="hero-emoji">🔢</text>
-    <text class="hero-title">九型人格测试</text>
-    <text class="hero-desc">探索你的核心性格类型</text>
-  </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+<!--pages/test/enneagram/index.wxml-->
+<view class="container">
+  <!-- 测试页面 -->
+  <block wx:if="{{!showResult}}">
+    <view class="hero" style="background: linear-gradient(135deg, #6366F1, #8B5CF6);">
+      <text class="hero-emoji">🔮</text>
+      <text class="hero-title">九型人格测试</text>
+      <text class="hero-desc">探索你的核心性格类型</text>
+    </view>
+
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%;"></view>
+    </view>
+    <text class="progress-text">{{currentQuestion + 1}} / 9</text>
+
+    <view class="question-card">
+      <text class="question-text">{{currentQuestion + 1}}. {{questions[currentQuestion].text}}</text>
+      <view class="options">
+        <view class="option" wx:for="{{questions[currentQuestion].options}}" wx:key="index" bindtap="handleAnswer" data-index="{{index}}">
+          <text class="option-label">{{['A','B','C'][index]}}</text>
+          <text class="option-text">{{item}}</text>
+        </view>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <!-- 结果页面 -->
+  <block wx:if="{{showResult}}">
+    <view class="result-hero" style="background: linear-gradient(135deg, {{result.color}}, {{result.color}}dd);">
+      <text class="result-emoji">{{result.emoji}}</text>
+      <text class="result-type">第{{result.type}}型</text>
+      <text class="result-name">{{result.name}}</text>
+      <text class="result-wing">翼型：{{result.type}}w{{result.wingType}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🏷️ 核心特质</text>
+      <view class="traits">
+        <text class="trait-tag" wx:for="{{result.traits}}" wx:key="index" style="background: {{result.color}}20; color: {{result.color}};">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💪 你的优势</text>
+      <text class="card-content">{{result.strengths}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">⚡ 成长空间</text>
+      <text class="card-content">{{result.weaknesses}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💡 成长建议</text>
+      <text class="card-content">{{result.advice}}</text>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新测试</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+
+    <ad wx:if="{{false}}" unit-id="adunit-xxx" ad-type="banner"></ad>
+  </block>
 </view>

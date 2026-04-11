@@ -1,30 +1,81 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
-    <text class="hero-emoji">🏮</text>
+<!--pages/metaphysics/bazi/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #92400e, #b45309);">
+    <text class="hero-emoji">☯️</text>
     <text class="hero-title">生辰八字</text>
-    <text class="hero-desc">排盘解读你的命理</text>
+    <text class="hero-desc">天干地支 · 五行命理</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
+
+  <block wx:if="{{!showResult}}">
+    <view class="form-card">
+      <text class="form-title">输入出生信息</text>
+      <view class="form-row">
+        <text class="form-label">出生年份</text>
+        <picker mode="selector" range="{{years}}" value="{{yearIdx}}" bindchange="onYearChange">
+          <view class="picker-val">{{birthYear}}年 ›</view>
+        </picker>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
+      <view class="form-row">
+        <text class="form-label">出生月份</text>
+        <picker mode="selector" range="{{months}}" value="{{monthIdx}}" bindchange="onMonthChange">
+          <view class="picker-val">{{birthMonth}}月 ›</view>
+        </picker>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+      <view class="form-row">
+        <text class="form-label">出生日期</text>
+        <picker mode="selector" range="{{days}}" value="{{dayIdx}}" bindchange="onDayChange">
+          <view class="picker-val">{{birthDay}}日 ›</view>
+        </picker>
       </view>
+      <view class="form-row">
+        <text class="form-label">出生时辰</text>
+        <picker mode="selector" range="{{hours}}" value="{{hourIdx}}" bindchange="onHourChange">
+          <view class="picker-val">{{birthHour}}时 ›</view>
+        </picker>
+      </view>
+      <button class="btn-analyze" bindtap="analyze">排盘分析</button>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <block wx:if="{{showResult && result}}">
+    <view class="bazi-card">
+      <text class="bazi-title">四柱八字</text>
+      <view class="bazi-grid">
+        <view class="bazi-col" wx:for="{{['年柱','月柱','日柱','时柱']}}" wx:key="index">
+          <text class="bazi-label">{{item}}</text>
+          <text class="bazi-gan">{{['year','month','day','hour'][index]}}</text>
+          <text class="bazi-text">{{result.bazi[['year','month','day','hour'][index]].text}}</text>
+          <text class="bazi-wuxing">{{result.bazi[['year','month','day','hour'][index]].wuxing}}</text>
+        </view>
+      </view>
+      <text class="shengxiao">生肖：{{result.bazi.shengxiao}} | 日主：{{result.dayMaster}}({{result.dayWuxing}})</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🔥 五行分布</text>
+      <view class="wuxing-bars">
+        <view class="wx-row" wx:for="{{result.wuxing.sorted}}" wx:key="index">
+          <text class="wx-label" style="color: {{result.colors[item[0]]}};">{{item[0]}}</text>
+          <view class="wx-bar"><view class="wx-fill" style="width: {{item[1] / 8 * 100}}%; background: {{result.colors[item[0]]}};"></view></view>
+          <text class="wx-val">{{item[1]}}</text>
+        </view>
+      </view>
+      <text class="wx-note" wx:if="{{result.wuxing.missing.length > 0}}">⚠️ 缺少：{{result.wuxing.missing}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🧘 性格分析</text>
+      <text class="card-content">日主为{{result.dayMaster}}，五行属{{result.dayWuxing}}。{{result.personality}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💡 命理建议</text>
+      <text class="card-content">{{result.advice}}</text>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新分析</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+  </block>
 </view>

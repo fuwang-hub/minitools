@@ -8,14 +8,31 @@
     </view>
 
     <!-- 搜索框 -->
-    <view class="search-bar" bindtap="onSearchTap">
+    <view class="search-bar">
       <text class="search-icon">🔍</text>
-      <text class="search-placeholder">搜索工具...</text>
+      <input class="search-input" placeholder="搜索工具..." placeholder-class="search-placeholder"
+             value="{{searchKeyword}}" bindinput="onSearchInput"
+             bindfocus="onSearchFocus" bindblur="onSearchBlur"
+             confirm-type="search" />
+      <text class="search-clear" wx:if="{{searchKeyword}}" catchtap="onSearchClear">✕</text>
     </view>
   </view>
 
-  <!-- 模块列表 -->
-  <view class="modules">
+  <!-- 搜索结果 -->
+  <view class="search-results" wx:if="{{searchMode && searchKeyword}}">
+    <view class="search-result-item" wx:for="{{searchResults}}" wx:key="id"
+          catchtap="onToolTap" data-path="{{item.path}}">
+      <text class="sr-emoji">{{item.emoji}}</text>
+      <text class="sr-name">{{item.name}}</text>
+      <text class="sr-arrow">›</text>
+    </view>
+    <view class="search-empty" wx:if="{{searchResults.length === 0}}">
+      <text>没有找到相关工具</text>
+    </view>
+  </view>
+
+  <!-- 模块列表（搜索时隐藏） -->
+  <view class="modules" wx:if="{{!searchMode || !searchKeyword}}">
     <view class="module-card" wx:for="{{modules}}" wx:key="id"
           style="background: linear-gradient(135deg, {{item.color1}}, {{item.color2}});"
           bindtap="onModuleTap" data-id="{{item.id}}">

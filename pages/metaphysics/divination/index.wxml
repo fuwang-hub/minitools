@@ -1,30 +1,69 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
-    <text class="hero-emoji">🎋</text>
-    <text class="hero-title">求签算卦</text>
-    <text class="hero-desc">诚心求签指引方向</text>
+<!--pages/metaphysics/divination/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
+    <text class="hero-emoji">🏮</text>
+    <text class="hero-title">求签问卦</text>
+    <text class="hero-desc">心诚则灵 · 签文指引</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+
+  <block wx:if="{{phase === 'ready'}}">
+    <view class="altar">
+      <text class="altar-emoji">🏮</text>
+      <text class="altar-text">心中默念所求之事</text>
+      <text class="altar-hint">然后点击下方开始求签</text>
+      <button class="btn-shake" bindtap="startShake">🙏 开始求签</button>
+    </view>
+    <view class="history-section" wx:if="{{history.length > 0}}">
+      <text class="history-title">📜 求签记录</text>
+      <view class="history-item" wx:for="{{history}}" wx:key="index">
+        <text class="h-num">第{{item.num}}签</text>
+        <text class="h-type" style="color: {{item.typeColor}};">{{item.type}}</text>
+        <text class="h-time">{{item.time}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <block wx:if="{{phase === 'shaking'}}">
+    <view class="shaking">
+      <text class="shake-emoji {{shakeCount % 2 === 0 ? 'shake-left' : 'shake-right'}}">🎋</text>
+      <text class="shake-text">摇签中...</text>
+      <view class="shake-dots">
+        <text class="dot {{shakeCount >= 1 ? 'active' : ''}}">●</text>
+        <text class="dot {{shakeCount >= 2 ? 'active' : ''}}">●</text>
+        <text class="dot {{shakeCount >= 3 ? 'active' : ''}}">●</text>
+        <text class="dot {{shakeCount >= 4 ? 'active' : ''}}">●</text>
+        <text class="dot {{shakeCount >= 5 ? 'active' : ''}}">●</text>
+        <text class="dot {{shakeCount >= 6 ? 'active' : ''}}">●</text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{phase === 'result' && result}}">
+    <view class="sign-card">
+      <text class="sign-num">第 {{result.num}} 签</text>
+      <text class="sign-type" style="color: {{result.typeColor}};">{{result.type}}</text>
+      <view class="sign-poem">
+        <text class="poem-text">{{result.poem}}</text>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">📖 签文解读</text>
+      <text class="card-content">{{result.meaning}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💡 行动指引</text>
+      <text class="card-content">{{result.advice}}</text>
+    </view>
+
+    <view class="disclaimer">
+      <text>⚠️ 签文仅供参考，命运掌握在自己手中</text>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">再求一签</button>
+      <button class="btn-share" open-type="share">分享签文</button>
+    </view>
+  </block>
 </view>

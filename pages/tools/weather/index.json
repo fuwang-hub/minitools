@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "天气预报",
+  "navigationBarBackgroundColor": "#5B86E5",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "backgroundColorTop": "#5B86E5",
+  "backgroundColorBottom": "#36D1DC",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

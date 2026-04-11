@@ -1,24 +1,32 @@
-.hero { padding: 48rpx 32rpx; text-align: center; }
-.hero-emoji { font-size: 64rpx; display: block; margin-bottom: 12rpx; }
-.hero-title { font-size: 40rpx; font-weight: 700; color: #fff; display: block; }
-.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
-
-.coming-soon {
-  margin: 24rpx; background: #fff; border-radius: 24rpx; padding: 48rpx 32rpx;
-  text-align: center; box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
-}
-.cs-icon { font-size: 80rpx; margin-bottom: 20rpx; }
-.cs-title { font-size: 36rpx; font-weight: 700; color: #333; margin-bottom: 12rpx; }
-.cs-desc { font-size: 26rpx; color: #999; margin-bottom: 32rpx; }
-
-.cs-features { text-align: left; padding: 0 24rpx; }
-.cs-feature {
-  display: flex; align-items: center; padding: 16rpx 0;
-  font-size: 26rpx; color: #666;
-}
-.cs-dot { margin-right: 12rpx; }
-
-.back-btn {
-  display: inline-block; margin-top: 32rpx; padding: 20rpx 48rpx;
-  background: #f5f7fa; border-radius: 40rpx; font-size: 28rpx; color: #667eea;
-}
+/* pages/ai/daily-advice/index.wxss */
+.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 40rpx; }
+.hero { padding: 60rpx 40rpx; text-align: center; color: #fff; }
+.hero-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
+.hero-title { font-size: 44rpx; font-weight: bold; display: block; }
+.hero-desc { font-size: 28rpx; opacity: 0.9; display: block; margin-top: 8rpx; }
+.hero-lunar { font-size: 24rpx; opacity: 0.8; display: block; margin-top: 4rpx; }
+.score-section { text-align: center; padding: 30rpx; }
+.score-ring { width: 160rpx; height: 160rpx; border-radius: 50%; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border: 8rpx solid #059669; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; }
+.score-num { font-size: 52rpx; font-weight: bold; color: #059669; line-height: 1; }
+.score-label { font-size: 22rpx; color: #059669; }
+.mood-text { font-size: 28rpx; color: #374151; margin-top: 16rpx; }
+.yi-ji-card { margin: 0 30rpx; background: #fff; border-radius: 24rpx; padding: 32rpx; box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06); }
+.yi-section, .ji-section { }
+.divider { height: 1rpx; background: #f3f4f6; margin: 24rpx 0; }
+.section-title { font-size: 32rpx; font-weight: 600; display: block; margin-bottom: 16rpx; }
+.yi-title { color: #059669; }
+.ji-title { color: #dc2626; }
+.tag-list { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.yi-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #dcfce7; color: #059669; border-radius: 20rpx; }
+.ji-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #fef2f2; color: #dc2626; border-radius: 20rpx; }
+.lucky-card { margin: 20rpx 30rpx; background: #fff; border-radius: 20rpx; padding: 28rpx; }
+.lucky-title { font-size: 30rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
+.lucky-row { display: flex; gap: 16rpx; }
+.lucky-item { flex: 1; text-align: center; background: #fef9c3; border-radius: 16rpx; padding: 20rpx 12rpx; }
+.l-label { font-size: 22rpx; color: #92400e; display: block; }
+.l-value { font-size: 28rpx; font-weight: 600; color: #1f2937; display: block; margin-top: 6rpx; }
+.quote-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 20rpx; padding: 32rpx; text-align: center; }
+.quote-icon { font-size: 40rpx; display: block; margin-bottom: 12rpx; }
+.quote-text { font-size: 28rpx; color: #374151; line-height: 1.8; font-style: italic; }
+.share-section { margin: 24rpx 30rpx; }
+.btn-share { height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #059669, #10b981); color: #fff; border-radius: 44rpx; font-size: 30rpx; }

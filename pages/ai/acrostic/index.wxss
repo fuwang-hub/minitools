@@ -1,24 +1,22 @@
-.hero { padding: 48rpx 32rpx; text-align: center; }
-.hero-emoji { font-size: 64rpx; display: block; margin-bottom: 12rpx; }
-.hero-title { font-size: 40rpx; font-weight: 700; color: #fff; display: block; }
-.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
-
-.coming-soon {
-  margin: 24rpx; background: #fff; border-radius: 24rpx; padding: 48rpx 32rpx;
-  text-align: center; box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
-}
-.cs-icon { font-size: 80rpx; margin-bottom: 20rpx; }
-.cs-title { font-size: 36rpx; font-weight: 700; color: #333; margin-bottom: 12rpx; }
-.cs-desc { font-size: 26rpx; color: #999; margin-bottom: 32rpx; }
-
-.cs-features { text-align: left; padding: 0 24rpx; }
-.cs-feature {
-  display: flex; align-items: center; padding: 16rpx 0;
-  font-size: 26rpx; color: #666;
-}
-.cs-dot { margin-right: 12rpx; }
-
-.back-btn {
-  display: inline-block; margin-top: 32rpx; padding: 20rpx 48rpx;
-  background: #f5f7fa; border-radius: 40rpx; font-size: 28rpx; color: #667eea;
-}
+/* pages/ai/acrostic/index.wxss */
+.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 40rpx; }
+.hero { padding: 60rpx 40rpx; text-align: center; color: #fff; }
+.hero-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
+.hero-title { font-size: 44rpx; font-weight: bold; display: block; }
+.hero-desc { font-size: 26rpx; opacity: 0.9; display: block; margin-top: 8rpx; }
+.form-card { margin: 20rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 36rpx; box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06); }
+.form-hint { font-size: 28rpx; color: #6b7280; display: block; margin-bottom: 20rpx; }
+.input-field { height: 88rpx; background: #f9fafb; border-radius: 16rpx; padding: 0 24rpx; font-size: 34rpx; border: 2rpx solid #e5e7eb; text-align: center; letter-spacing: 8rpx; }
+.btn-gen { margin-top: 24rpx; height: 92rpx; line-height: 92rpx; background: linear-gradient(135deg, #0891b2, #06b6d4); color: #fff; border-radius: 46rpx; font-size: 32rpx; }
+.tip-card { margin: 20rpx 30rpx; background: #fff; border-radius: 20rpx; padding: 28rpx; }
+.tip-title { font-size: 30rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
+.tip-item { font-size: 26rpx; color: #6b7280; display: block; margin-bottom: 8rpx; line-height: 1.6; }
+.poem-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #fef7ed, #fef3c7); border-radius: 24rpx; padding: 48rpx 40rpx; border: 2rpx solid #fde68a; }
+.poem-scroll { }
+.poem-line { margin-bottom: 20rpx; font-size: 34rpx; color: #1f2937; line-height: 1.8; }
+.first-char { color: #dc2626; font-weight: bold; font-size: 38rpx; }
+.rest-chars { color: #374151; }
+.actions { display: flex; gap: 16rpx; margin: 24rpx 30rpx; }
+.btn-copy { flex: 1; height: 80rpx; line-height: 80rpx; background: #f3f4f6; color: #374151; border-radius: 40rpx; font-size: 28rpx; }
+.btn-restart { flex: 1; height: 80rpx; line-height: 80rpx; background: #f3f4f6; color: #374151; border-radius: 40rpx; font-size: 28rpx; }
+.btn-share { flex: 1; height: 80rpx; line-height: 80rpx; background: linear-gradient(135deg, #0891b2, #06b6d4); color: #fff; border-radius: 40rpx; font-size: 28rpx; }

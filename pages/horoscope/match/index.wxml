@@ -1,30 +1,86 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
-    <text class="hero-emoji">💑</text>
+<!--pages/horoscope/match/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #EC4899, #F472B6);">
+    <text class="hero-emoji">💕</text>
     <text class="hero-title">星座配对</text>
-    <text class="hero-desc">看看你们有多般配</text>
+    <text class="hero-desc">测测你们的缘分指数</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
+
+  <block wx:if="{{!showResult}}">
+    <view class="pair-display">
+      <view class="pair-item {{sign1 >= 0 ? 'selected' : ''}}" style="{{sign1 >= 0 ? 'border-color:' + result + ';' : ''}}">
+        <text class="pair-emoji">{{sign1 >= 0 ? signs[sign1].emoji : '?'}}</text>
+        <text class="pair-name">{{sign1 >= 0 ? signs[sign1].name : '选择星座'}}</text>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+      <text class="pair-heart">❤️</text>
+      <view class="pair-item {{sign2 >= 0 ? 'selected' : ''}}">
+        <text class="pair-emoji">{{sign2 >= 0 ? signs[sign2].emoji : '?'}}</text>
+        <text class="pair-name">{{sign2 >= 0 ? signs[sign2].name : '选择星座'}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+
+    <view class="select-hint">
+      <text>{{selecting === 1 ? '👆 请选择第一个星座' : selecting === 2 ? '👆 请选择第二个星座' : ''}}</text>
+    </view>
+
+    <view class="sign-grid">
+      <view class="sign-item" wx:for="{{signs}}" wx:key="index" bindtap="selectSign" data-index="{{item.index}}">
+        <text class="sign-emoji">{{item.emoji}}</text>
+        <text class="sign-name">{{item.name}}</text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{showResult && result}}">
+    <view class="match-display">
+      <view class="match-sign">
+        <text class="match-emoji">{{signs[sign1].emoji}}</text>
+        <text class="match-name">{{signs[sign1].name}}</text>
+        <text class="match-elem" style="color: {{result.elemColor1}};">{{result.elem1}}象</text>
+      </view>
+      <view class="match-score-circle">
+        <text class="score-num">{{result.score}}</text>
+        <text class="score-pct">%</text>
+      </view>
+      <view class="match-sign">
+        <text class="match-emoji">{{signs[sign2].emoji}}</text>
+        <text class="match-name">{{signs[sign2].name}}</text>
+        <text class="match-elem" style="color: {{result.elemColor2}};">{{result.elem2}}象</text>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💫 配对分析</text>
+      <text class="card-content">{{result.desc}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">📊 各维度评分</text>
+      <view class="dim-item">
+        <text class="dim-label">💕 爱情</text>
+        <view class="dim-bar"><view class="dim-fill" style="width: {{result.love}}%; background: #EC4899;"></view></view>
+        <text class="dim-val">{{result.love}}%</text>
+      </view>
+      <view class="dim-item">
+        <text class="dim-label">🤝 友情</text>
+        <view class="dim-bar"><view class="dim-fill" style="width: {{result.friendship}}%; background: #0EA5E9;"></view></view>
+        <text class="dim-val">{{result.friendship}}%</text>
+      </view>
+      <view class="dim-item">
+        <text class="dim-label">💼 事业</text>
+        <view class="dim-bar"><view class="dim-fill" style="width: {{result.work}}%; background: #F59E0B;"></view></view>
+        <text class="dim-val">{{result.work}}%</text>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">💡 相处建议</text>
+      <text class="card-content">{{result.tips}}</text>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新配对</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+  </block>
 </view>

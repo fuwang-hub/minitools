@@ -1,30 +1,111 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+<!--pages/horoscope/chart/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
     <text class="hero-emoji">🌌</text>
     <text class="hero-title">星盘查询</text>
-    <text class="hero-desc">探索你的出生星盘</text>
+    <text class="hero-desc">探索你的星象密码</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
+
+  <block wx:if="{{!showResult}}">
+    <view class="form-card">
+      <text class="form-title">输入出生信息</text>
+
+      <view class="form-row">
+        <text class="form-label">出生年份</text>
+        <picker mode="selector" range="{{years}}" value="{{yearIdx}}" bindchange="onYearChange">
+          <view class="picker-val">{{birthYear}}年 ›</view>
+        </picker>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
+
+      <view class="form-row">
+        <text class="form-label">出生月份</text>
+        <picker mode="selector" range="{{months}}" value="{{monthIdx}}" bindchange="onMonthChange">
+          <view class="picker-val">{{birthMonth}}月 ›</view>
+        </picker>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+
+      <view class="form-row">
+        <text class="form-label">出生日期</text>
+        <picker mode="selector" range="{{days}}" value="{{dayIdx}}" bindchange="onDayChange">
+          <view class="picker-val">{{birthDay}}日 ›</view>
+        </picker>
+      </view>
+
+      <view class="form-row">
+        <text class="form-label">出生时辰</text>
+        <picker mode="selector" range="{{hours}}" value="{{hourIdx}}" bindchange="onHourChange">
+          <view class="picker-val">{{birthHour}}时 ›</view>
+        </picker>
+      </view>
+
+      <button class="btn-generate" bindtap="generate">生成星盘</button>
+    </view>
+  </block>
+
+  <block wx:if="{{showResult && result}}">
+    <view class="three-signs">
+      <view class="three-item">
+        <text class="three-label">☀️ 太阳</text>
+        <text class="three-val">{{result.sunSign}}</text>
+      </view>
+      <view class="three-item">
+        <text class="three-label">🌙 月亮</text>
+        <text class="three-val">{{result.moonSign}}</text>
+      </view>
+      <view class="three-item">
+        <text class="three-label">⬆️ 上升</text>
+        <text class="three-val">{{result.risingSign}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+
+    <view class="result-card">
+      <text class="card-title">🌟 星盘总览</text>
+      <text class="card-content">{{result.summary}}</text>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🪐 行星落座</text>
+      <view class="planet-list">
+        <view class="planet-item" wx:for="{{result.chart}}" wx:key="name">
+          <text class="planet-emoji">{{item.emoji}}</text>
+          <text class="planet-name">{{item.name}}</text>
+          <text class="planet-sign">{{item.signEmoji}} {{item.sign}} {{item.degree}}°</text>
+          <text class="planet-meaning">{{item.meaning}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="result-card">
+      <text class="card-title">🔥 元素分析</text>
+      <text class="card-content">主导元素：{{result.dominantElem}}象</text>
+      <view class="elem-bars">
+        <view class="elem-row">
+          <text class="elem-label">🔥 火</text>
+          <view class="elem-bar"><view class="elem-fill" style="width: {{result.elemCount['火'] / 8 * 100}}%; background: #EF4444;"></view></view>
+          <text class="elem-val">{{result.elemCount['火']}}</text>
+        </view>
+        <view class="elem-row">
+          <text class="elem-label">🌍 土</text>
+          <view class="elem-bar"><view class="elem-fill" style="width: {{result.elemCount['土'] / 8 * 100}}%; background: #A16207;"></view></view>
+          <text class="elem-val">{{result.elemCount['土']}}</text>
+        </view>
+        <view class="elem-row">
+          <text class="elem-label">💨 风</text>
+          <view class="elem-bar"><view class="elem-fill" style="width: {{result.elemCount['风'] / 8 * 100}}%; background: #0EA5E9;"></view></view>
+          <text class="elem-val">{{result.elemCount['风']}}</text>
+        </view>
+        <view class="elem-row">
+          <text class="elem-label">💧 水</text>
+          <view class="elem-bar"><view class="elem-fill" style="width: {{result.elemCount['水'] / 8 * 100}}%; background: #6366F1;"></view></view>
+          <text class="elem-val">{{result.elemCount['水']}}</text>
+        </view>
+      </view>
+      <text class="card-content" style="margin-top: 16rpx;">{{result.elemDesc}}</text>
+    </view>
+
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新查询</button>
+      <button class="btn-share" open-type="share">分享星盘</button>
+    </view>
+  </block>
 </view>

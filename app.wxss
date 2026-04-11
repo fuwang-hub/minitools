@@ -12,7 +12,7 @@ view, text, image, input, button, scroll-view, navigator {
   box-sizing: border-box;
 }
 
-/* ============ 通用工具类 ============ */
+/* ============ 通用布局 ============ */
 .flex-center {
   display: flex;
   align-items: center;
@@ -30,25 +30,56 @@ view, text, image, input, button, scroll-view, navigator {
   flex-direction: column;
 }
 
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* ============ 安全区域 ============ */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* ============ 页面容器 ============ */
+/* ============ 页面容器（全局公共） ============ */
 .page-container {
   min-height: 100vh;
   background: #f5f7fa;
   padding-bottom: 120rpx;
 }
 
-/* ============ 卡片样式 ============ */
+/* ============ 卡片样式（全局公共） ============ */
 .card {
   background: #fff;
   border-radius: 24rpx;
   padding: 32rpx;
   margin: 0 24rpx 24rpx;
   box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+/* ============ hero 区域（各工具页通用） ============ */
+.hero {
+  padding: 60rpx 40rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-emoji {
+  font-size: 80rpx;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.hero-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  display: block;
+}
+
+.hero-desc {
+  font-size: 28rpx;
+  opacity: 0.9;
+  display: block;
+  margin-top: 8rpx;
 }
 
 /* ============ 按钮样式 ============ */
@@ -68,11 +99,77 @@ view, text, image, input, button, scroll-view, navigator {
   transform: scale(0.98);
 }
 
+/* ============ 结果卡片（测试/分析页通用） ============ */
+.result-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin: 20rpx 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+}
+
+.result-card .card-title,
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.result-card .card-content,
+.card-content {
+  font-size: 28rpx;
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+/* ============ 进度条 ============ */
+.progress-bar {
+  height: 8rpx;
+  background: #f3f4f6;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+/* ============ 分割线 ============ */
+.divider {
+  height: 1rpx;
+  background: #f3f4f6;
+  margin: 24rpx 0;
+}
+
+/* ============ 标签样式 ============ */
+.tag {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
 /* ============ 文字颜色 ============ */
 .text-primary { color: #667eea; }
 .text-secondary { color: #999; }
 .text-dark { color: #333; }
 .text-light { color: #666; }
+.text-success { color: #059669; }
+.text-danger { color: #dc2626; }
+.text-warning { color: #f59e0b; }
+
+/* ============ 间距 ============ */
+.mt-sm { margin-top: 12rpx; }
+.mt-md { margin-top: 24rpx; }
+.mt-lg { margin-top: 40rpx; }
+.mb-sm { margin-bottom: 12rpx; }
+.mb-md { margin-bottom: 24rpx; }
+.mb-lg { margin-bottom: 40rpx; }
+.mx-md { margin-left: 30rpx; margin-right: 30rpx; }
 
 /* ============ 广告占位 ============ */
 .ad-placeholder {
@@ -83,4 +180,43 @@ view, text, image, input, button, scroll-view, navigator {
   color: #bbb;
   font-size: 24rpx;
   margin: 24rpx;
+}
+
+/* ============ 触摸反馈（全局） ============ */
+.tap-effect:active {
+  opacity: 0.7;
+  transform: scale(0.97);
+}
+
+/* ============ 加载动画 ============ */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ============ 分享按钮（全局复用） ============ */
+.share-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  border: none;
+}
+
+.share-btn::after {
+  border: none;
 }

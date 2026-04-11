@@ -1,30 +1,43 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
-    <text class="hero-emoji">🐉</text>
+<!--pages/metaphysics/zodiac-match/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #b91c1c, #dc2626);">
+    <text class="hero-emoji">🧧</text>
     <text class="hero-title">属相配对</text>
-    <text class="hero-desc">生肖配对看姻缘</text>
+    <text class="hero-desc">十二生肖缘分测试</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
+  <block wx:if="{{!showResult}}">
+    <view class="pair-display">
+      <view class="pair-item {{z1 >= 0 ? 'selected' : ''}}">
+        <text class="pair-emoji">{{z1 >= 0 ? zodiacList[z1].emoji : '?'}}</text>
+        <text class="pair-name">{{z1 >= 0 ? zodiacList[z1].name : '选择'}}</text>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+      <text class="pair-heart">❤️</text>
+      <view class="pair-item {{z2 >= 0 ? 'selected' : ''}}">
+        <text class="pair-emoji">{{z2 >= 0 ? zodiacList[z2].emoji : '?'}}</text>
+        <text class="pair-name">{{z2 >= 0 ? zodiacList[z2].name : '选择'}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+    <text class="select-hint">{{selecting === 1 ? '请选择第一个属相' : '请选择第二个属相'}}</text>
+    <view class="zodiac-grid">
+      <view class="zodiac-item" wx:for="{{zodiacList}}" wx:key="name" bindtap="selectZodiac" data-index="{{index}}">
+        <text class="z-emoji">{{item.emoji}}</text>
+        <text class="z-name">{{item.name}}</text>
+        <text class="z-year">{{item.year}}</text>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{showResult && result}}">
+    <view class="match-display">
+      <view class="m-sign"><text class="m-emoji">{{zodiacList[z1].emoji}}</text><text class="m-name">{{zodiacList[z1].name}}</text></view>
+      <view class="m-score" style="border-color: {{result.score >= 80 ? '#059669' : result.score >= 60 ? '#F59E0B' : '#dc2626'}};"><text class="m-num">{{result.score}}</text><text class="m-pct">分</text></view>
+      <view class="m-sign"><text class="m-emoji">{{zodiacList[z2].emoji}}</text><text class="m-name">{{zodiacList[z2].name}}</text></view>
+    </view>
+    <view class="level-tag" style="background: {{result.score >= 80 ? '#dcfce7' : result.score >= 60 ? '#fef9c3' : '#fef2f2'}}; color: {{result.score >= 80 ? '#059669' : result.score >= 60 ? '#b45309' : '#dc2626'}};"><text>{{result.level}}</text></view>
+    <view class="result-card"><text class="card-title">📖 配对分析</text><text class="card-content">{{result.desc}}</text></view>
+    <view class="disclaimer"><text>⚠️ 属相配对仅供娱乐，真正的感情靠双方用心经营</text></view>
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新配对</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+  </block>
 </view>

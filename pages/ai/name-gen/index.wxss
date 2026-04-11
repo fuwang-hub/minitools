@@ -1,24 +1,24 @@
-.hero { padding: 48rpx 32rpx; text-align: center; }
-.hero-emoji { font-size: 64rpx; display: block; margin-bottom: 12rpx; }
-.hero-title { font-size: 40rpx; font-weight: 700; color: #fff; display: block; }
-.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
-
-.coming-soon {
-  margin: 24rpx; background: #fff; border-radius: 24rpx; padding: 48rpx 32rpx;
-  text-align: center; box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
-}
-.cs-icon { font-size: 80rpx; margin-bottom: 20rpx; }
-.cs-title { font-size: 36rpx; font-weight: 700; color: #333; margin-bottom: 12rpx; }
-.cs-desc { font-size: 26rpx; color: #999; margin-bottom: 32rpx; }
-
-.cs-features { text-align: left; padding: 0 24rpx; }
-.cs-feature {
-  display: flex; align-items: center; padding: 16rpx 0;
-  font-size: 26rpx; color: #666;
-}
-.cs-dot { margin-right: 12rpx; }
-
-.back-btn {
-  display: inline-block; margin-top: 32rpx; padding: 20rpx 48rpx;
-  background: #f5f7fa; border-radius: 40rpx; font-size: 28rpx; color: #667eea;
-}
+/* pages/ai/name-gen/index.wxss */
+.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 40rpx; }
+.hero { padding: 60rpx 40rpx; text-align: center; color: #fff; }
+.hero-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
+.hero-title { font-size: 44rpx; font-weight: bold; display: block; }
+.hero-desc { font-size: 26rpx; opacity: 0.9; display: block; margin-top: 8rpx; }
+.form-card { margin: 20rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 36rpx; }
+.form-label { font-size: 28rpx; font-weight: 600; color: #374151; display: block; margin-bottom: 16rpx; }
+.gender-row { display: flex; gap: 16rpx; }
+.gender-btn { flex: 1; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 16rpx; border: 2rpx solid #e5e7eb; font-size: 30rpx; color: #6b7280; background: #f9fafb; }
+.gender-btn.active { border-color: #7c3aed; color: #7c3aed; background: #f5f3ff; }
+.style-row { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.style-tag { font-size: 26rpx; padding: 10rpx 24rpx; border-radius: 20rpx; background: #f9fafb; color: #6b7280; border: 2rpx solid #e5e7eb; }
+.style-tag.active { background: #f5f3ff; color: #7c3aed; border-color: #7c3aed; }
+.btn-gen { margin-top: 32rpx; height: 92rpx; line-height: 92rpx; background: linear-gradient(135deg, #7c3aed, #a78bfa); color: #fff; border-radius: 46rpx; font-size: 32rpx; }
+.name-list { margin: 20rpx 30rpx; }
+.name-card { background: linear-gradient(135deg, #faf5ff, #f5f3ff); border-radius: 20rpx; padding: 28rpx; margin-bottom: 16rpx; border: 1rpx solid #e9d5ff; }
+.name-header { display: flex; justify-content: space-between; align-items: center; }
+.name-text { font-size: 38rpx; font-weight: bold; color: #4c1d95; }
+.name-copy { font-size: 24rpx; color: #7c3aed; padding: 6rpx 16rpx; border: 1rpx solid #c4b5fd; border-radius: 12rpx; }
+.name-meaning { font-size: 26rpx; color: #6b7280; margin-top: 12rpx; line-height: 1.6; display: block; }
+.actions { display: flex; gap: 20rpx; margin: 20rpx 30rpx; }
+.btn-restart { flex: 1; height: 88rpx; line-height: 88rpx; background: #f3f4f6; color: #374151; border-radius: 44rpx; font-size: 30rpx; }
+.btn-share { flex: 1; height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #7c3aed, #a78bfa); color: #fff; border-radius: 44rpx; font-size: 30rpx; }

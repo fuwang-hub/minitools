@@ -1,30 +1,37 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #6366f1);">
+<!--pages/ai/name-gen/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">
     <text class="hero-emoji">🏯</text>
     <text class="hero-title">古风名字</text>
-    <text class="hero-desc">AI生成古风雅名</text>
+    <text class="hero-desc">生成唯美古风名字</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
+  <block wx:if="{{!showResult}}">
+    <view class="form-card">
+      <text class="form-label">选择性别</text>
+      <view class="gender-row">
+        <view class="gender-btn {{gender === 'male' ? 'active' : ''}}" bindtap="setGender" data-gender="male">🤴 男生</view>
+        <view class="gender-btn {{gender === 'female' ? 'active' : ''}}" bindtap="setGender" data-gender="female">👸 女生</view>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
+      <text class="form-label" style="margin-top:24rpx;">选择风格</text>
+      <view class="style-row">
+        <text class="style-tag {{style === item ? 'active' : ''}}" wx:for="{{styles}}" wx:key="index" bindtap="setStyle" data-style="{{item}}">{{item}}</text>
       </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+      <button class="btn-gen" bindtap="generate">✨ 生成名字</button>
+    </view>
+  </block>
+  <block wx:if="{{showResult}}">
+    <view class="name-list">
+      <view class="name-card" wx:for="{{names}}" wx:key="name">
+        <view class="name-header">
+          <text class="name-text">{{item.name}}</text>
+          <text class="name-copy" bindtap="copyName" data-name="{{item.name}}">复制</text>
+        </view>
+        <text class="name-meaning">{{item.meaning}}</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+    <view class="actions">
+      <button class="btn-restart" bindtap="generate">换一批</button>
+      <button class="btn-share" open-type="share">分享</button>
+    </view>
+  </block>
 </view>

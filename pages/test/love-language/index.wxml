@@ -1,30 +1,66 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-    <text class="hero-emoji">💕</text>
-    <text class="hero-title">爱情语言测试</text>
-    <text class="hero-desc">了解你的爱情表达方式</text>
-  </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+<!--pages/test/love-language/index.wxml-->
+<view class="container">
+  <block wx:if="{{!showResult}}">
+    <view class="hero" style="background: linear-gradient(135deg, #EC4899, #F472B6);">
+      <text class="hero-emoji">💕</text>
+      <text class="hero-title">爱情语言测试</text>
+      <text class="hero-desc">发现你独特的爱情表达方式</text>
+    </view>
+    <view class="progress-bar"><view class="progress-fill" style="width: {{progress}}%; background: linear-gradient(90deg, #EC4899, #F472B6);"></view></view>
+    <text class="progress-text">{{currentQuestion + 1}} / 10</text>
+    <view class="question-card">
+      <text class="question-text">{{questions[currentQuestion].text}}</text>
+      <view class="ab-options">
+        <view class="ab-option" bindtap="chooseOption" data-option="a">
+          <text class="ab-label">A</text>
+          <text class="ab-text">{{questions[currentQuestion].a}}</text>
+        </view>
+        <view class="ab-option" bindtap="chooseOption" data-option="b">
+          <text class="ab-label">B</text>
+          <text class="ab-text">{{questions[currentQuestion].b}}</text>
+        </view>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <block wx:if="{{showResult}}">
+    <view class="result-hero" style="background: linear-gradient(135deg, {{result.color}}, {{result.color}}bb);">
+      <text class="result-emoji">{{result.emoji}}</text>
+      <text class="result-name">{{result.name}}</text>
+      <text class="result-en">{{result.en}}</text>
+    </view>
+    <view class="result-card">
+      <text class="card-title">💝 你的爱情语言</text>
+      <text class="card-content">{{result.desc}}</text>
+    </view>
+    <view class="result-card">
+      <text class="card-title">💑 最佳匹配</text>
+      <text class="card-content">{{result.match}}</text>
+    </view>
+    <view class="result-card">
+      <text class="card-title">💡 给伴侣的建议</text>
+      <view class="tips">
+        <view class="tip-item" wx:for="{{result.tips}}" wx:key="index">
+          <text class="tip-dot">•</text>
+          <text class="tip-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="result-card">
+      <text class="card-title">📊 五种语言占比</text>
+      <view class="bars">
+        <view class="bar-item" wx:for="{{allResults}}" wx:key="name">
+          <text class="bar-label">{{item.emoji}} {{item.name}}</text>
+          <view class="bar-track">
+            <view class="bar-fill" style="width: {{item.percent}}%; background: {{item.color}};"></view>
+          </view>
+          <text class="bar-val">{{item.percent}}%</text>
+        </view>
+      </view>
+    </view>
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新测试</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+  </block>
 </view>

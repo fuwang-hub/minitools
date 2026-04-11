@@ -1,30 +1,36 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #6366f1);">
+<!--pages/ai/acrostic/index.wxml-->
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #06b6d4);">
     <text class="hero-emoji">📜</text>
     <text class="hero-title">藏头诗</text>
-    <text class="hero-desc">AI为你写藏头诗</text>
+    <text class="hero-desc">输入文字，生成专属诗句</text>
   </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+  <block wx:if="{{!showResult}}">
+    <view class="form-card">
+      <text class="form-hint">输入2-8个字，生成藏头诗</text>
+      <input class="input-field" placeholder="如：我爱你、生日快乐" value="{{inputText}}" bindinput="onInput" maxlength="8" />
+      <button class="btn-gen" bindtap="generate">✨ 生成藏头诗</button>
+    </view>
+    <view class="tip-card">
+      <text class="tip-title">💡 使用场景</text>
+      <text class="tip-item">💕 表白告白：输入对方名字或"我爱你"</text>
+      <text class="tip-item">🎂 生日祝福：输入"生日快乐"</text>
+      <text class="tip-item">🎉 节日祝福：输入"新年快乐"</text>
+      <text class="tip-item">👋 特殊场合：输入任意文字</text>
+    </view>
+  </block>
+  <block wx:if="{{showResult}}">
+    <view class="poem-card">
+      <view class="poem-scroll">
+        <view class="poem-line" wx:for="{{poemDisplay}}" wx:key="index">
+          <text class="first-char">{{item.firstChar}}</text><text class="rest-chars">{{item.restChars}}</text>
+        </view>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+    <view class="actions">
+      <button class="btn-copy" bindtap="copyPoem">📋 复制</button>
+      <button class="btn-restart" bindtap="restart">重新生成</button>
+      <button class="btn-share" open-type="share">分享</button>
+    </view>
+  </block>
 </view>

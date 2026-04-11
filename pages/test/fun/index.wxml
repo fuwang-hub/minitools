@@ -1,30 +1,58 @@
-<view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-    <text class="hero-emoji">🎭</text>
-    <text class="hero-title">趣味测试合集</text>
-    <text class="hero-desc">轻松有趣的性格测试</text>
-  </view>
-  <view class="coming-soon">
-    <view class="cs-icon">🚀</view>
-    <view class="cs-title">功能开发中</view>
-    <view class="cs-desc">该功能正在紧锣密鼓地开发，即将上线</view>
-    <view class="cs-features">
-      <view class="cs-feature">
-        <text class="cs-dot">✨</text>
-        <text>精心打磨的交互体验</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎯</text>
-        <text>准确可靠的计算结果</text>
-      </view>
-      <view class="cs-feature">
-        <text class="cs-dot">🎨</text>
-        <text>精美的界面设计</text>
+<!--pages/test/fun/index.wxml-->
+<view class="container">
+  <!-- 测试列表 -->
+  <block wx:if="{{mode === 'list'}}">
+    <view class="hero" style="background: linear-gradient(135deg, #F97316, #FB923C);">
+      <text class="hero-emoji">🎮</text>
+      <text class="hero-title">趣味测试</text>
+      <text class="hero-desc">选择一个测试开始吧</text>
+    </view>
+    <view class="test-list">
+      <view class="test-item" wx:for="{{tests}}" wx:key="id" bindtap="selectTest" data-id="{{item.id}}">
+        <text class="test-emoji">{{item.emoji}}</text>
+        <view class="test-info">
+          <text class="test-name">{{item.name}}</text>
+          <text class="test-desc">{{item.desc}}</text>
+        </view>
+        <text class="test-arrow">›</text>
       </view>
     </view>
-    <navigator url="/pages/index/index" open-type="navigateBack" class="back-btn">
-      <text>← 返回首页</text>
-    </navigator>
-  </view>
-  <ad-banner type="banner" />
+  </block>
+
+  <!-- 答题 -->
+  <block wx:if="{{mode === 'test' && !showResult}}">
+    <view class="hero" style="background: linear-gradient(135deg, {{currentTest.color}}, {{currentTest.color}}cc);">
+      <text class="hero-emoji">{{currentTest.emoji}}</text>
+      <text class="hero-title">{{currentTest.name}}</text>
+    </view>
+    <view class="progress-bar"><view class="progress-fill" style="width: {{progress}}%; background: {{currentTest.color}};"></view></view>
+    <text class="progress-text">{{currentQuestion + 1}} / {{currentTest.questions.length}}</text>
+    <view class="question-card">
+      <text class="question-text">{{currentTest.questions[currentQuestion].text}}</text>
+      <view class="options">
+        <view class="option" wx:for="{{currentTest.questions[currentQuestion].options}}" wx:key="index" bindtap="handleAnswer" data-index="{{index}}">
+          <text class="option-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 结果 -->
+  <block wx:if="{{mode === 'test' && showResult}}">
+    <view class="result-hero" style="background: linear-gradient(135deg, {{currentTest.color}}, {{currentTest.color}}bb);">
+      <text class="result-emoji">{{result.emoji}}</text>
+      <text class="result-value">{{result.value}}</text>
+    </view>
+    <view class="result-card">
+      <text class="card-title">📝 结果分析</text>
+      <text class="card-content">{{result.desc}}</text>
+    </view>
+    <view class="actions">
+      <button class="btn-restart" bindtap="restart">重新测试</button>
+      <button class="btn-share" open-type="share">分享结果</button>
+    </view>
+    <view class="back-link" bindtap="backToList">
+      <text>← 返回测试列表</text>
+    </view>
+  </block>
 </view>
