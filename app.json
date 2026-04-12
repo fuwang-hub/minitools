@@ -8,7 +8,15 @@
     "pages/tools/qrcode/index",
     "pages/tools/random/index",
     "pages/tools/date-calc/index",
-    "pages/tools/password/index"
+    "pages/tools/password/index",
+    "pages/tools/mortgage/index",
+    "pages/tools/bmi/index",
+    "pages/tools/ledger/index",
+    "pages/tools/countdown/index",
+    "pages/tools/exchange/index",
+    "pages/tools/stopwatch/index",
+    "pages/tools/ruler/index",
+    "pages/tools/noise/index"
   ],
   "subpackages": [
     {

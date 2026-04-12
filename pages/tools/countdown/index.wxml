@@ -1,0 +1,80 @@
+<!--pages/tools/countdown/index.wxml-->
+<view class="container" style="background: linear-gradient(180deg, #ec4899, #f472b6);">
+  <view class="header">
+    <text class="h-title">📅 我的倒数日</text>
+    <view class="add-btn" bindtap="showAddForm">+ 添加</view>
+  </view>
+
+  <!-- 事件列表 -->
+  <view class="event-card" wx:for="{{events}}" wx:key="id" style="border-left: 8rpx solid {{item.color}};" bindtap="editEvent" data-id="{{item.id}}" bindlongpress="deleteEvent" data-id="{{item.id}}">
+    <view class="event-left">
+      <text class="event-emoji">{{item.emoji}}</text>
+      <view class="event-info">
+        <text class="event-name">{{item.name}}</text>
+        <text class="event-date">{{item.date}}</text>
+      </view>
+    </view>
+    <view class="event-right">
+      <block wx:if="{{item.isToday}}">
+        <text class="event-today">🎉 今天</text>
+      </block>
+      <block wx:else>
+        <text class="event-days" style="color: {{item.color}};">{{item.days}}</text>
+        <text class="event-label">{{item.label}}{{item.unit}}</text>
+      </block>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{events.length === 0}}">
+    <text class="empty-icon">📅</text>
+    <text class="empty-text">还没有添加事件</text>
+    <text class="empty-hint">点击右上角 "添加" 开始记录</text>
+  </view>
+
+  <!-- 提示 -->
+  <view class="tips" wx:if="{{events.length > 0}}">
+    <text class="tips-text">💡 点击编辑，长按删除</text>
+  </view>
+
+  <ad-banner />
+
+  <!-- 添加/编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showAdd}}" bindtap="hideAddForm">
+    <view class="modal" catchtap="">
+      <text class="modal-title">{{editId ? '编辑事件' : '添加事件'}}</text>
+
+      <view class="m-row">
+        <text class="m-label">事件名称</text>
+        <input class="m-input" placeholder="如：生日、纪念日" value="{{newName}}" bindinput="onNameInput" />
+      </view>
+
+      <view class="m-row">
+        <text class="m-label">目标日期</text>
+        <picker mode="date" value="{{newDate}}" bindchange="onDateChange">
+          <text class="m-picker">{{newDate}} ▼</text>
+        </picker>
+      </view>
+
+      <view class="m-row">
+        <text class="m-label">类型</text>
+        <view class="type-btns">
+          <view class="t-btn {{newIsCountdown ? 'active' : ''}}" bindtap="switchType" data-type="countdown">⏳ 倒数日</view>
+          <view class="t-btn {{!newIsCountdown ? 'active' : ''}}" bindtap="switchType" data-type="memorial">❤️ 纪念日</view>
+        </view>
+      </view>
+
+      <view class="m-row">
+        <text class="m-label">图标</text>
+        <view class="emoji-list">
+          <text class="emoji-opt {{newEmoji === item ? 'active' : ''}}" wx:for="{{emojis}}" wx:key="*this" bindtap="selectEmoji" data-emoji="{{item}}">{{item}}</text>
+        </view>
+      </view>
+
+      <view class="modal-btns">
+        <view class="m-cancel" bindtap="hideAddForm">取消</view>
+        <view class="m-save" bindtap="saveEvent">保存</view>
+      </view>
+    </view>
+  </view>
+</view>

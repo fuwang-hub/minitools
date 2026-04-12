@@ -1,0 +1,75 @@
+<!--pages/tools/noise/index.wxml-->
+<view class="container" style="background: {{isRecording ? level.bg : '#f5f5f5'}};">
+  <!-- 表盘 -->
+  <view class="meter-area">
+    <view class="meter">
+      <view class="meter-bg">
+        <view class="meter-scale">
+          <text class="scale-num s-0">0</text>
+          <text class="scale-num s-30">30</text>
+          <text class="scale-num s-60">60</text>
+          <text class="scale-num s-90">90</text>
+          <text class="scale-num s-120">120</text>
+        </view>
+        <view class="meter-needle" style="transform: rotate({{meterAngle}}deg);"></view>
+        <view class="meter-center"></view>
+      </view>
+      <view class="db-display">
+        <text class="db-num" style="color: {{level.color}};">{{currentDb}}</text>
+        <text class="db-unit">dB</text>
+      </view>
+    </view>
+
+    <text class="level-emoji">{{level.emoji}}</text>
+    <text class="level-label" style="color: {{level.color}};">{{level.label}}</text>
+    <text class="level-desc">{{level.desc}}</text>
+  </view>
+
+  <!-- 统计 -->
+  <view class="stats-row" wx:if="{{isRecording}}">
+    <view class="stat-item">
+      <text class="st-val" style="color: #ef4444;">{{maxDb}}</text>
+      <text class="st-label">最高 dB</text>
+    </view>
+    <view class="stat-item">
+      <text class="st-val" style="color: #10b981;">{{minDb === 999 ? 0 : minDb}}</text>
+      <text class="st-label">最低 dB</text>
+    </view>
+    <view class="stat-item">
+      <text class="st-val" style="color: #3b82f6;">{{avgDb}}</text>
+      <text class="st-label">平均 dB</text>
+    </view>
+    <view class="stat-item">
+      <text class="st-val">{{durationText}}</text>
+      <text class="st-label">检测时长</text>
+    </view>
+  </view>
+
+  <!-- 波形 -->
+  <view class="wave-card" wx:if="{{history.length > 0}}">
+    <text class="wave-title">📊 实时分贝波形</text>
+    <view class="wave-bars">
+      <view class="wave-bar" wx:for="{{history}}" wx:key="index" style="height: {{item / 130 * 100}}%; background: {{item > 80 ? '#ef4444' : item > 60 ? '#fbbf24' : '#10b981'}};"></view>
+    </view>
+  </view>
+
+  <!-- 控制按钮 -->
+  <view class="ctrl-area">
+    <view class="main-btn {{isRecording ? 'stop' : 'start'}}" bindtap="{{isRecording ? 'stopDetect' : 'startDetect'}}">
+      <text class="btn-icon">{{isRecording ? '⏹' : '🎤'}}</text>
+      <text class="btn-text">{{isRecording ? '停止检测' : '开始检测'}}</text>
+    </view>
+  </view>
+
+  <!-- 参考 -->
+  <view class="ref-card">
+    <text class="ref-title">📋 噪音参考标准</text>
+    <view class="ref-row" wx:for="{{6}}" wx:key="index">
+      <view class="ref-dot" style="background: {{index === 0 ? '#10b981' : index === 1 ? '#34d399' : index === 2 ? '#fbbf24' : index === 3 ? '#f97316' : index === 4 ? '#ef4444' : '#dc2626'}};"></view>
+      <text class="ref-range">{{index === 0 ? '0-30 dB' : index === 1 ? '30-50 dB' : index === 2 ? '50-65 dB' : index === 3 ? '65-80 dB' : index === 4 ? '80-95 dB' : '95+ dB'}}</text>
+      <text class="ref-desc">{{index === 0 ? '非常安静 (图书馆)' : index === 1 ? '安静 (办公室)' : index === 2 ? '一般 (正常交谈)' : index === 3 ? '较吵 (街道)' : index === 4 ? '嘈杂 (工厂)' : '极吵 (可能损伤听力)'}}</text>
+    </view>
+  </view>
+
+  <ad-banner />
+</view>

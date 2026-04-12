@@ -1,0 +1,162 @@
+<!--pages/tools/mortgage/index.wxml-->
+<view class="container" style="background: linear-gradient(180deg, #1e3a5f, #2d5a87);">
+  <!-- 贷款类型 -->
+  <view class="type-bar">
+    <view class="type-btn {{loanType === item.key ? 'active' : ''}}" wx:for="{{loanTypes}}" wx:key="key" bindtap="switchLoanType" data-type="{{item.key}}">{{item.name}}</view>
+  </view>
+
+  <!-- 输入区域 -->
+  <view class="form-card">
+    <!-- 房价+首付 -->
+    <view class="form-row">
+      <text class="form-label">房屋总价</text>
+      <view class="form-input-wrap">
+        <input class="form-input" type="digit" placeholder="请输入" value="{{totalPrice}}" bindinput="onTotalPriceInput" />
+        <text class="form-unit">万元</text>
+      </view>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">首付比例</text>
+      <picker range="{{downPaymentRates}}" value="{{1}}" bindchange="onDownPaymentChange">
+        <view class="picker-value">{{downPaymentRate}}% ▼</view>
+      </picker>
+    </view>
+
+    <!-- 非组合贷显示贷款金额 -->
+    <view class="form-row" wx:if="{{loanType !== 'combo'}}">
+      <text class="form-label">贷款金额</text>
+      <view class="form-input-wrap">
+        <input class="form-input" type="digit" placeholder="自动计算" value="{{loanAmount}}" bindinput="onLoanAmountInput" />
+        <text class="form-unit">万元</text>
+      </view>
+    </view>
+
+    <!-- 组合贷两个金额 -->
+    <block wx:if="{{loanType === 'combo'}}">
+      <view class="form-row">
+        <text class="form-label">商贷金额</text>
+        <view class="form-input-wrap">
+          <input class="form-input" type="digit" placeholder="请输入" value="{{comboCommercial}}" bindinput="onComboCommercialInput" />
+          <text class="form-unit">万元</text>
+        </view>
+      </view>
+      <view class="form-row">
+        <text class="form-label">公积金金额</text>
+        <view class="form-input-wrap">
+          <input class="form-input" type="digit" placeholder="请输入" value="{{comboFund}}" bindinput="onComboFundInput" />
+          <text class="form-unit">万元</text>
+        </view>
+      </view>
+    </block>
+
+    <view class="form-row">
+      <text class="form-label">贷款年限</text>
+      <picker range="{{yearOptions}}" value="{{5}}" bindchange="onYearsChange">
+        <view class="picker-value">{{loanYears}}年 ▼</view>
+      </picker>
+    </view>
+
+    <!-- 利率 -->
+    <view class="form-row" wx:if="{{loanType !== 'fund'}}">
+      <text class="form-label">商贷利率</text>
+      <view class="form-input-wrap">
+        <input class="form-input" type="digit" value="{{commercialRate}}" bindinput="onCommercialRateInput" />
+        <text class="form-unit">%</text>
+      </view>
+    </view>
+    <view class="form-row" wx:if="{{loanType !== 'commercial'}}">
+      <text class="form-label">公积金利率</text>
+      <view class="form-input-wrap">
+        <input class="form-input" type="digit" value="{{fundRate}}" bindinput="onFundRateInput" />
+        <text class="form-unit">%</text>
+      </view>
+    </view>
+
+    <!-- 还款方式 -->
+    <view class="form-row repay-row">
+      <text class="form-label">还款方式</text>
+      <view class="repay-btns">
+        <view class="repay-btn {{repayType === 'equal_payment' ? 'active' : ''}}" bindtap="switchRepayType" data-type="equal_payment">等额本息</view>
+        <view class="repay-btn {{repayType === 'equal_principal' ? 'active' : ''}}" bindtap="switchRepayType" data-type="equal_principal">等额本金</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 计算按钮 -->
+  <view class="calc-btn" bindtap="calculate">开始计算</view>
+
+  <!-- 结果 -->
+  <view class="result-card" wx:if="{{result}}">
+    <view class="result-header">
+      <text class="result-tag">{{result.repayType}}</text>
+    </view>
+
+    <view class="result-main">
+      <text class="result-label">{{repayType === 'equal_principal' ? '首月月供' : '每月月供'}}</text>
+      <text class="result-amount">¥{{result.monthlyPayment}}</text>
+      <text class="result-sub" wx:if="{{result.monthlyLast}}">末月月供：¥{{result.monthlyLast}}</text>
+    </view>
+
+    <view class="result-grid">
+      <view class="grid-item">
+        <text class="g-value">{{result.totalLoanWan}}万</text>
+        <text class="g-label">贷款总额</text>
+      </view>
+      <view class="grid-item">
+        <text class="g-value">{{result.totalInterestWan}}万</text>
+        <text class="g-label">利息总额</text>
+      </view>
+      <view class="grid-item">
+        <text class="g-value">{{result.totalPaymentWan}}万</text>
+        <text class="g-label">还款总额</text>
+      </view>
+    </view>
+
+    <!-- 组合贷明细 -->
+    <view class="combo-detail" wx:if="{{result.isCombo}}">
+      <view class="combo-row">
+        <text class="c-name">{{result.part1.name}}</text>
+        <text class="c-monthly">月供 ¥{{result.part1.monthly}}</text>
+        <text class="c-interest">利息 {{result.part1.interest}}万</text>
+      </view>
+      <view class="combo-row">
+        <text class="c-name">{{result.part2.name}}</text>
+        <text class="c-monthly">月供 ¥{{result.part2.monthly}}</text>
+        <text class="c-interest">利息 {{result.part2.interest}}万</text>
+      </view>
+    </view>
+
+    <!-- 还款明细 -->
+    <view class="detail-toggle" bindtap="toggleDetail">
+      <text>{{showDetail ? '收起明细 ▲' : '查看还款明细 ▼'}}</text>
+    </view>
+
+    <view class="detail-table" wx:if="{{showDetail}}">
+      <view class="table-header">
+        <text class="th">月份</text>
+        <text class="th">月供</text>
+        <text class="th">本金</text>
+        <text class="th">利息</text>
+      </view>
+      <view class="table-row" wx:for="{{detailMonths}}" wx:key="month">
+        <text class="td">{{item.month > 0 ? '第' + item.month + '月' : '...'}}</text>
+        <text class="td">{{item.payment}}</text>
+        <text class="td">{{item.principal}}</text>
+        <text class="td">{{item.interest}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告 -->
+  <ad-banner />
+
+  <!-- 提示 -->
+  <view class="tips-card">
+    <text class="tips-title">💡 小贴士</text>
+    <text class="tips-text">• 2024年最新LPR商贷基准利率为3.45%</text>
+    <text class="tips-text">• 公积金贷款5年以上利率为2.85%</text>
+    <text class="tips-text">• 等额本息月供固定，适合收入稳定人群</text>
+    <text class="tips-text">• 等额本金总利息少，前期月供较高</text>
+  </view>
+</view>

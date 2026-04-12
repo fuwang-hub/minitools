@@ -1,0 +1,91 @@
+<!--pages/tools/stopwatch/index.wxml-->
+<view class="container" style="background: linear-gradient(180deg, #111827, #1f2937);">
+  <!-- 模式切换 -->
+  <view class="mode-bar">
+    <view class="mode-btn {{mode === 'stopwatch' ? 'active' : ''}}" bindtap="switchMode" data-mode="stopwatch">⏱️ 秒表</view>
+    <view class="mode-btn {{mode === 'timer' ? 'active' : ''}}" bindtap="switchMode" data-mode="timer">⏰ 计时器</view>
+  </view>
+
+  <!-- 秒表模式 -->
+  <block wx:if="{{mode === 'stopwatch'}}">
+    <view class="display-area">
+      <text class="time-display">{{swDisplay}}</text>
+    </view>
+
+    <view class="btn-row">
+      <block wx:if="{{swState === 'idle'}}">
+        <view class="ctrl-btn start-btn" bindtap="swStart">开始</view>
+      </block>
+      <block wx:elif="{{swState === 'running'}}">
+        <view class="ctrl-btn lap-btn" bindtap="swLap">计次</view>
+        <view class="ctrl-btn pause-btn" bindtap="swPause">暂停</view>
+      </block>
+      <block wx:elif="{{swState === 'paused'}}">
+        <view class="ctrl-btn reset-btn" bindtap="swReset">重置</view>
+        <view class="ctrl-btn start-btn" bindtap="swResume">继续</view>
+      </block>
+    </view>
+
+    <!-- 计次列表 -->
+    <scroll-view scroll-y class="lap-list" wx:if="{{swLaps.length > 0}}">
+      <view class="lap-header">
+        <text class="lh-col">计次</text>
+        <text class="lh-col">计次用时</text>
+        <text class="lh-col">总用时</text>
+      </view>
+      <view class="lap-row {{item.isBest ? 'best' : ''}} {{item.isWorst ? 'worst' : ''}}" wx:for="{{swLaps}}" wx:key="num">
+        <text class="lr-col">第{{item.num}}次</text>
+        <text class="lr-col lr-lap">{{item.lapTime}}</text>
+        <text class="lr-col">{{item.totalTime}}</text>
+      </view>
+    </scroll-view>
+  </block>
+
+  <!-- 计时器模式 -->
+  <block wx:if="{{mode === 'timer'}}">
+    <block wx:if="{{timerState === 'idle'}}">
+      <view class="timer-setup">
+        <view class="timer-adj">
+          <view class="adj-btn" bindtap="timerMinus">−</view>
+          <text class="timer-min">{{timerMinutes}}</text>
+          <view class="adj-btn" bindtap="timerPlus">+</view>
+        </view>
+        <text class="timer-unit">分钟</text>
+      </view>
+
+      <view class="preset-row">
+        <view class="preset-btn {{timerMinutes === item ? 'active' : ''}}" wx:for="{{timerPresets}}" wx:key="*this" bindtap="setTimerMinutes" data-min="{{item}}">{{item}}min</view>
+      </view>
+
+      <view class="btn-row">
+        <view class="ctrl-btn start-btn" bindtap="tmStart">开始计时</view>
+      </view>
+    </block>
+
+    <block wx:if="{{timerState !== 'idle'}}">
+      <view class="timer-ring-area">
+        <view class="timer-ring" style="background: conic-gradient(#10b981 0deg, #10b981 {{timerProgress * 3.6}}deg, #374151 {{timerProgress * 3.6}}deg, #374151 360deg);">
+          <view class="timer-inner">
+            <text class="timer-time">{{timerDisplay}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-row">
+        <block wx:if="{{timerState === 'running'}}">
+          <view class="ctrl-btn reset-btn" bindtap="tmReset">取消</view>
+          <view class="ctrl-btn pause-btn" bindtap="tmPause">暂停</view>
+        </block>
+        <block wx:elif="{{timerState === 'paused'}}">
+          <view class="ctrl-btn reset-btn" bindtap="tmReset">取消</view>
+          <view class="ctrl-btn start-btn" bindtap="tmResume">继续</view>
+        </block>
+        <block wx:elif="{{timerState === 'done'}}">
+          <view class="ctrl-btn start-btn" bindtap="tmReset">完成</view>
+        </block>
+      </view>
+    </block>
+  </block>
+
+  <ad-banner />
+</view>

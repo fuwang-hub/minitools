@@ -1,11 +1,19 @@
 var ALL_MODULES = [
   {
     id: 'tools', emoji: '🔧', name: '实用工具',
-    desc: '天气预报、计算器、单位换算...日常必备',
+    desc: '天气、计算器、房贷、记账、汇率...日常必备',
     color1: '#667eea', color2: '#764ba2',
     tools: [
       { id: 'weather', emoji: '🌤️', name: '天气预报', path: '/pages/tools/weather/index', tags: '天气温度气温' },
       { id: 'calculator', emoji: '🧮', name: '计算器', path: '/pages/tools/calculator/index', tags: '计算加减乘除' },
+      { id: 'mortgage', emoji: '🏠', name: '房贷计算', path: '/pages/tools/mortgage/index', tags: '房贷月供贷款利率' },
+      { id: 'bmi', emoji: '💪', name: 'BMI健康', path: '/pages/tools/bmi/index', tags: 'BMI体重健康体脂' },
+      { id: 'ledger', emoji: '💰', name: '记账本', path: '/pages/tools/ledger/index', tags: '记账收支账单' },
+      { id: 'countdown', emoji: '⏳', name: '倒数日', path: '/pages/tools/countdown/index', tags: '倒数日纪念日生日' },
+      { id: 'exchange', emoji: '💱', name: '汇率换算', path: '/pages/tools/exchange/index', tags: '汇率换算美元欧元' },
+      { id: 'stopwatch', emoji: '⏱️', name: '秒表计时', path: '/pages/tools/stopwatch/index', tags: '秒表计时器倒计时' },
+      { id: 'ruler', emoji: '📏', name: '尺子测量', path: '/pages/tools/ruler/index', tags: '尺子测量长度厘米' },
+      { id: 'noise', emoji: '🔊', name: '噪音检测', path: '/pages/tools/noise/index', tags: '噪音分贝检测声音' },
       { id: 'converter', emoji: '📐', name: '单位换算', path: '/pages/tools/converter/index', tags: '单位长度重量温度面积体积' },
       { id: 'coin', emoji: '🪙', name: '抛硬币', path: '/pages/tools/coin/index', tags: '硬币正反面随机决定' },
       { id: 'random', emoji: '🎲', name: '随机数', path: '/pages/tools/random/index', tags: '随机数字抽签' },

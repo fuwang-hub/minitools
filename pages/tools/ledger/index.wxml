@@ -1,0 +1,108 @@
+<!--pages/tools/ledger/index.wxml-->
+<view class="container" style="background: linear-gradient(180deg, #7c3aed, #a78bfa);">
+  <!-- Tab -->
+  <view class="tab-bar">
+    <view class="tab-item {{tab === 'record' ? 'active' : ''}}" bindtap="switchTab" data-tab="record">记一笔</view>
+    <view class="tab-item {{tab === 'stats' ? 'active' : ''}}" bindtap="switchTab" data-tab="stats">统计</view>
+  </view>
+
+  <!-- 记账视图 -->
+  <block wx:if="{{tab === 'record'}}">
+    <!-- 收支切换 -->
+    <view class="type-switch">
+      <view class="ts-btn {{recordType === 'expense' ? 'active exp' : ''}}" bindtap="switchRecordType" data-type="expense">支出</view>
+      <view class="ts-btn {{recordType === 'income' ? 'active inc' : ''}}" bindtap="switchRecordType" data-type="income">收入</view>
+    </view>
+
+    <!-- 分类选择 -->
+    <view class="cat-grid">
+      <view class="cat-item {{selectedCat === item.key ? 'active' : ''}}" wx:for="{{categories}}" wx:key="key" bindtap="selectCat" data-key="{{item.key}}">
+        <text class="cat-emoji">{{item.emoji}}</text>
+        <text class="cat-name">{{item.name}}</text>
+      </view>
+    </view>
+
+    <!-- 输入 -->
+    <view class="input-card">
+      <view class="amount-row">
+        <text class="currency">¥</text>
+        <input class="amount-input" type="digit" placeholder="0.00" value="{{amount}}" bindinput="onAmountInput" focus="{{true}}" />
+      </view>
+      <view class="extra-row">
+        <picker mode="date" value="{{date}}" bindchange="onDateChange">
+          <text class="date-picker">📅 {{date}}</text>
+        </picker>
+        <input class="remark-input" placeholder="添加备注" value="{{remark}}" bindinput="onRemarkInput" />
+      </view>
+      <view class="save-btn" bindtap="saveRecord">保存</view>
+    </view>
+
+    <!-- 月度概览 -->
+    <view class="month-bar">
+      <text class="month-arrow" bindtap="prevMonth">◀</text>
+      <text class="month-text">{{monthKey}}</text>
+      <text class="month-arrow" bindtap="nextMonth">▶</text>
+    </view>
+    <view class="summary-row">
+      <view class="sum-item"><text class="s-label">支出</text><text class="s-val exp">¥{{monthExpense}}</text></view>
+      <view class="sum-item"><text class="s-label">收入</text><text class="s-val inc">¥{{monthIncome}}</text></view>
+      <view class="sum-item"><text class="s-label">结余</text><text class="s-val">¥{{monthBalance}}</text></view>
+    </view>
+
+    <!-- 记录列表 -->
+    <view class="record-group" wx:for="{{groupedRecords}}" wx:key="date">
+      <view class="group-header">
+        <text class="group-date">{{item.dateLabel}}</text>
+        <text class="group-sum">支出 ¥{{item.dayExp}}</text>
+      </view>
+      <view class="record-item" wx:for="{{item.items}}" wx:for-item="rec" wx:key="id" bindlongpress="deleteRecord" data-id="{{rec.id}}">
+        <text class="r-emoji">{{rec.categoryEmoji}}</text>
+        <view class="r-info">
+          <text class="r-cat">{{rec.categoryName}}</text>
+          <text class="r-remark" wx:if="{{rec.remark}}">{{rec.remark}}</text>
+        </view>
+        <text class="r-amount {{rec.type === 'expense' ? 'exp' : 'inc'}}">{{rec.type === 'expense' ? '-' : '+'}}¥{{rec.amount}}</text>
+      </view>
+    </view>
+
+    <view class="empty-tip" wx:if="{{groupedRecords.length === 0}}">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">本月还没有记录</text>
+    </view>
+  </block>
+
+  <!-- 统计视图 -->
+  <block wx:if="{{tab === 'stats'}}">
+    <view class="month-bar">
+      <text class="month-arrow" bindtap="prevMonth">◀</text>
+      <text class="month-text">{{monthKey}} 月支出统计</text>
+      <text class="month-arrow" bindtap="nextMonth">▶</text>
+    </view>
+
+    <view class="stat-total">
+      <text class="st-label">总支出</text>
+      <text class="st-value">¥{{statTotal}}</text>
+    </view>
+
+    <view class="stat-list">
+      <view class="stat-item" wx:for="{{statCategories}}" wx:key="key">
+        <text class="si-emoji">{{item.emoji}}</text>
+        <view class="si-info">
+          <view class="si-top">
+            <text class="si-name">{{item.name}}</text>
+            <text class="si-amount">¥{{item.amount}}</text>
+          </view>
+          <view class="si-bar-bg"><view class="si-bar-fill" style="width: {{item.barWidth}}%;"></view></view>
+        </view>
+        <text class="si-percent">{{item.percent}}%</text>
+      </view>
+    </view>
+
+    <view class="empty-tip" wx:if="{{statCategories.length === 0}}">
+      <text class="empty-icon">📊</text>
+      <text class="empty-text">本月没有支出记录</text>
+    </view>
+  </block>
+
+  <ad-banner />
+</view>

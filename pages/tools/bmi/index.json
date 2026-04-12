@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "BMI健康计算",
+  "navigationBarBackgroundColor": "#059669",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

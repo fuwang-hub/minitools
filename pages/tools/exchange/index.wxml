@@ -1,0 +1,64 @@
+<!--pages/tools/exchange/index.wxml-->
+<view class="container" style="background: linear-gradient(180deg, #1e40af, #3b82f6);">
+  <view class="rate-info" wx:if="{{rateText}}">
+    <text class="rate-text">{{rateText}}</text>
+    <text class="update-text" wx:if="{{updateTime}}">{{updateTime}}</text>
+  </view>
+
+  <!-- 换算卡片 -->
+  <view class="exchange-card">
+    <!-- From -->
+    <view class="currency-row">
+      <picker range="{{currencies}}" range-key="name" value="{{fromIdx}}" bindchange="onFromChange">
+        <view class="cur-selector">
+          <text class="cur-flag">{{currencies[fromIdx].emoji}}</text>
+          <text class="cur-code">{{currencies[fromIdx].code}}</text>
+          <text class="cur-arrow">▼</text>
+        </view>
+      </picker>
+      <input class="cur-input" type="digit" placeholder="输入金额" value="{{fromAmount}}" bindinput="onFromAmountInput" />
+    </view>
+
+    <!-- 交换按钮 -->
+    <view class="swap-btn" bindtap="swapCurrency">
+      <text class="swap-icon">🔄</text>
+    </view>
+
+    <!-- To -->
+    <view class="currency-row">
+      <picker range="{{currencies}}" range-key="name" value="{{toIdx}}" bindchange="onToChange">
+        <view class="cur-selector">
+          <text class="cur-flag">{{currencies[toIdx].emoji}}</text>
+          <text class="cur-code">{{currencies[toIdx].code}}</text>
+          <text class="cur-arrow">▼</text>
+        </view>
+      </picker>
+      <input class="cur-input" type="digit" placeholder="换算结果" value="{{toAmount}}" bindinput="onToAmountInput" />
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-row" wx:if="{{loading}}">
+    <text class="loading-text">正在获取最新汇率...</text>
+  </view>
+
+  <!-- 常用汇率 -->
+  <view class="common-card" wx:if="{{rates}}">
+    <text class="card-title">📊 主要货币汇率 (基准: {{currencies[fromIdx].code}})</text>
+    <view class="rate-row" wx:for="{{currencies}}" wx:key="code" wx:if="{{index !== fromIdx && index < 12}}">
+      <view class="rate-left">
+        <text class="r-flag">{{item.emoji}}</text>
+        <text class="r-name">{{item.name}}</text>
+        <text class="r-code">{{item.code}}</text>
+      </view>
+      <text class="r-rate">{{rates[item.code]}}</text>
+    </view>
+  </view>
+
+  <ad-banner />
+
+  <view class="tip-card">
+    <text class="tip-text">💡 汇率数据来自 ExchangeRate API，每日更新</text>
+    <text class="tip-text">⚠️ 实际交易汇率以银行柜台为准</text>
+  </view>
+</view>

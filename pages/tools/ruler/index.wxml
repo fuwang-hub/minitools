@@ -1,0 +1,47 @@
+<!--pages/tools/ruler/index.wxml-->
+<view class="container">
+  <!-- 顶部控制栏 -->
+  <view class="top-bar">
+    <view class="unit-switch">
+      <view class="u-btn {{unit === 'cm' ? 'active' : ''}}" bindtap="switchUnit" data-unit="cm">厘米</view>
+      <view class="u-btn {{unit === 'inch' ? 'active' : ''}}" bindtap="switchUnit" data-unit="inch">英寸</view>
+    </view>
+    <view class="info-text">
+      <text class="screen-size">屏幕: {{totalCm}}cm / {{totalInch}}in</text>
+    </view>
+  </view>
+
+  <!-- 尺子区域 -->
+  <view class="ruler-area">
+    <!-- 左侧刻度 -->
+    <view class="ruler-scale">
+      <view class="mark {{item.isCm ? 'cm-mark' : ''}}" wx:for="{{rulerMarks}}" wx:key="top" style="top: {{item.top}}px; width: {{item.height}}rpx;">
+        <text class="mark-label" wx:if="{{item.showLabel}}">{{item.label}}</text>
+      </view>
+    </view>
+
+    <!-- 中间测量区 -->
+    <view class="measure-area">
+      <view class="measure-hint">
+        <text class="hint-icon">📏</text>
+        <text class="hint-text">将物体贴靠屏幕左边缘测量</text>
+        <text class="hint-sub">单位: {{unit === 'cm' ? '厘米(cm)' : '英寸(inch)'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部信息 -->
+  <view class="bottom-info">
+    <view class="info-row">
+      <text class="info-label">屏幕PPI</text>
+      <text class="info-val">{{ppi}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">每像素</text>
+      <text class="info-val">{{mmPerPx}}mm</text>
+    </view>
+    <text class="disclaimer">⚠️ 测量结果为估算值，精度约±2mm，实际结果以实物测量为准</text>
+  </view>
+
+  <ad-banner />
+</view>

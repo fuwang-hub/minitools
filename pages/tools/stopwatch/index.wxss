@@ -1,0 +1,35 @@
+/* pages/tools/stopwatch/index.wxss */
+.container { min-height: 100vh; padding-bottom: 40rpx; }
+.mode-bar { display: flex; margin: 20rpx 28rpx; background: rgba(255,255,255,0.1); border-radius: 16rpx; padding: 6rpx; }
+.mode-btn { flex: 1; text-align: center; padding: 18rpx 0; font-size: 28rpx; color: rgba(255,255,255,0.6); border-radius: 12rpx; }
+.mode-btn.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 600; }
+.display-area { text-align: center; padding: 80rpx 0 60rpx; }
+.time-display { font-size: 96rpx; color: #fff; font-weight: 300; font-family: 'Courier New', monospace; letter-spacing: 4rpx; }
+.btn-row { display: flex; justify-content: center; gap: 32rpx; padding: 40rpx 0; }
+.ctrl-btn { width: 160rpx; height: 160rpx; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28rpx; font-weight: 600; }
+.start-btn { background: rgba(16,185,129,0.2); color: #10b981; border: 4rpx solid #10b981; }
+.pause-btn { background: rgba(245,158,11,0.2); color: #f59e0b; border: 4rpx solid #f59e0b; }
+.reset-btn { background: rgba(107,114,128,0.2); color: #9ca3af; border: 4rpx solid #6b7280; }
+.lap-btn { background: rgba(255,255,255,0.1); color: #fff; border: 4rpx solid rgba(255,255,255,0.3); }
+.ctrl-btn:active { opacity: 0.7; }
+/* 计次列表 */
+.lap-list { max-height: 500rpx; margin: 0 28rpx; }
+.lap-header { display: flex; padding: 12rpx 0; border-bottom: 1rpx solid rgba(255,255,255,0.15); }
+.lh-col { flex: 1; text-align: center; font-size: 22rpx; color: rgba(255,255,255,0.4); }
+.lap-row { display: flex; padding: 16rpx 0; border-bottom: 1rpx solid rgba(255,255,255,0.06); }
+.lap-row.best .lr-lap { color: #10b981; }
+.lap-row.worst .lr-lap { color: #ef4444; }
+.lr-col { flex: 1; text-align: center; font-size: 26rpx; color: rgba(255,255,255,0.8); font-family: 'Courier New', monospace; }
+/* 计时器 */
+.timer-setup { text-align: center; padding: 60rpx 0 20rpx; }
+.timer-adj { display: flex; align-items: center; justify-content: center; gap: 40rpx; }
+.adj-btn { width: 80rpx; height: 80rpx; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; font-size: 40rpx; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.timer-min { font-size: 120rpx; color: #fff; font-weight: 200; width: 200rpx; text-align: center; }
+.timer-unit { font-size: 28rpx; color: rgba(255,255,255,0.5); display: block; margin-top: 8rpx; }
+.preset-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12rpx; padding: 20rpx 28rpx; }
+.preset-btn { padding: 12rpx 24rpx; border-radius: 24rpx; font-size: 24rpx; color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.08); }
+.preset-btn.active { background: rgba(16,185,129,0.2); color: #10b981; border: 2rpx solid #10b981; }
+.timer-ring-area { display: flex; justify-content: center; padding: 60rpx 0; }
+.timer-ring { width: 400rpx; height: 400rpx; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.timer-inner { width: 360rpx; height: 360rpx; border-radius: 50%; background: #1f2937; display: flex; align-items: center; justify-content: center; }
+.timer-time { font-size: 80rpx; color: #fff; font-weight: 300; font-family: 'Courier New', monospace; }

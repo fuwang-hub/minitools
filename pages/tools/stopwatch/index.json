@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "秒表计时器",
+  "navigationBarBackgroundColor": "#111827",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

@@ -1,0 +1,91 @@
+<!--pages/tools/bmi/index.wxml-->
+<view class="container" style="background: linear-gradient(180deg, #059669, #34d399);">
+  <view class="form-card">
+    <view class="gender-row">
+      <view class="gender-btn {{gender === 'male' ? 'active' : ''}}" bindtap="setGender" data-g="male">🤴 男</view>
+      <view class="gender-btn {{gender === 'female' ? 'active' : ''}}" bindtap="setGender" data-g="female">👸 女</view>
+    </view>
+    <view class="input-row">
+      <text class="input-label">身高</text>
+      <input class="input-field" type="digit" placeholder="请输入" value="{{height}}" bindinput="onHeightInput" />
+      <text class="input-unit">cm</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">体重</text>
+      <input class="input-field" type="digit" placeholder="请输入" value="{{weight}}" bindinput="onWeightInput" />
+      <text class="input-unit">kg</text>
+    </view>
+    <view class="input-row">
+      <text class="input-label">年龄</text>
+      <input class="input-field" type="number" placeholder="选填" value="{{age}}" bindinput="onAgeInput" />
+      <text class="input-unit">岁</text>
+    </view>
+  </view>
+
+  <view class="calc-btn" bindtap="calculate">开始计算</view>
+
+  <block wx:if="{{result}}">
+    <!-- BMI -->
+    <view class="result-card bmi-card">
+      <view class="bmi-header">
+        <text class="bmi-emoji">{{result.bmiEmoji}}</text>
+        <view class="bmi-info">
+          <text class="bmi-value" style="color: {{result.bmiColor}};">BMI {{result.bmi}}</text>
+          <text class="bmi-level" style="color: {{result.bmiColor}};">{{result.bmiLevel}}</text>
+        </view>
+      </view>
+      <view class="bmi-bar">
+        <view class="bar-bg">
+          <view class="bar-thin" style="width: 21.4%;"></view>
+          <view class="bar-normal" style="width: 26.2%;"></view>
+          <view class="bar-fat" style="width: 19%;"></view>
+          <view class="bar-obese" style="width: 33.4%;"></view>
+        </view>
+        <view class="bar-pointer" style="left: {{result.bmiPos}}%;">▼</view>
+        <view class="bar-labels">
+          <text class="bl">偏瘦</text><text class="bl">正常</text><text class="bl">偏胖</text><text class="bl">肥胖</text>
+        </view>
+        <view class="bar-nums">
+          <text class="bn">14</text><text class="bn">18.5</text><text class="bn">24</text><text class="bn">28</text><text class="bn">35</text>
+        </view>
+      </view>
+      <text class="ideal-text">理想体重：{{result.idealWeight}} kg</text>
+      <text class="advice-text">{{result.weightAdvice}}</text>
+    </view>
+
+    <!-- 健康指标 -->
+    <view class="metrics-grid">
+      <view class="metric-card">
+        <text class="m-icon">🔥</text>
+        <text class="m-label">体脂率</text>
+        <text class="m-value" style="color: {{result.fatColor}};">{{result.bodyFat}}%</text>
+        <text class="m-level" style="color: {{result.fatColor}};">{{result.fatLevel}}</text>
+      </view>
+      <view class="metric-card">
+        <text class="m-icon">⚡</text>
+        <text class="m-label">基础代谢</text>
+        <text class="m-value">{{result.bmr}}</text>
+        <text class="m-level">kcal/天</text>
+      </view>
+      <view class="metric-card">
+        <text class="m-icon">💧</text>
+        <text class="m-label">建议饮水</text>
+        <text class="m-value">{{result.water}}</text>
+        <text class="m-level">ml({{result.waterCups}}杯)</text>
+      </view>
+    </view>
+
+    <!-- TDEE -->
+    <view class="result-card">
+      <text class="card-title">🏃 每日消耗热量(TDEE)</text>
+      <view class="tdee-row">
+        <view class="tdee-item"><text class="t-val">{{result.tdee_low}}</text><text class="t-lab">久坐不动</text></view>
+        <view class="tdee-item"><text class="t-val">{{result.tdee_mid}}</text><text class="t-lab">适度运动</text></view>
+        <view class="tdee-item"><text class="t-val">{{result.tdee_high}}</text><text class="t-lab">高强度运动</text></view>
+      </view>
+      <text class="tdee-unit">单位：kcal/天</text>
+    </view>
+  </block>
+
+  <ad-banner />
+</view>

@@ -1,0 +1,44 @@
+/* pages/tools/bmi/index.wxss */
+.container { min-height: 100vh; padding-bottom: 40rpx; }
+.form-card { margin: 20rpx 28rpx; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 28rpx; }
+.gender-row { display: flex; gap: 16rpx; margin-bottom: 20rpx; }
+.gender-btn { flex: 1; text-align: center; padding: 20rpx; border: 2rpx solid #e5e7eb; border-radius: 16rpx; font-size: 30rpx; color: #6b7280; }
+.gender-btn.active { border-color: #059669; color: #059669; background: #ecfdf5; font-weight: 600; }
+.input-row { display: flex; align-items: center; padding: 20rpx 0; border-bottom: 1rpx solid #f3f4f6; }
+.input-row:last-child { border-bottom: none; }
+.input-label { font-size: 28rpx; color: #374151; width: 100rpx; }
+.input-field { flex: 1; text-align: right; font-size: 32rpx; color: #1f2937; font-weight: 500; }
+.input-unit { font-size: 24rpx; color: #9ca3af; margin-left: 8rpx; width: 50rpx; }
+.calc-btn { margin: 24rpx 28rpx; height: 88rpx; line-height: 88rpx; text-align: center; background: rgba(255,255,255,0.95); color: #059669; font-size: 32rpx; font-weight: 600; border-radius: 44rpx; }
+.calc-btn:active { opacity: 0.8; }
+.result-card { margin: 16rpx 28rpx; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 28rpx; }
+.bmi-card { }
+.bmi-header { display: flex; align-items: center; gap: 20rpx; }
+.bmi-emoji { font-size: 60rpx; }
+.bmi-value { font-size: 44rpx; font-weight: 700; display: block; }
+.bmi-level { font-size: 28rpx; display: block; margin-top: 4rpx; }
+.bmi-bar { margin: 24rpx 0 16rpx; }
+.bar-bg { display: flex; height: 16rpx; border-radius: 8rpx; overflow: hidden; }
+.bar-thin { background: #60a5fa; }
+.bar-normal { background: #34d399; }
+.bar-fat { background: #fbbf24; }
+.bar-obese { background: #f87171; }
+.bar-pointer { position: relative; font-size: 20rpx; color: #1f2937; transform: translateX(-50%); display: inline-block; margin-top: 4rpx; }
+.bar-labels { display: flex; justify-content: space-around; margin-top: 8rpx; }
+.bl { font-size: 20rpx; color: #6b7280; }
+.bar-nums { display: flex; justify-content: space-between; }
+.bn { font-size: 18rpx; color: #9ca3af; }
+.ideal-text { font-size: 26rpx; color: #374151; display: block; margin-top: 16rpx; }
+.advice-text { font-size: 26rpx; color: #059669; display: block; margin-top: 8rpx; font-weight: 500; }
+.metrics-grid { display: flex; gap: 12rpx; margin: 16rpx 28rpx; }
+.metric-card { flex: 1; background: rgba(255,255,255,0.95); border-radius: 20rpx; padding: 24rpx 16rpx; text-align: center; }
+.m-icon { font-size: 36rpx; display: block; }
+.m-label { font-size: 22rpx; color: #6b7280; display: block; margin: 8rpx 0 4rpx; }
+.m-value { font-size: 36rpx; font-weight: 700; display: block; color: #1f2937; }
+.m-level { font-size: 20rpx; display: block; color: #6b7280; }
+.card-title { font-size: 28rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
+.tdee-row { display: flex; gap: 12rpx; }
+.tdee-item { flex: 1; text-align: center; background: #f9fafb; border-radius: 12rpx; padding: 16rpx 8rpx; }
+.t-val { font-size: 32rpx; font-weight: 600; color: #059669; display: block; }
+.t-lab { font-size: 22rpx; color: #6b7280; display: block; margin-top: 4rpx; }
+.tdee-unit { font-size: 22rpx; color: #9ca3af; display: block; text-align: center; margin-top: 12rpx; }

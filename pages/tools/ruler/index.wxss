@@ -1,0 +1,24 @@
+/* pages/tools/ruler/index.wxss */
+.container { min-height: 100vh; background: #fff; }
+.top-bar { display: flex; justify-content: space-between; align-items: center; padding: 16rpx 28rpx; background: #fafafa; border-bottom: 1rpx solid #e5e7eb; }
+.unit-switch { display: flex; background: #e5e7eb; border-radius: 8rpx; padding: 4rpx; }
+.u-btn { padding: 8rpx 24rpx; font-size: 24rpx; color: #6b7280; border-radius: 6rpx; }
+.u-btn.active { background: #fff; color: #1f2937; font-weight: 600; }
+.screen-size { font-size: 22rpx; color: #6b7280; }
+/* 尺子 */
+.ruler-area { position: relative; min-height: 800rpx; display: flex; }
+.ruler-scale { width: 120rpx; background: #fef9c3; position: relative; border-right: 4rpx solid #1f2937; min-height: 100vh; }
+.mark { position: absolute; left: 0; height: 2rpx; background: #1f2937; }
+.cm-mark { background: #1f2937; }
+.mark-label { position: absolute; right: -60rpx; top: -16rpx; font-size: 24rpx; color: #1f2937; font-weight: 600; }
+.measure-area { flex: 1; display: flex; align-items: center; justify-content: center; }
+.measure-hint { text-align: center; padding: 40rpx; }
+.hint-icon { font-size: 64rpx; display: block; margin-bottom: 16rpx; }
+.hint-text { font-size: 28rpx; color: #374151; display: block; }
+.hint-sub { font-size: 24rpx; color: #9ca3af; display: block; margin-top: 8rpx; }
+/* 底部 */
+.bottom-info { padding: 20rpx 28rpx; background: #fafafa; border-top: 1rpx solid #e5e7eb; }
+.info-row { display: flex; justify-content: space-between; padding: 8rpx 0; }
+.info-label { font-size: 24rpx; color: #6b7280; }
+.info-val { font-size: 24rpx; color: #1f2937; font-weight: 500; }
+.disclaimer { font-size: 20rpx; color: #9ca3af; display: block; margin-top: 12rpx; text-align: center; }
