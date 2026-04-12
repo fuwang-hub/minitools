@@ -1,5 +1,5 @@
 <!--pages/tools/stopwatch/index.wxml-->
-<view class="container" style="background: linear-gradient(180deg, #111827, #1f2937);">
+<view class="page-container">
   <!-- 模式切换 -->
   <view class="mode-bar">
     <view class="mode-btn {{mode === 'stopwatch' ? 'active' : ''}}" bindtap="switchMode" data-mode="stopwatch">⏱️ 秒表</view>

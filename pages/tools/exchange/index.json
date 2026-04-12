@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "汇率换算",
-  "navigationBarBackgroundColor": "#1e40af",
-  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
   }

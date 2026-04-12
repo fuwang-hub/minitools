@@ -6,37 +6,112 @@ App({
       rewardedVideo: 'adunit-xxxxxxxxxx'
     },
     systemInfo: null,
-    launchTime: 0
+    launchTime: 0,
+    userInfo: null
   },
 
   onLaunch: function() {
     this.globalData.launchTime = Date.now();
 
-    // 缓存系统信息（避免每个页面重复调用）
+    // 缓存系统信息
     try {
       this.globalData.systemInfo = wx.getSystemInfoSync();
     } catch (e) {}
 
-    // 清理过期缓存（超过7天的）
+    // 恢复登录态
+    this._restoreLogin();
+
+    // 清理过期缓存
     this._cleanExpiredCache();
   },
 
   onShow: function() {
-    // 记录启动耗时
     var cost = Date.now() - this.globalData.launchTime;
     if (cost > 0 && cost < 30000) {
       console.log('[性能] 启动耗时: ' + cost + 'ms');
     }
   },
 
-  // ========== 缓存管理 ==========
+  // ========== 登录管理 ==========
 
   /**
-   * 带过期时间的缓存写入
-   * @param {string} key - 缓存键
-   * @param {any} data - 数据
-   * @param {number} expireMs - 过期时间（毫秒），默认 24 小时
+   * 恢复登录态（从本地存储恢复）
    */
+  _restoreLogin: function() {
+    try {
+      var userInfo = wx.getStorageSync('user_info');
+      if (userInfo && userInfo.nickName) {
+        this.globalData.userInfo = userInfo;
+        // 静默刷新登录 code
+        this._silentLogin();
+      }
+    } catch (e) {}
+  },
+
+  /**
+   * 静默登录（获取最新 code，不打扰用户）
+   */
+  _silentLogin: function() {
+    wx.login({
+      success: function(res) {
+        if (res.code) {
+          // code 可用于后端换取 openid/session_key
+          // 如果有后端服务，在这里发送 code 到服务器
+          console.log('[登录] code 已刷新');
+        }
+      }
+    });
+  },
+
+  /**
+   * 获取用户信息
+   * @returns {Object|null}
+   */
+  getUserInfo: function() {
+    return this.globalData.userInfo;
+  },
+
+  /**
+   * 保存用户信息
+   * @param {Object} userInfo - { avatarUrl, nickName, code, ... }
+   */
+  setUserInfo: function(userInfo) {
+    this.globalData.userInfo = userInfo;
+    try {
+      wx.setStorageSync('user_info', userInfo);
+    } catch (e) {}
+  },
+
+  /**
+   * 清除用户信息（退出登录）
+   */
+  clearUserInfo: function() {
+    this.globalData.userInfo = null;
+    try {
+      wx.removeStorageSync('user_info');
+    } catch (e) {}
+  },
+
+  /**
+   * 检查是否已登录
+   * @returns {boolean}
+   */
+  isLoggedIn: function() {
+    return !!this.globalData.userInfo;
+  },
+
+  /**
+   * 记录工具使用次数
+   */
+  trackToolUsage: function() {
+    try {
+      var count = wx.getStorageSync('tool_usage_count') || 0;
+      wx.setStorageSync('tool_usage_count', count + 1);
+    } catch (e) {}
+  },
+
+  // ========== 缓存管理 ==========
+
   setCache: function(key, data, expireMs) {
     expireMs = expireMs || 86400000;
     try {
@@ -50,18 +125,12 @@ App({
     }
   },
 
-  /**
-   * 读取缓存（自动检查过期）
-   * @param {string} key - 缓存键
-   * @returns {any|null} 缓存数据或 null
-   */
   getCache: function(key) {
     try {
       var item = wx.getStorageSync('cache_' + key);
       if (item && item.expire > Date.now()) {
         return item.data;
       }
-      // 过期则删除
       if (item) {
         wx.removeStorageSync('cache_' + key);
       }
@@ -69,18 +138,12 @@ App({
     return null;
   },
 
-  /**
-   * 清除指定缓存
-   */
   removeCache: function(key) {
     try {
       wx.removeStorageSync('cache_' + key);
     } catch (e) {}
   },
 
-  /**
-   * 清理所有过期缓存
-   */
   _cleanExpiredCache: function() {
     try {
       var info = wx.getStorageInfoSync();
@@ -101,9 +164,6 @@ App({
 
   // ========== 广告管理 ==========
 
-  /**
-   * 创建插屏广告实例（全局复用）
-   */
   _interstitialAd: null,
   getInterstitialAd: function() {
     if (!this._interstitialAd && wx.createInterstitialAd) {
@@ -116,9 +176,6 @@ App({
     return this._interstitialAd;
   },
 
-  /**
-   * 创建激励视频实例（全局复用）
-   */
   _rewardedAd: null,
   getRewardedAd: function() {
     if (!this._rewardedAd && wx.createRewardedVideoAd) {

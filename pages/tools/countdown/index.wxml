@@ -1,5 +1,5 @@
 <!--pages/tools/countdown/index.wxml-->
-<view class="container" style="background: linear-gradient(180deg, #ec4899, #f472b6);">
+<view class="page-container">
   <view class="header">
     <text class="h-title">📅 我的倒数日</text>
     <view class="add-btn" bindtap="showAddForm">+ 添加</view>

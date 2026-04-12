@@ -1,5 +1,5 @@
 <!--pages/tools/noise/index.wxml-->
-<view class="container" style="background: {{isRecording ? level.bg : '#f5f5f5'}};">
+<view class="page-immersive" style="background: {{isRecording ? level.bg : '#f5f5f5'}};">
   <!-- 表盘 -->
   <view class="meter-area">
     <view class="meter">

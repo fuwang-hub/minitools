@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "倒数日",
-  "navigationBarBackgroundColor": "#ec4899",
-  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
   }

@@ -25,25 +25,25 @@ var WEATHER_ICONS = {
   '热': '🔥', '冷': '🥶', '未知': '🌤️'
 };
 
-// 天气背景色映射
+// 天气背景色映射 - 品牌蓝紫色系，不同天气用深浅区分
 var WEATHER_BG = {
-  '晴': ['#FF6B35', '#FF8C42'],
-  '多云': ['#5B86E5', '#36D1DC'],
-  '少云': ['#5B86E5', '#36D1DC'],
-  '阴': ['#616161', '#9BC5C3'],
-  '雨': ['#2C3E50', '#3498DB'],
-  '小雨': ['#4A6FA5', '#6B93D6'],
-  '中雨': ['#2C3E50', '#3498DB'],
-  '大雨': ['#1a2a3a', '#2980B9'],
-  '暴雨': ['#0d1b2a', '#1B4F72'],
-  '雷阵雨': ['#2C3E50', '#4A69BD'],
-  '阵雨': ['#4A6FA5', '#6B93D6'],
-  '雪': ['#83a4d4', '#b6fbff'],
-  '小雪': ['#83a4d4', '#b6fbff'],
-  '大雪': ['#5f7ea8', '#b6fbff'],
-  '雾': ['#757F9A', '#D7DDE8'],
-  '霾': ['#8e9eab', '#eef2f3'],
-  '沙尘': ['#c2956b', '#e8c99b']
+  '晴': ['#4F6EF6', '#6C8AFF'],
+  '多云': ['#5a6fd6', '#6b42a0'],
+  '少云': ['#6078e0', '#7048a1'],
+  '阴': ['#4a5bb0', '#5c3b8a'],
+  '雨': ['#3d4e9e', '#4e3580'],
+  '小雨': ['#4a5bb0', '#5c3b8a'],
+  '中雨': ['#3d4e9e', '#4e3580'],
+  '大雨': ['#354690', '#453078'],
+  '暴雨': ['#2d3d80', '#3c2a6e'],
+  '雷阵雨': ['#354690', '#453078'],
+  '阵雨': ['#4a5bb0', '#5c3b8a'],
+  '雪': ['#7b8fee', '#8a5db8'],
+  '小雪': ['#7b8fee', '#8a5db8'],
+  '大雪': ['#8b9cf0', '#9a6dc0'],
+  '雾': ['#5868c0', '#6a4595'],
+  '霾': ['#4f5aaa', '#5f3d88'],
+  '沙尘': ['#5868c0', '#6a4595']
 };
 
 // 城市编码表 - 高德使用 adcode
@@ -109,23 +109,23 @@ function getWeatherIcon(text) {
 }
 
 function getWeatherBgGradient(text) {
-  if (!text) return 'linear-gradient(180deg, #5B86E5, #36D1DC)';
+  if (!text) return 'linear-gradient(135deg, #4F6EF6, #6C8AFF)';
   var keys = Object.keys(WEATHER_BG);
   for (var i = 0; i < keys.length; i++) {
     if (text.indexOf(keys[i]) >= 0) {
-      return 'linear-gradient(180deg, ' + WEATHER_BG[keys[i]][0] + ', ' + WEATHER_BG[keys[i]][1] + ')';
+      return 'linear-gradient(135deg, ' + WEATHER_BG[keys[i]][0] + ', ' + WEATHER_BG[keys[i]][1] + ')';
     }
   }
-  return 'linear-gradient(180deg, #5B86E5, #36D1DC)';
+  return 'linear-gradient(135deg, #4F6EF6, #6C8AFF)';
 }
 
 function getWeatherBgColor(text) {
-  if (!text) return '#5B86E5';
+  if (!text) return '#4F6EF6';
   var keys = Object.keys(WEATHER_BG);
   for (var i = 0; i < keys.length; i++) {
     if (text.indexOf(keys[i]) >= 0) return WEATHER_BG[keys[i]][0];
   }
-  return '#5B86E5';
+  return '#4F6EF6';
 }
 
 function getAqiLevel(aqi) {
@@ -286,7 +286,7 @@ Page({
 
     // 实时天气
     now: null,
-    bgStyle: 'background: linear-gradient(180deg, #5B86E5, #36D1DC);',
+    bgStyle: 'background: linear-gradient(135deg, #4F6EF6, #6C8AFF);',
     bgColor: '#5B86E5',
     weatherIcon: '🌤️',
     aqiInfo: null,

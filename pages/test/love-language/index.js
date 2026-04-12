@@ -80,10 +80,29 @@ Page({
   },
 
   onShareAppMessage() {
-    const { result } = this.data;
-    return {
-      title: result ? '我的爱情语言是"' + result.name + '"，你的呢？' : '爱情语言测试',
-      path: '/pages/test/love-language/index'
-    };
-  }
+    var share = require('../../../utils/share');
+    var r = this.data.result || {};
+    return share.buildShareConfig('love-language', { result: r.name || '' }, '/pages/test/love-language/index');
+  },
+
+  onShareTimeline() {
+    var share = require('../../../utils/share');
+    var r = this.data.result || {};
+    return share.buildTimelineConfig('love-language', { result: r.name || '' });
+  },
+
+  showPoster() {
+    var r = this.data.result || {};
+    this.setData({
+      showPoster: true,
+      posterData: {
+        emoji: r.emoji || '💕', title: '爱情语言测试', subtitle: '我的爱情语言是',
+        result: r.name || '', highlight: '', desc: r.desc || '',
+        qrTip: '扫一扫，测测你的爱情语言是什么！'
+      }
+    });
+  },
+
+  closePoster() { this.setData({ showPoster: false }); },
+  onUnlocked() { this.setData({ detailUnlocked: true }); }
 });

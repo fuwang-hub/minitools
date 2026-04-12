@@ -130,4 +130,9 @@ Page({
       path: '/pages/horoscope/daily/index'
     };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("daily", {});
+  }
 });

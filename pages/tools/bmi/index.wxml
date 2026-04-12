@@ -1,5 +1,5 @@
 <!--pages/tools/bmi/index.wxml-->
-<view class="container" style="background: linear-gradient(180deg, #059669, #34d399);">
+<view class="page-container">
   <view class="form-card">
     <view class="gender-row">
       <view class="gender-btn {{gender === 'male' ? 'active' : ''}}" bindtap="setGender" data-g="male">🤴 男</view>

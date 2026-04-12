@@ -53,4 +53,9 @@ Page({
   onShareAppMessage() {
     return { title: '帮你起一个绝美的古风名字！', path: '/pages/ai/name-gen/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("default", {});
+  }
 });

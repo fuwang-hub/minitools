@@ -108,4 +108,9 @@ Page({
     if (result) return { title: '我的名字评分' + result.totalScore + '分，来测测你的！', path: '/pages/metaphysics/name/index' };
     return { title: '姓名测试打分', path: '/pages/metaphysics/name/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("name-test", {});
+  }
 });

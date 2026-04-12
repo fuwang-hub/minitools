@@ -1,6 +1,6 @@
 <!--pages/metaphysics/bazi/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #92400e, #b45309);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">☯️</text>
     <text class="hero-title">生辰八字</text>
     <text class="hero-desc">天干地支 · 五行命理</text>

@@ -1,5 +1,5 @@
 <!-- pages/tools/weather/index.wxml -->
-<view class="container" style="{{bgStyle}}">
+<view class="page-immersive" style="{{bgStyle}}">
 
   <!-- 未配置提示 -->
   <view class="config-tip" wx:if="{{!configured}}">

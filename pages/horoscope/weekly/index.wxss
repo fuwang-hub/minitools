@@ -12,13 +12,13 @@
 .sign-header { display: flex; justify-content: space-between; align-items: center; margin: 20rpx 30rpx 0; padding: 20rpx 24rpx; background: #fff; border-radius: 16rpx; }
 .current-sign { font-size: 34rpx; font-weight: 600; color: #1f2937; }
 .change-sign { font-size: 26rpx; color: #6366F1; }
-.summary-card { margin: 16rpx 30rpx; background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-radius: 20rpx; padding: 32rpx; }
+.summary-card { margin: 16rpx 30rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border-radius: 24rpx; padding: 32rpx; }
 .overall-label { font-size: 28rpx; color: #4338ca; display: block; }
 .overall-stars { font-size: 36rpx; display: block; margin: 8rpx 0; }
 .summary-text { font-size: 28rpx; color: #4b5563; line-height: 1.8; display: block; margin-top: 12rpx; }
 .lucky-info { display: flex; gap: 24rpx; margin-top: 16rpx; }
 .lucky-item { font-size: 26rpx; color: #6366F1; background: rgba(99,102,241,0.1); padding: 8rpx 16rpx; border-radius: 12rpx; }
-.fortune-card { margin: 16rpx 30rpx; background: #fff; border-radius: 20rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
+.fortune-card { margin: 16rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
 .fortune-header { display: flex; align-items: center; margin-bottom: 12rpx; }
 .fortune-icon { font-size: 36rpx; margin-right: 12rpx; }
 .fortune-title { font-size: 30rpx; font-weight: 600; color: #1f2937; flex: 1; }

@@ -1,9 +1,9 @@
 /* pages/tools/countdown/index.wxss */
-.container { min-height: 100vh; padding-bottom: 40rpx; }
-.header { display: flex; justify-content: space-between; align-items: center; padding: 20rpx 28rpx; }
+.page-immersive { min-height: 100vh; padding-bottom: 40rpx; }
+.header { display: flex; justify-content: space-between; align-items: center; padding: 20rpx 30rpx; }
 .h-title { font-size: 34rpx; color: #fff; font-weight: 700; }
-.add-btn { padding: 12rpx 28rpx; background: rgba(255,255,255,0.25); border-radius: 20rpx; font-size: 26rpx; color: #fff; }
-.event-card { margin: 12rpx 28rpx; background: rgba(255,255,255,0.95); border-radius: 20rpx; padding: 24rpx; display: flex; justify-content: space-between; align-items: center; }
+.add-btn { padding: 12rpx 30rpx; background: rgba(255,255,255,0.25); border-radius: 24rpx; font-size: 26rpx; color: #fff; }
+.event-card { margin: 12rpx 30rpx; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 24rpx; display: flex; justify-content: space-between; align-items: center; }
 .event-left { display: flex; align-items: center; gap: 16rpx; flex: 1; }
 .event-emoji { font-size: 40rpx; }
 .event-name { font-size: 28rpx; color: #1f2937; font-weight: 600; display: block; }

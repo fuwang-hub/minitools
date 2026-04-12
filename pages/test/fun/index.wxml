@@ -1,8 +1,8 @@
 <!--pages/test/fun/index.wxml-->
-<view class="container">
+<view class="page-container">
   <!-- 测试列表 -->
   <block wx:if="{{mode === 'list'}}">
-    <view class="hero" style="background: linear-gradient(135deg, #F97316, #FB923C);">
+    <view class="hero">
       <text class="hero-emoji">🎮</text>
       <text class="hero-title">趣味测试</text>
       <text class="hero-desc">选择一个测试开始吧</text>
@@ -21,7 +21,7 @@
 
   <!-- 答题 -->
   <block wx:if="{{mode === 'test' && !showResult}}">
-    <view class="hero" style="background: linear-gradient(135deg, {{currentTest.color}}, {{currentTest.color}}cc);">
+    <view class="hero">
       <text class="hero-emoji">{{currentTest.emoji}}</text>
       <text class="hero-title">{{currentTest.name}}</text>
     </view>
@@ -39,7 +39,7 @@
 
   <!-- 结果 -->
   <block wx:if="{{mode === 'test' && showResult}}">
-    <view class="result-hero" style="background: linear-gradient(135deg, {{currentTest.color}}, {{currentTest.color}}bb);">
+    <view class="result-hero">
       <text class="result-emoji">{{result.emoji}}</text>
       <text class="result-value">{{result.value}}</text>
     </view>

@@ -1,7 +1,7 @@
 <!--pages/ai/answer-book/index.wxml-->
-<view class="container">
+<view class="page-container">
   <block wx:if="{{phase === 'input'}}">
-    <view class="hero" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
+    <view class="hero">
       <text class="hero-emoji">📖</text>
       <text class="hero-title">答案之书</text>
       <text class="hero-desc">心中默想问题，翻开书页</text>

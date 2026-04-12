@@ -59,4 +59,9 @@ Page({
   onShareAppMessage() {
     return { title: '周公解梦 - 解读你的梦境密码', path: '/pages/metaphysics/dream/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("dream", {});
+  }
 });

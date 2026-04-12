@@ -1,6 +1,6 @@
 <!--pages/ai/acrostic/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #0891b2, #06b6d4);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">📜</text>
     <text class="hero-title">藏头诗</text>
     <text class="hero-desc">输入文字，生成专属诗句</text>

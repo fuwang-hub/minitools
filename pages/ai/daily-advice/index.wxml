@@ -1,6 +1,6 @@
 <!--pages/ai/daily-advice/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #059669, #10b981);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">📿</text>
     <text class="hero-title">今日宜忌</text>
     <text class="hero-desc">{{today.year}}年{{today.month}}月{{today.day}}日 周{{today.weekday}}</text>

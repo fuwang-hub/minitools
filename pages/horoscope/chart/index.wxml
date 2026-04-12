@@ -1,6 +1,6 @@
 <!--pages/horoscope/chart/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">🌌</text>
     <text class="hero-title">星盘查询</text>
     <text class="hero-desc">探索你的星象密码</text>

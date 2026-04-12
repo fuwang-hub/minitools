@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "尺子测量",
-  "navigationBarBackgroundColor": "#fafafa",
+  "navigationBarBackgroundColor": "#FFFFFF",
   "navigationBarTextStyle": "black",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"

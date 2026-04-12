@@ -1,6 +1,6 @@
 <!--pages/metaphysics/dream/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #4338ca, #6366F1);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">🌙</text>
     <text class="hero-title">周公解梦</text>
     <text class="hero-desc">解读梦境的神秘密码</text>

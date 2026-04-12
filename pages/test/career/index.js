@@ -87,10 +87,29 @@ Page({
   },
 
   onShareAppMessage() {
-    const { result } = this.data;
-    return {
-      title: result ? '我的职业类型是' + result.name + '，你呢？' : '职业倾向测试',
-      path: '/pages/test/career/index'
-    };
-  }
+    var share = require('../../../utils/share');
+    var r = this.data.result || {};
+    return share.buildShareConfig('career', { result: r.name || '' }, '/pages/test/career/index');
+  },
+
+  onShareTimeline() {
+    var share = require('../../../utils/share');
+    var r = this.data.result || {};
+    return share.buildTimelineConfig('career', { result: r.name || '' });
+  },
+
+  showPoster() {
+    var r = this.data.result || {};
+    this.setData({
+      showPoster: true,
+      posterData: {
+        emoji: r.emoji || '💼', title: '职业倾向测试', subtitle: '我最适合的职业类型',
+        result: r.code || '', highlight: r.name || '', desc: r.desc || '',
+        qrTip: '扫一扫，测测你适合什么职业！'
+      }
+    });
+  },
+
+  closePoster() { this.setData({ showPoster: false }); },
+  onUnlocked() { this.setData({ detailUnlocked: true }); }
 });

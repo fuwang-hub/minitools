@@ -1,11 +1,6 @@
 /* pages/metaphysics/zodiac-match/index.wxss */
-.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 40rpx; }
-.hero { padding: 60rpx 40rpx; text-align: center; color: #fff; }
-.hero-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
-.hero-title { font-size: 44rpx; font-weight: bold; display: block; }
-.hero-desc { font-size: 26rpx; opacity: 0.9; display: block; margin-top: 8rpx; }
 .pair-display { display: flex; justify-content: center; align-items: center; padding: 40rpx 30rpx; gap: 30rpx; }
-.pair-item { width: 160rpx; height: 160rpx; background: #fff; border-radius: 20rpx; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4rpx dashed #d1d5db; }
+.pair-item { width: 160rpx; height: 160rpx; background: #fff; border-radius: 24rpx; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4rpx dashed #d1d5db; }
 .pair-item.selected { border: 4rpx solid #dc2626; }
 .pair-emoji { font-size: 56rpx; }
 .pair-name { font-size: 24rpx; color: #6b7280; margin-top: 6rpx; }
@@ -24,12 +19,10 @@
 .m-score { width: 130rpx; height: 130rpx; border-radius: 50%; border: 6rpx solid; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; }
 .m-num { font-size: 44rpx; font-weight: bold; color: #1f2937; line-height: 1; }
 .m-pct { font-size: 22rpx; color: #6b7280; }
-.level-tag { text-align: center; margin: 0 auto 20rpx; width: 160rpx; padding: 10rpx 0; border-radius: 20rpx; font-size: 30rpx; font-weight: 600; }
-.result-card { margin: 16rpx 30rpx; background: #fff; border-radius: 20rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
-.card-title { font-size: 32rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
-.card-content { font-size: 28rpx; color: #4b5563; line-height: 1.8; display: block; }
+.level-tag { text-align: center; margin: 0 auto 20rpx; width: 160rpx; padding: 10rpx 0; border-radius: 24rpx; font-size: 30rpx; font-weight: 600; }
+.result-card { margin: 16rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
 .disclaimer { text-align: center; margin: 20rpx 30rpx; }
 .disclaimer text { font-size: 24rpx; color: #9ca3af; }
 .actions { display: flex; gap: 20rpx; margin: 20rpx 30rpx; }
 .btn-restart { flex: 1; height: 88rpx; line-height: 88rpx; background: #f3f4f6; color: #374151; border-radius: 44rpx; font-size: 30rpx; }
-.btn-share { flex: 1; height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #b91c1c, #dc2626); color: #fff; border-radius: 44rpx; font-size: 30rpx; }
+.btn-share { flex: 1; height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); color: #fff; border-radius: 44rpx; font-size: 30rpx; }

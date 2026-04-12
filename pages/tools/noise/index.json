@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "噪音检测",
-  "navigationBarBackgroundColor": "#f5f5f5",
+  "navigationBarBackgroundColor": "#FFFFFF",
   "navigationBarTextStyle": "black",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"

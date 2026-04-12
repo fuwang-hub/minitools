@@ -125,10 +125,29 @@ Page({
   },
 
   onShareAppMessage() {
-    const { result } = this.data;
-    return {
-      title: result ? '我是九型人格中的' + result.name + '，你是哪型？' : '九型人格测试',
-      path: '/pages/test/enneagram/index'
-    };
-  }
+    var share = require('../../../utils/share');
+    var r = this.data.result || {};
+    return share.buildShareConfig('enneagram', { result: r.name || '' }, '/pages/test/enneagram/index');
+  },
+
+  onShareTimeline() {
+    var share = require('../../../utils/share');
+    var r = this.data.result || {};
+    return share.buildTimelineConfig('enneagram', { result: r.name || '' });
+  },
+
+  showPoster() {
+    var r = this.data.result || {};
+    this.setData({
+      showPoster: true,
+      posterData: {
+        emoji: r.emoji || '🔢', title: '九型人格测试', subtitle: '我的人格类型',
+        result: r.type || '', highlight: r.name || '', desc: r.desc || '',
+        qrTip: '扫一扫，测测你是九型中的哪一型！'
+      }
+    });
+  },
+
+  closePoster() { this.setData({ showPoster: false }); },
+  onUnlocked() { this.setData({ detailUnlocked: true }); }
 });

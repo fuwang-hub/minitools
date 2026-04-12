@@ -1,5 +1,5 @@
 <!--pages/tools/ledger/index.wxml-->
-<view class="container" style="background: linear-gradient(180deg, #7c3aed, #a78bfa);">
+<view class="page-container">
   <!-- Tab -->
   <view class="tab-bar">
     <view class="tab-item {{tab === 'record' ? 'active' : ''}}" bindtap="switchTab" data-tab="record">记一笔</view>

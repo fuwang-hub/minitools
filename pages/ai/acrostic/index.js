@@ -71,4 +71,9 @@ Page({
   onShareAppMessage() {
     return { title: '我用藏头诗表白，你也来试试！', path: '/pages/ai/acrostic/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("acrostic", {});
+  }
 });

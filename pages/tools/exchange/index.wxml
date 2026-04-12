@@ -1,5 +1,5 @@
 <!--pages/tools/exchange/index.wxml-->
-<view class="container" style="background: linear-gradient(180deg, #1e40af, #3b82f6);">
+<view class="page-container">
   <view class="rate-info" wx:if="{{rateText}}">
     <text class="rate-text">{{rateText}}</text>
     <text class="update-text" wx:if="{{updateTime}}">{{updateTime}}</text>

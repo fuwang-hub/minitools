@@ -1,6 +1,6 @@
 <!--pages/ai/name-gen/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">🏯</text>
     <text class="hero-title">古风名字</text>
     <text class="hero-desc">生成唯美古风名字</text>

@@ -1,0 +1,21 @@
+/* components/share-unlock/share-unlock.wxss */
+.unlock-section { margin: 20rpx 30rpx; }
+.unlock-card {
+  background: #fff; border-radius: 24rpx; padding: 48rpx 36rpx;
+  text-align: center; box-shadow: 0 2rpx 16rpx rgba(0,0,0,0.06);
+  border: 2rpx dashed #4F6EF6;
+}
+.unlock-icon { font-size: 56rpx; display: block; margin-bottom: 16rpx; }
+.unlock-title { font-size: 32rpx; font-weight: 600; color: #1A1A1A; display: block; }
+.unlock-desc { font-size: 24rpx; color: #999; display: block; margin-top: 8rpx; line-height: 1.6; }
+.unlock-actions { margin-top: 32rpx; }
+.btn-unlock-share {
+  background: linear-gradient(135deg, #4F6EF6, #6C8AFF) !important;
+  color: #fff !important; border: none !important;
+  height: 88rpx; line-height: 88rpx; border-radius: 44rpx;
+  font-size: 28rpx; font-weight: 600;
+}
+.unlock-or { font-size: 24rpx; color: #ccc; display: block; margin: 16rpx 0; }
+.btn-unlock-ad {
+  color: #4F6EF6; font-size: 26rpx; padding: 12rpx 0;
+}

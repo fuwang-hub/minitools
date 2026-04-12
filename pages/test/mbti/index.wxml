@@ -1,7 +1,7 @@
 <view class="page-container">
   <!-- 答题中 -->
   <block wx:if="{{!showResult}}">
-    <view class="hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+    <view class="hero">
       <text class="hero-emoji">🧠</text>
       <text class="hero-title">MBTI 性格测试</text>
       <text class="hero-desc">回答8个问题，探索你的性格类型</text>
@@ -28,48 +28,53 @@
 
   <!-- 结果页 -->
   <block wx:if="{{showResult}}">
-    <view class="result-hero" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+    <view class="result-hero">
       <text class="result-emoji">{{resultInfo.emoji}}</text>
       <text class="result-type">{{result}}</text>
       <text class="result-name">{{resultInfo.name}}</text>
     </view>
 
+    <!-- 基础报告（免费） -->
     <view class="card">
       <text class="section-title">🎯 性格描述</text>
       <text class="desc-text">{{resultInfo.desc}}</text>
     </view>
 
-    <view class="card">
-      <text class="section-title">✨ 性格特点</text>
-      <view class="trait-item" wx:for="{{resultInfo.traits}}" wx:key="index">
-        <text class="trait-dot">•</text>
-        <text class="trait-text">{{item}}</text>
-      </view>
-    </view>
-
-    <view class="card">
-      <text class="section-title">💼 适合职业</text>
-      <view class="tag-list">
-        <view class="tag" wx:for="{{resultInfo.careers}}" wx:key="index">
-          <text>{{item}}</text>
+    <!-- 分享解锁区域 -->
+    <share-unlock pageKey="mbti_{{result}}" title="查看完整分析报告" brief="包含性格特点、适合职业、最佳配对等详细内容" bind:unlocked="onUnlocked">
+      <view class="card">
+        <text class="section-title">✨ 性格特点</text>
+        <view class="trait-item" wx:for="{{resultInfo.traits}}" wx:key="index">
+          <text class="trait-dot">•</text>
+          <text class="trait-text">{{item}}</text>
         </view>
       </view>
-    </view>
 
-    <view class="card">
-      <text class="section-title">❤️ 最佳配对</text>
-      <text class="match-text">{{resultInfo.match}}</text>
-    </view>
+      <view class="card">
+        <text class="section-title">💼 适合职业</text>
+        <view class="tag-list">
+          <view class="tag" wx:for="{{resultInfo.careers}}" wx:key="index">
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
 
-    <view class="action-area">
-      <view class="btn-primary" style="text-align:center;" bindtap="onRestart">
-        <text>🔄 重新测试</text>
+      <view class="card">
+        <text class="section-title">❤️ 最佳配对</text>
+        <text class="match-text">{{resultInfo.match}}</text>
       </view>
-      <view class="btn-share" bindtap="onShare">
-        <text>📤 分享结果</text>
-      </view>
+    </share-unlock>
+
+    <!-- 分享操作区 -->
+    <view class="share-area">
+      <button class="btn-primary share-btn" open-type="share">📤 分享给好友</button>
+      <view class="btn-secondary" bindtap="showPoster">🖼️ 生成海报</view>
+      <view class="btn-secondary" bindtap="onRestart">🔄 重新测试</view>
     </view>
   </block>
 
   <ad-banner type="banner" />
+
+  <!-- 海报组件 -->
+  <share-poster show="{{showPoster}}" posterData="{{posterData}}" bind:close="closePoster" />
 </view>

@@ -1,12 +1,8 @@
 <view class="page-container">
-  <!-- 顶部区域 -->
+  <!-- 顶部蓝色区域 -->
   <view class="header">
-    <view class="header-bg"></view>
-    <view class="header-content">
-      <text class="app-title">🧰 万能工具箱</text>
-      <text class="app-slogan">一个小程序，搞定日常所有小需求</text>
-    </view>
-
+    <text class="app-title">🧰 万能工具箱</text>
+    <text class="app-slogan">一个小程序，搞定日常所有小需求</text>
     <!-- 搜索框 -->
     <view class="search-bar">
       <text class="search-icon">🔍</text>
@@ -15,6 +11,17 @@
              bindfocus="onSearchFocus" bindblur="onSearchBlur"
              confirm-type="search" />
       <text class="search-clear" wx:if="{{searchKeyword}}" catchtap="onSearchClear">✕</text>
+    </view>
+  </view>
+
+  <!-- 签到栏 -->
+  <view class="checkin-bar" wx:if="{{!searchMode}}">
+    <view class="checkin-info">
+      <text class="checkin-streak" wx:if="{{streak > 0}}">🔥 连续{{streak}}天</text>
+      <text class="checkin-points">⭐ {{points}}积分</text>
+    </view>
+    <view class="checkin-btn {{checkedIn ? 'checked' : ''}}" bindtap="doCheckin">
+      <text>{{checkedIn ? '✅ 已签到' : '📅 签到'}}</text>
     </view>
   </view>
 
@@ -31,24 +38,25 @@
     </view>
   </view>
 
-  <!-- 模块列表（搜索时隐藏） -->
+  <!-- 模块列表 -->
   <view class="modules" wx:if="{{!searchMode || !searchKeyword}}">
-    <view class="module-card" wx:for="{{modules}}" wx:key="id"
-          style="background: linear-gradient(135deg, {{item.color1}}, {{item.color2}});"
-          bindtap="onModuleTap" data-id="{{item.id}}">
-      <view class="module-header">
-        <text class="module-emoji">{{item.emoji}}</text>
-        <text class="module-name">{{item.name}}</text>
-        <text class="module-count">{{item.tools.length}}个工具</text>
+    <view class="module-section" wx:for="{{modules}}" wx:key="id">
+      <!-- 模块标题栏 -->
+      <view class="module-header" bindtap="onModuleTap" data-id="{{item.id}}">
+        <view class="module-title-row">
+          <text class="module-emoji">{{item.emoji}}</text>
+          <text class="module-name">{{item.name}}</text>
+          <text class="module-count">{{item.tools.length}}个</text>
+        </view>
+        <text class="module-desc">{{item.desc}}</text>
       </view>
-      <view class="module-desc">
-        <text>{{item.desc}}</text>
-      </view>
-      <!-- 工具网格 -->
+      <!-- 工具网格（白色卡片） -->
       <view class="tool-grid">
         <view class="tool-item" wx:for="{{item.tools}}" wx:for-item="tool" wx:key="id"
               catchtap="onToolTap" data-path="{{tool.path}}">
-          <text class="tool-emoji">{{tool.emoji}}</text>
+          <view class="tool-icon-wrap">
+            <text class="tool-emoji">{{tool.emoji}}</text>
+          </view>
           <text class="tool-name">{{tool.name}}</text>
         </view>
       </view>

@@ -1,6 +1,6 @@
 <!--pages/metaphysics/name/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #f59e0b, #f97316);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">📝</text>
     <text class="hero-title">姓名测试</text>
     <text class="hero-desc">五格数理 · 姓名评分</text>

@@ -1,6 +1,6 @@
 <!--pages/horoscope/match/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #EC4899, #F472B6);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">💕</text>
     <text class="hero-title">星座配对</text>
     <text class="hero-desc">测测你们的缘分指数</text>

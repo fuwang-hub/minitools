@@ -1,5 +1,5 @@
 /* pages/tools/weather/index.wxss */
-.container { min-height: 100vh; padding-bottom: 40rpx; color: #fff; }
+.page-immersive { min-height: 100vh; padding-bottom: 40rpx; color: #fff; }
 
 /* 配置提示 */
 .config-tip { margin: 40rpx; background: rgba(255,255,255,0.15); border-radius: 24rpx; padding: 48rpx 36rpx; text-align: center; backdrop-filter: blur(10px); }
@@ -38,7 +38,7 @@
 .aqi-tag { padding: 6rpx 16rpx; border-radius: 16rpx; font-size: 22rpx; }
 
 /* 通用卡片 */
-.card { margin: 16rpx 28rpx; background: rgba(255,255,255,0.12); border-radius: 24rpx; padding: 28rpx; backdrop-filter: blur(10px); }
+.card { margin: 16rpx 30rpx; background: rgba(255,255,255,0.12); border-radius: 24rpx; padding: 28rpx; backdrop-filter: blur(10px); }
 .card-title { font-size: 28rpx; font-weight: 600; display: block; margin-bottom: 20rpx; }
 
 /* 逐小时 */

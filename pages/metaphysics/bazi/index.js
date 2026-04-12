@@ -92,4 +92,9 @@ Page({
   onShareAppMessage() {
     return { title: '生辰八字分析', path: '/pages/metaphysics/bazi/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("bazi", {});
+  }
 });

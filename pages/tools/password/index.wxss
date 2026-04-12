@@ -22,7 +22,7 @@
   width: 88rpx; height: 48rpx; border-radius: 24rpx;
   background: #ddd; position: relative; transition: all 0.3s;
 }
-.toggle.on { background: #667eea; }
+.toggle.on { background: #4F6EF6; }
 .toggle-dot {
   width: 40rpx; height: 40rpx; border-radius: 50%; background: #fff;
   position: absolute; top: 4rpx; left: 4rpx; transition: all 0.3s;
@@ -47,4 +47,4 @@
   padding: 16rpx 0; border-bottom: 1rpx solid #f8f8f8;
 }
 .history-pw { font-size: 24rpx; color: #666; font-family: monospace; flex: 1; word-break: break-all; }
-.history-copy { font-size: 24rpx; color: #667eea; margin-left: 16rpx; flex-shrink: 0; }
+.history-copy { font-size: 24rpx; color: #4F6EF6; margin-left: 16rpx; flex-shrink: 0; }

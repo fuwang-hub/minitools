@@ -1,6 +1,6 @@
 <!--pages/horoscope/weekly/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #6366F1, #8B5CF6);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">📅</text>
     <text class="hero-title">本周运势</text>
     <text class="hero-desc">{{weekRange}}</text>

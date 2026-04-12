@@ -114,4 +114,9 @@ Page({
     }
     return { title: '本周星座运势查询', path: '/pages/horoscope/weekly/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("daily", {});
+  }
 });

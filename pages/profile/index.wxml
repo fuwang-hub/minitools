@@ -1,0 +1,85 @@
+<!--pages/profile/index.wxml-->
+<view class="page-container profile-page">
+  <!-- 用户信息区 -->
+  <view class="user-section">
+    <!-- 已登录 -->
+    <view class="user-card" wx:if="{{isLogin}}">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-info">
+        <text class="nickname">{{userInfo.nickName || '微信用户'}}</text>
+        <text class="user-desc">欢迎使用万能工具箱</text>
+      </view>
+    </view>
+    <!-- 未登录 -->
+    <view class="login-card" wx:else bindtap="onLogin">
+      <view class="login-avatar-placeholder">
+        <text class="login-icon">👤</text>
+      </view>
+      <view class="login-info">
+        <text class="login-title">点击登录</text>
+        <text class="login-desc">登录后享受更多服务</text>
+      </view>
+      <text class="login-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-row">
+    <view class="stat-item">
+      <text class="stat-num">{{toolUsageCount}}</text>
+      <text class="stat-label">使用次数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{favoriteCount}}</text>
+      <text class="stat-label">我的收藏</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">35</text>
+      <text class="stat-label">全部工具</text>
+    </view>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-section">
+    <view
+      class="menu-item"
+      wx:for="{{menuList}}"
+      wx:key="id"
+      bindtap="{{item.isShare ? '' : 'onMenuTap'}}"
+      data-id="{{item.id}}"
+    >
+      <button
+        wx:if="{{item.isShare}}"
+        class="menu-share-btn"
+        open-type="share"
+      >
+        <text class="menu-icon">{{item.icon}}</text>
+        <view class="menu-text">
+          <text class="menu-title">{{item.title}}</text>
+          <text class="menu-desc">{{item.desc}}</text>
+        </view>
+        <text class="menu-arrow">›</text>
+      </button>
+      <block wx:else>
+        <text class="menu-icon">{{item.icon}}</text>
+        <view class="menu-text">
+          <text class="menu-title">{{item.title}}</text>
+          <text class="menu-desc">{{item.desc}}</text>
+        </view>
+        <text class="menu-arrow">›</text>
+      </block>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section" wx:if="{{isLogin}}">
+    <view class="logout-btn" bindtap="onLogout">退出登录</view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer">
+    <text class="footer-text">万能工具箱 v1.0.0</text>
+  </view>
+</view>

@@ -99,4 +99,9 @@ Page({
     }
     return { title: '星座配对测试', path: '/pages/horoscope/match/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("horoscope-match", {});
+  }
 });

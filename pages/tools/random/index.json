@@ -2,5 +2,7 @@
   "navigationBarTitleText": "随机数生成",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
-  }
+  },
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black"
 }

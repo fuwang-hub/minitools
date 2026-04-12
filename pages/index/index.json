@@ -2,5 +2,7 @@
   "navigationBarTitleText": "万能工具箱",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
-  }
+  },
+  "navigationBarBackgroundColor": "#4F6EF6",
+  "navigationBarTextStyle": "white"
 }

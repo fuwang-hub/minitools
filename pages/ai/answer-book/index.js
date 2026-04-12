@@ -61,4 +61,9 @@ Page({
     if (answer) return { title: '答案之书告诉我：' + answer.text, path: '/pages/ai/answer-book/index' };
     return { title: 'AI答案之书 - 为你指引方向', path: '/pages/ai/answer-book/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("answer-book", {});
+  }
 });

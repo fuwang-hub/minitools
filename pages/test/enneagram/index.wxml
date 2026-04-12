@@ -1,8 +1,8 @@
 <!--pages/test/enneagram/index.wxml-->
-<view class="container">
+<view class="page-container">
   <!-- 测试页面 -->
   <block wx:if="{{!showResult}}">
-    <view class="hero" style="background: linear-gradient(135deg, #6366F1, #8B5CF6);">
+    <view class="hero">
       <text class="hero-emoji">🔮</text>
       <text class="hero-title">九型人格测试</text>
       <text class="hero-desc">探索你的核心性格类型</text>
@@ -26,7 +26,7 @@
 
   <!-- 结果页面 -->
   <block wx:if="{{showResult}}">
-    <view class="result-hero" style="background: linear-gradient(135deg, {{result.color}}, {{result.color}}dd);">
+    <view class="result-hero">
       <text class="result-emoji">{{result.emoji}}</text>
       <text class="result-type">第{{result.type}}型</text>
       <text class="result-name">{{result.name}}</text>

@@ -1,6 +1,6 @@
 <!--pages/metaphysics/divination/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">🏮</text>
     <text class="hero-title">求签问卦</text>
     <text class="hero-desc">心诚则灵 · 签文指引</text>

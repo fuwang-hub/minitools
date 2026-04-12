@@ -2,5 +2,7 @@
   "navigationBarTitleText": "计算器",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
-  }
+  },
+  "navigationBarBackgroundColor": "#1C1C1E",
+  "navigationBarTextStyle": "white"
 }

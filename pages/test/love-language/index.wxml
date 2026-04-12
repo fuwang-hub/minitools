@@ -1,7 +1,7 @@
 <!--pages/test/love-language/index.wxml-->
-<view class="container">
+<view class="page-container">
   <block wx:if="{{!showResult}}">
-    <view class="hero" style="background: linear-gradient(135deg, #EC4899, #F472B6);">
+    <view class="hero">
       <text class="hero-emoji">💕</text>
       <text class="hero-title">爱情语言测试</text>
       <text class="hero-desc">发现你独特的爱情表达方式</text>
@@ -24,7 +24,7 @@
   </block>
 
   <block wx:if="{{showResult}}">
-    <view class="result-hero" style="background: linear-gradient(135deg, {{result.color}}, {{result.color}}bb);">
+    <view class="result-hero">
       <text class="result-emoji">{{result.emoji}}</text>
       <text class="result-name">{{result.name}}</text>
       <text class="result-en">{{result.en}}</text>

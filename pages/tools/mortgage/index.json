@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "房贷计算器",
-  "navigationBarBackgroundColor": "#1e3a5f",
-  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
   }

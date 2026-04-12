@@ -1,5 +1,5 @@
 <!--pages/tools/ruler/index.wxml-->
-<view class="container">
+<view class="page-immersive">
   <!-- 顶部控制栏 -->
   <view class="top-bar">
     <view class="unit-switch">

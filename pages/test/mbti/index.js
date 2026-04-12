@@ -131,7 +131,10 @@ Page({
     answers: [],
     showResult: false,
     result: '',
-    resultInfo: {}
+    resultInfo: {},
+    showPoster: false,
+    posterData: {},
+    detailUnlocked: false
   },
 
   onAnswer(e) {
@@ -186,14 +189,42 @@ Page({
   },
 
   onShare() {
-    wx.showShareMenu({ withShareTicket: true });
+    wx.showShareMenu({ withShareTicket: true, menus: ['shareAppMessage', 'shareTimeline'] });
   },
 
   onShareAppMessage() {
-    const { result, resultInfo } = this.data;
-    return {
-      title: '我的MBTI是 ' + result + '（' + (resultInfo.name || '') + '）你是什么类型？',
-      path: '/pages/test/mbti/index'
-    };
-  }
+    var share = require('../../../utils/share');
+    return share.buildShareConfig('mbti', {
+      result: this.data.result,
+      name: (this.data.resultInfo || {}).name || ''
+    }, '/pages/test/mbti/index');
+  },
+
+  onShareTimeline() {
+    var share = require('../../../utils/share');
+    return share.buildTimelineConfig('mbti', {
+      result: this.data.result,
+      name: (this.data.resultInfo || {}).name || ''
+    });
+  },
+
+  showPoster() {
+    var info = this.data.resultInfo || {};
+    this.setData({
+      showPoster: true,
+      posterData: {
+        emoji: info.emoji || '🧠',
+        title: 'MBTI 性格测试',
+        subtitle: '我的性格类型是',
+        result: this.data.result,
+        highlight: info.name || '',
+        desc: info.desc || '',
+        qrTip: '扫一扫，你也来测测你是什么类型！'
+      }
+    });
+  },
+
+  closePoster() { this.setData({ showPoster: false }); },
+
+  onUnlocked() { this.setData({ detailUnlocked: true }); }
 });

@@ -1,7 +1,7 @@
 <!--pages/test/career/index.wxml-->
-<view class="container">
+<view class="page-container">
   <block wx:if="{{!showResult}}">
-    <view class="hero" style="background: linear-gradient(135deg, #F59E0B, #F97316);">
+    <view class="hero">
       <text class="hero-emoji">💼</text>
       <text class="hero-title">职业倾向测试</text>
       <text class="hero-desc">发现最适合你的职业方向</text>
@@ -24,7 +24,7 @@
   </block>
 
   <block wx:if="{{showResult}}">
-    <view class="result-hero" style="background: linear-gradient(135deg, {{result.color}}, {{result.color}}cc);">
+    <view class="result-hero">
       <text class="result-emoji">{{result.emoji}}</text>
       <text class="result-name">{{result.name}}</text>
       <text class="result-title">{{result.title}}</text>

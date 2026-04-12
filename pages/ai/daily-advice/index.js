@@ -87,4 +87,9 @@ Page({
   onShareAppMessage() {
     return { title: '今日宜忌 - 每天看一看，好运自然来', path: '/pages/ai/daily-advice/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("daily", {});
+  }
 });

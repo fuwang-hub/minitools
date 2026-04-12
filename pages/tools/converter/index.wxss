@@ -23,7 +23,7 @@
   box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.05);
 }
 .tab-item.active {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #4F6EF6, #6C8AFF);
   color: #fff;
 }
 
@@ -44,7 +44,7 @@
 
 .picker-text {
   font-size: 28rpx;
-  color: #667eea;
+  color: #4F6EF6;
   font-weight: 500;
   padding: 12rpx 16rpx;
   background: #f5f7ff;
@@ -67,7 +67,7 @@
 .result-value {
   font-size: 36rpx;
   font-weight: 700;
-  color: #667eea;
+  color: #4F6EF6;
 }
 
 .swap-btn {

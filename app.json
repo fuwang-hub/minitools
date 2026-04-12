@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/profile/index",
+    "pages/login/index",
     "pages/tools/weather/index",
     "pages/tools/calculator/index",
     "pages/tools/coin/index",
@@ -62,6 +64,26 @@
       ]
     }
   ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4F6EF6",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "工具箱",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/tab-profile.png",
+        "selectedIconPath": "images/tab-profile-active.png"
+      }
+    ]
+  },
   "preloadRule": {
     "pages/index/index": {
       "network": "all",
@@ -70,9 +92,9 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#667eea",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "万能工具箱",
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "backgroundColor": "#f5f7fa"
   },
   "lazyCodeLoading": "requiredComponents",

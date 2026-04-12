@@ -1,5 +1,5 @@
 <view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+  <view class="hero">
     <text class="hero-emoji">⭐</text>
     <text class="hero-title">今日运势</text>
     <text class="hero-desc">{{today}}</text>

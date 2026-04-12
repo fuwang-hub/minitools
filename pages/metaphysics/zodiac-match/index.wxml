@@ -1,6 +1,6 @@
 <!--pages/metaphysics/zodiac-match/index.wxml-->
-<view class="container">
-  <view class="hero" style="background: linear-gradient(135deg, #b91c1c, #dc2626);">
+<view class="page-container">
+  <view class="hero">
     <text class="hero-emoji">🧧</text>
     <text class="hero-title">属相配对</text>
     <text class="hero-desc">十二生肖缘分测试</text>

@@ -1,12 +1,7 @@
 /* pages/ai/daily-advice/index.wxss */
-.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 40rpx; }
-.hero { padding: 60rpx 40rpx; text-align: center; color: #fff; }
-.hero-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
-.hero-title { font-size: 44rpx; font-weight: bold; display: block; }
-.hero-desc { font-size: 28rpx; opacity: 0.9; display: block; margin-top: 8rpx; }
 .hero-lunar { font-size: 24rpx; opacity: 0.8; display: block; margin-top: 4rpx; }
 .score-section { text-align: center; padding: 30rpx; }
-.score-ring { width: 160rpx; height: 160rpx; border-radius: 50%; background: linear-gradient(135deg, #dcfce7, #bbf7d0); border: 8rpx solid #059669; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; }
+.score-ring { width: 160rpx; height: 160rpx; border-radius: 50%; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border: 8rpx solid #059669; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; }
 .score-num { font-size: 52rpx; font-weight: bold; color: #059669; line-height: 1; }
 .score-label { font-size: 22rpx; color: #059669; }
 .mood-text { font-size: 28rpx; color: #374151; margin-top: 16rpx; }
@@ -17,16 +12,16 @@
 .yi-title { color: #059669; }
 .ji-title { color: #dc2626; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 12rpx; }
-.yi-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #dcfce7; color: #059669; border-radius: 20rpx; }
-.ji-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #fef2f2; color: #dc2626; border-radius: 20rpx; }
-.lucky-card { margin: 20rpx 30rpx; background: #fff; border-radius: 20rpx; padding: 28rpx; }
+.yi-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #dcfce7; color: #059669; border-radius: 24rpx; }
+.ji-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #fef2f2; color: #dc2626; border-radius: 24rpx; }
+.lucky-card { margin: 20rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; }
 .lucky-title { font-size: 30rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
 .lucky-row { display: flex; gap: 16rpx; }
 .lucky-item { flex: 1; text-align: center; background: #fef9c3; border-radius: 16rpx; padding: 20rpx 12rpx; }
 .l-label { font-size: 22rpx; color: #92400e; display: block; }
 .l-value { font-size: 28rpx; font-weight: 600; color: #1f2937; display: block; margin-top: 6rpx; }
-.quote-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 20rpx; padding: 32rpx; text-align: center; }
+.quote-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border-radius: 24rpx; padding: 32rpx; text-align: center; }
 .quote-icon { font-size: 40rpx; display: block; margin-bottom: 12rpx; }
 .quote-text { font-size: 28rpx; color: #374151; line-height: 1.8; font-style: italic; }
 .share-section { margin: 24rpx 30rpx; }
-.btn-share { height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #059669, #10b981); color: #fff; border-radius: 44rpx; font-size: 30rpx; }
+.btn-share { height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); color: #fff; border-radius: 44rpx; font-size: 30rpx; }

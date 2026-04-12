@@ -70,4 +70,9 @@ Page({
     if (result) return { title: '我求到了' + result.type + '，你也来试试！', path: '/pages/metaphysics/divination/index' };
     return { title: '求签问卦 - 探索命运的指引', path: '/pages/metaphysics/divination/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("divination", {});
+  }
 });

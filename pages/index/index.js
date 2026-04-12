@@ -25,7 +25,7 @@ var ALL_MODULES = [
   {
     id: 'test', emoji: '🔮', name: '娱乐测试',
     desc: '探索你的性格、职业倾向和爱情语言',
-    color1: '#f093fb', color2: '#f5576c',
+    color1: '#7c5ce0', color2: '#9b7ff0',
     tools: [
       { id: 'mbti', emoji: '🧠', name: 'MBTI', path: '/pages/test/mbti/index', tags: 'MBTI性格人格测试' },
       { id: 'enneagram', emoji: '🔢', name: '九型人格', path: '/pages/test/enneagram/index', tags: '九型人格性格' },
@@ -37,7 +37,7 @@ var ALL_MODULES = [
   {
     id: 'horoscope', emoji: '⭐', name: '星座运势',
     desc: '每日运势、星座配对、星盘分析',
-    color1: '#4facfe', color2: '#00f2fe',
+    color1: '#5a67d8', color2: '#7f8cf5',
     tools: [
       { id: 'daily', emoji: '🌅', name: '今日运势', path: '/pages/horoscope/daily/index', tags: '星座运势今日每日' },
       { id: 'weekly', emoji: '📆', name: '本周运势', path: '/pages/horoscope/weekly/index', tags: '星座运势本周每周' },
@@ -48,7 +48,7 @@ var ALL_MODULES = [
   {
     id: 'metaphysics', emoji: '🔮', name: '传统玄学',
     desc: '姓名测试、生辰八字、周公解梦',
-    color1: '#f59e0b', color2: '#ef4444',
+    color1: '#805ad5', color2: '#b794f4',
     tools: [
       { id: 'name', emoji: '📝', name: '姓名测试', path: '/pages/metaphysics/name/index', tags: '姓名测试打分' },
       { id: 'bazi', emoji: '🏮', name: '生辰八字', path: '/pages/metaphysics/bazi/index', tags: '八字生辰五行' },
@@ -60,7 +60,7 @@ var ALL_MODULES = [
   {
     id: 'ai', emoji: '🤖', name: 'AI 工具',
     desc: '藏头诗、古风名字、答案之书',
-    color1: '#0891b2', color2: '#6366f1',
+    color1: '#6b5ce7', color2: '#a78bfa',
     tools: [
       { id: 'acrostic', emoji: '📜', name: '藏头诗', path: '/pages/ai/acrostic/index', tags: '藏头诗诗词古诗' },
       { id: 'name-gen', emoji: '🏯', name: '古风名字', path: '/pages/ai/name-gen/index', tags: '古风名字取名' },
@@ -83,13 +83,44 @@ Page({
     modules: ALL_MODULES,
     searchMode: false,
     searchKeyword: '',
-    searchResults: []
+    searchResults: [],
+    checkedIn: false,
+    streak: 0,
+    points: 0
   },
 
   // 搜索防抖 timer
   _searchTimer: null,
   // 跳转节流时间戳
   _lastNavTime: 0,
+
+  onShow: function() {
+    // 每次显示刷新签到状态
+    var checkin = require('../../utils/checkin');
+    var data = checkin.getCheckinData();
+    this.setData({
+      checkedIn: checkin.isCheckedToday(),
+      streak: data.streak,
+      points: data.points
+    });
+  },
+
+  doCheckin: function() {
+    var checkin = require('../../utils/checkin');
+    var result = checkin.doCheckin();
+    if (result.success) {
+      this.setData({
+        checkedIn: true,
+        streak: result.streak,
+        points: result.points
+      });
+      wx.showToast({ title: result.msg, icon: 'none', duration: 2000 });
+      // 签到后请求订阅消息（需要在微信后台配置模板ID后取消注释）
+      // checkin.requestSubscribe('你的模板ID');
+    } else {
+      wx.showToast({ title: result.msg, icon: 'none' });
+    }
+  },
 
   onSearchFocus: function() {
     this.setData({ searchMode: true });

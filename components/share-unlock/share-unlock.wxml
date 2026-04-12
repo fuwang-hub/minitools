@@ -1,0 +1,20 @@
+<!-- components/share-unlock/share-unlock.wxml -->
+<view class="unlock-section" wx:if="{{!unlocked}}">
+  <view class="unlock-card">
+    <text class="unlock-icon">🔒</text>
+    <text class="unlock-title">{{title}}</text>
+    <text class="unlock-desc" wx:if="{{brief}}">{{brief}}</text>
+    <view class="unlock-actions">
+      <button class="btn-unlock-share" open-type="share" bindtap="onShareSuccess">
+        📤 分享给好友即可解锁
+      </button>
+      <text class="unlock-or">或</text>
+      <view class="btn-unlock-ad" bindtap="onAdUnlock">
+        🎬 看视频广告解锁
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{unlocked}}">
+  <slot></slot>
+</view>

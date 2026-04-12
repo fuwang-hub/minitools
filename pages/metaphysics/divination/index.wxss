@@ -1,14 +1,9 @@
 /* pages/metaphysics/divination/index.wxss */
-.container { min-height: 100vh; background: #f5f5f5; padding-bottom: 40rpx; }
-.hero { padding: 60rpx 40rpx; text-align: center; color: #fff; }
-.hero-emoji { font-size: 80rpx; display: block; margin-bottom: 16rpx; }
-.hero-title { font-size: 44rpx; font-weight: bold; display: block; }
-.hero-desc { font-size: 26rpx; opacity: 0.9; display: block; margin-top: 8rpx; }
 .altar { text-align: center; padding: 60rpx 30rpx; }
 .altar-emoji { font-size: 120rpx; display: block; margin-bottom: 24rpx; }
 .altar-text { font-size: 34rpx; font-weight: 600; color: #1f2937; display: block; }
 .altar-hint { font-size: 26rpx; color: #9ca3af; display: block; margin-top: 8rpx; margin-bottom: 40rpx; }
-.btn-shake { width: 360rpx; height: 96rpx; line-height: 96rpx; background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; border-radius: 48rpx; font-size: 34rpx; font-weight: 600; }
+.btn-shake { width: 360rpx; height: 96rpx; line-height: 96rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); color: #fff; border-radius: 48rpx; font-size: 34rpx; font-weight: 600; }
 .shaking { text-align: center; padding: 80rpx 30rpx; }
 .shake-emoji { font-size: 120rpx; display: inline-block; }
 .shake-left { transform: rotate(-15deg); }
@@ -17,14 +12,12 @@
 .shake-dots { display: flex; justify-content: center; gap: 16rpx; margin-top: 24rpx; }
 .dot { font-size: 24rpx; color: #e5e7eb; }
 .dot.active { color: #dc2626; }
-.sign-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #fef2f2, #fde8e8); border-radius: 24rpx; padding: 40rpx; text-align: center; border: 2rpx solid #fecaca; }
+.sign-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border-radius: 24rpx; padding: 40rpx; text-align: center; border: 2rpx solid #fecaca; }
 .sign-num { font-size: 28rpx; color: #9ca3af; display: block; }
 .sign-type { font-size: 44rpx; font-weight: bold; display: block; margin: 12rpx 0; }
 .sign-poem { background: rgba(255,255,255,0.6); border-radius: 16rpx; padding: 24rpx; margin-top: 16rpx; }
 .poem-text { font-size: 30rpx; color: #374151; line-height: 1.8; font-style: italic; }
-.result-card { margin: 16rpx 30rpx; background: #fff; border-radius: 20rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
-.card-title { font-size: 32rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
-.card-content { font-size: 28rpx; color: #4b5563; line-height: 1.8; display: block; }
+.result-card { margin: 16rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
 .disclaimer { text-align: center; margin: 20rpx 30rpx; }
 .disclaimer text { font-size: 24rpx; color: #9ca3af; }
 .history-section { margin: 30rpx 30rpx; }
@@ -35,4 +28,4 @@
 .h-time { font-size: 22rpx; color: #9ca3af; margin-left: auto; }
 .actions { display: flex; gap: 20rpx; margin: 20rpx 30rpx; }
 .btn-restart { flex: 1; height: 88rpx; line-height: 88rpx; background: #f3f4f6; color: #374151; border-radius: 44rpx; font-size: 30rpx; }
-.btn-share { flex: 1; height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; border-radius: 44rpx; font-size: 30rpx; }
+.btn-share { flex: 1; height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); color: #fff; border-radius: 44rpx; font-size: 30rpx; }

@@ -61,4 +61,9 @@ Page({
     if (result) return { title: zodiacList[z1].emoji + zodiacList[z1].name + ' ❤️ ' + zodiacList[z2].emoji + zodiacList[z2].name + ' 配对' + result.score + '分', path: '/pages/metaphysics/zodiac-match/index' };
     return { title: '属相配对测试', path: '/pages/metaphysics/zodiac-match/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("zodiac-match", {});
+  }
 });

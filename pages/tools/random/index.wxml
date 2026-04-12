@@ -1,5 +1,5 @@
 <view class="page-container">
-  <view class="hero" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+  <view class="hero">
     <text class="hero-emoji">🎲</text>
     <text class="hero-title">随机数生成</text>
   </view>

@@ -105,4 +105,9 @@ Page({
   onShareAppMessage() {
     return { title: '我的星盘分析，来看看你的！', path: '/pages/horoscope/chart/index' };
   }
+,
+  onShareTimeline: function() {
+    var share = require("../../../utils/share");
+    return share.buildTimelineConfig("default", {});
+  }
 });

@@ -126,10 +126,35 @@ Page({
   },
 
   onShareAppMessage() {
-    const { result, currentTest } = this.data;
-    if (result && currentTest) {
-      return { title: currentTest.name + '：我的结果是' + result.value, path: '/pages/test/fun/index' };
+    var share = require('../../../utils/share');
+    var r = this.data.result;
+    var t = this.data.currentTest;
+    if (r && t) {
+      return share.buildShareConfig('fun', { result: t.name + '：' + r.value }, '/pages/test/fun/index');
     }
-    return { title: '趣味测试合集，快来测测你是什么类型！', path: '/pages/test/fun/index' };
-  }
+    return share.buildShareConfig('fun', { result: '' }, '/pages/test/fun/index');
+  },
+
+  onShareTimeline() {
+    var share = require('../../../utils/share');
+    var r = this.data.result;
+    var t = this.data.currentTest;
+    return share.buildTimelineConfig('fun', { result: r && t ? r.value : '趣味测试合集' });
+  },
+
+  showPoster() {
+    var r = this.data.result || {};
+    var t = this.data.currentTest || {};
+    this.setData({
+      showPoster: true,
+      posterData: {
+        emoji: r.emoji || '🎭', title: t.name || '趣味测试', subtitle: '我的测试结果',
+        result: r.value || '', highlight: '', desc: r.desc || '',
+        qrTip: '扫一扫，你也来测测！'
+      }
+    });
+  },
+
+  closePoster() { this.setData({ showPoster: false }); },
+  onUnlocked() { this.setData({ detailUnlocked: true }); }
 });
