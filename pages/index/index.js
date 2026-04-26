@@ -1,3 +1,4 @@
+var analytics = require('../../utils/analytics');
 var ALL_MODULES = [
   {
     id: 'tools', emoji: '🔧', name: '实用工具',
@@ -79,6 +80,10 @@ ALL_MODULES.forEach(function(m) {
 });
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('index');
+    analytics.trackToolUse('index');
+  },
   data: {
     modules: ALL_MODULES,
     searchMode: false,
@@ -178,6 +183,7 @@ Page({
   onModuleTap: function() {},
 
   onShareAppMessage: function() {
+    analytics.trackShare('friend', 'index');
     return {
       title: '万能工具箱 - 日常生活小助手',
       path: '/pages/index/index'

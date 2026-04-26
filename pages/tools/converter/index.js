@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 const categories = [
   {
     key: 'length', name: '长度',
@@ -63,6 +64,10 @@ const categories = [
 ];
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('converter');
+    analytics.trackToolUse('converter');
+  },
   data: {
     categories,
     activeTab: 0,

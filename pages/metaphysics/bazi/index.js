@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/metaphysics/bazi/index.js
 const tianGan = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const diZhi = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
@@ -52,6 +53,10 @@ const wuxingDescs = {
 };
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('bazi');
+    analytics.trackToolUse('bazi');
+  },
   data: {
     birthYear: '1995', birthMonth: '6', birthDay: '15', birthHour: '12',
     showResult: false, result: null,

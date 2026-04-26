@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/mortgage/index.js
 Page({
   data: {
@@ -29,6 +30,8 @@ Page({
   },
 
   onLoad: function () {
+    analytics.trackPage('mortgage');
+    analytics.trackToolUse('mortgage');
     this.calcLoanAmount();
   },
 
@@ -219,6 +222,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'mortgage');
     return { title: '房贷计算器 - 算算你的月供', path: '/pages/tools/mortgage/index' };
   }
 });

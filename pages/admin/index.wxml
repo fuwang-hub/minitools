@@ -1,0 +1,225 @@
+<!--pages/admin/index.wxml-->
+<view class="page-container">
+  <view class="hero">
+    <text class="hero-emoji">📊</text>
+    <text class="hero-title">数据看板</text>
+    <text class="hero-desc">实时数据分析</text>
+  </view>
+
+  <!-- 核心指标 -->
+  <view class="card">
+    <text class="card-title">📈 核心指标</text>
+    <view class="metrics-grid">
+      <view class="metric-item">
+        <text class="metric-num">{{overview.totalSessions || 0}}</text>
+        <text class="metric-label">总会话</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{overview.totalPV || 0}}</text>
+        <text class="metric-label">总PV</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{overview.totalToolUse || 0}}</text>
+        <text class="metric-label">工具使用</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{overview.totalShares || 0}}</text>
+        <text class="metric-label">总分享</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{overview.avgPVPerSession || 0}}</text>
+        <text class="metric-label">每会话PV</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{overview.shareRate || 0}}%</text>
+        <text class="metric-label">分享率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日数据 -->
+  <view class="card">
+    <text class="card-title">📅 今日数据</text>
+    <view class="metrics-grid">
+      <view class="metric-item">
+        <text class="metric-num">{{todayStats.pv || 0}}</text>
+        <text class="metric-label">今日PV</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{todayStats.uv ? 1 : 0}}</text>
+        <text class="metric-label">今日UV</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{todayStats.date || '-'}}</text>
+        <text class="metric-label">日期</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 留存数据 -->
+  <view class="card">
+    <text class="card-title">📌 留存情况</text>
+    <view class="retention-row">
+      <view class="ret-item">
+        <text class="ret-day">首次</text>
+        <text class="ret-val">{{overview.firstVisit || '-'}}</text>
+      </view>
+      <view class="ret-item">
+        <text class="ret-day">访问天数</text>
+        <text class="ret-val ret-yes">{{overview.totalVisitDays || 0}}天</text>
+      </view>
+    </view>
+    <view class="retention-row">
+      <view class="ret-item {{retention.d1 ? 'ret-active' : ''}}">
+        <text class="ret-day">次日</text>
+        <text class="ret-val">{{retention.d1 ? '✅' : '❌'}}</text>
+      </view>
+      <view class="ret-item {{retention.d3 ? 'ret-active' : ''}}">
+        <text class="ret-day">3日</text>
+        <text class="ret-val">{{retention.d3 ? '✅' : '❌'}}</text>
+      </view>
+      <view class="ret-item {{retention.d7 ? 'ret-active' : ''}}">
+        <text class="ret-day">7日</text>
+        <text class="ret-val">{{retention.d7 ? '✅' : '❌'}}</text>
+      </view>
+      <view class="ret-item {{retention.d14 ? 'ret-active' : ''}}">
+        <text class="ret-day">14日</text>
+        <text class="ret-val">{{retention.d14 ? '✅' : '❌'}}</text>
+      </view>
+      <view class="ret-item {{retention.d30 ? 'ret-active' : ''}}">
+        <text class="ret-day">30日</text>
+        <text class="ret-val">{{retention.d30 ? '✅' : '❌'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工具使用排行 -->
+  <view class="card">
+    <text class="card-title">🔧 工具使用排行</text>
+    <view wx:if="{{toolRanking.length === 0}}" class="empty-text">暂无数据</view>
+    <view class="rank-list" wx:if="{{toolRanking.length > 0}}">
+      <view class="rank-item" wx:for="{{toolRanking}}" wx:key="name">
+        <text class="rank-num">{{index + 1}}</text>
+        <text class="rank-name">{{item.name}}</text>
+        <view class="rank-bar-bg">
+          <view class="rank-bar-fill" style="width: {{toolRanking[0].count > 0 ? item.count / toolRanking[0].count * 100 : 0}}%;"></view>
+        </view>
+        <text class="rank-count">{{item.count}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面浏览排行 -->
+  <view class="card">
+    <text class="card-title">📄 页面浏览排行</text>
+    <view wx:if="{{pageRanking.length === 0}}" class="empty-text">暂无数据</view>
+    <view class="rank-list" wx:if="{{pageRanking.length > 0}}">
+      <view class="rank-item" wx:for="{{pageRanking}}" wx:key="path">
+        <text class="rank-num">{{index + 1}}</text>
+        <text class="rank-name">{{item.path}}</text>
+        <text class="rank-count">{{item.count}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分享数据 -->
+  <view class="card">
+    <text class="card-title">📤 分享数据</text>
+    <view class="metrics-grid">
+      <view class="metric-item">
+        <text class="metric-num">{{shareStats.total || 0}}</text>
+        <text class="metric-label">总分享</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{shareStats.byType.friend || 0}}</text>
+        <text class="metric-label">好友分享</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{shareStats.byType.timeline || 0}}</text>
+        <text class="metric-label">朋友圈</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{shareStats.byType.poster || 0}}</text>
+        <text class="metric-label">海报保存</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告数据 -->
+  <view class="card">
+    <text class="card-title">📺 广告数据</text>
+    <view class="metrics-grid">
+      <view class="metric-item">
+        <text class="metric-num">{{overview.totalAdViews || 0}}</text>
+        <text class="metric-label">广告展示</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{adStats.bannerShow || 0}}</text>
+        <text class="metric-label">Banner</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{adStats.interstitialShow || 0}}</text>
+        <text class="metric-label">插屏</text>
+      </view>
+      <view class="metric-item">
+        <text class="metric-num">{{adStats.rewardComplete || 0}}</text>
+        <text class="metric-label">激励视频完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户信息 -->
+  <view class="card">
+    <text class="card-title">👤 用户信息</text>
+    <view class="info-row">
+      <text class="info-label">UID</text>
+      <text class="info-val">{{overview.uid || '-'}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">首次访问</text>
+      <text class="info-val">{{overview.firstVisit || '-'}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">最近访问</text>
+      <text class="info-val">{{overview.lastVisit || '-'}}</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">已注册</text>
+      <text class="info-val">{{overview.registered ? '是 (' + overview.registerTime + ')' : '否'}}</text>
+    </view>
+  </view>
+
+  <!-- 事件日志 -->
+  <view class="card">
+    <view class="card-header" bindtap="toggleEvents">
+      <text class="card-title">📋 事件日志（最近30条）</text>
+      <text class="toggle-arrow">{{showEvents ? '收起 ▲' : '展开 ▼'}}</text>
+    </view>
+    <view wx:if="{{showEvents}}" class="event-list">
+      <view wx:if="{{eventLog.length === 0}}" class="empty-text">暂无事件</view>
+      <view class="event-item" wx:for="{{eventLog}}" wx:key="index">
+        <text class="event-time">{{item.time}}</text>
+        <text class="event-name">{{item.event}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <button class="btn-action" bindtap="loadData">🔄 刷新数据</button>
+    <button class="btn-action" bindtap="exportAllData">📦 导出数据</button>
+    <button class="btn-action" bindtap="reportServer">☁️ 上报服务端</button>
+    <button class="btn-action btn-danger" bindtap="clearData">🗑️ 清除数据</button>
+  </view>
+
+  <!-- 导出弹窗 -->
+  <view class="export-mask" wx:if="{{showExport}}" bindtap="closeExport">
+    <view class="export-box" catchtap="">
+      <text class="export-title">导出数据 (JSON)</text>
+      <textarea class="export-textarea" value="{{exportData}}" auto-height="false" />
+      <button class="btn-primary" bindtap="copyExport">复制到剪贴板</button>
+    </view>
+  </view>
+
+  <ad-banner />
+</view>

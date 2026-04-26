@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 const zodiacs = [
   { id: 0, name: '白羊座', emoji: '♈', date: '3.21-4.19' },
   { id: 1, name: '金牛座', emoji: '♉', date: '4.20-5.20' },

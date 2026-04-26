@@ -1,4 +1,9 @@
+var analytics = require('../../../utils/analytics');
 Page({
+  onLoad: function() {
+    analytics.trackPage('coin');
+    analytics.trackToolUse('coin');
+  },
   data: {
     result: null,
     flipping: false,

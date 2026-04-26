@@ -10,6 +10,7 @@ Page({
     menuList: [
       { id: 'favorites', icon: '⭐', title: '我的收藏', desc: '收藏的工具' },
       { id: 'history', icon: '📋', title: '使用记录', desc: '最近使用的工具' },
+      { id: 'analytics', icon: '📊', title: '数据看板', desc: '使用统计分析' },
       { id: 'feedback', icon: '💬', title: '意见反馈', desc: '帮助我们改进' },
       { id: 'share', icon: '🔗', title: '分享给好友', desc: '好东西要分享', isShare: true },
       { id: 'about', icon: 'ℹ️', title: '关于我们', desc: '万能工具箱 v1.0.0' }
@@ -114,6 +115,9 @@ Page({
         break;
       case 'history':
         wx.showToast({ title: '功能开发中', icon: 'none' });
+        break;
+      case 'analytics':
+        wx.navigateTo({ url: '/pages/admin/index' });
         break;
       case 'feedback':
         // 打开意见反馈

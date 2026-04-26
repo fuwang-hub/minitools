@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/test/career/index.js
 const questions = [
   { id: 1, text: '你更喜欢哪种工作环境？', options: ['户外或动手操作的环境', '安静的研究室或实验室', '充满创意和自由的空间', '需要与人互动交流的场所', '有明确目标和竞争的团队', '有秩序有规则的办公室'] },
@@ -38,6 +39,10 @@ const careerTypes = {
 const typeKeys = ['R', 'I', 'A', 'S', 'E', 'C'];
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('career');
+    analytics.trackToolUse('career');
+  },
   data: {
     currentQuestion: 0,
     answers: [],

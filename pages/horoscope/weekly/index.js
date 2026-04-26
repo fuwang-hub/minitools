@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/horoscope/weekly/index.js
 var signs = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
 var signEmojis = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
@@ -94,6 +95,8 @@ Page({
   },
 
   onLoad: function() {
+    analytics.trackPage('weekly');
+    analytics.trackToolUse('weekly');
     this.setData({ weekRange: getWeekRange() });
   },
 
@@ -108,6 +111,7 @@ Page({
   },
 
   onShareAppMessage: function() {
+    analytics.trackShare('friend', 'weekly');
     var selectedSign = this.data.selectedSign;
     if (selectedSign >= 0) {
       return { title: signs[selectedSign] + '本周运势，快来看看！', path: '/pages/horoscope/weekly/index' };

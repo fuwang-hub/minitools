@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/weather/index.js
 // 高德天气 API - 个人开发者 30万次/天 免费
 // 注册地址: https://console.amap.com
@@ -307,6 +308,8 @@ Page({
   },
 
   onLoad: function () {
+    analytics.trackPage('weather');
+    analytics.trackToolUse('weather');
     if (!AMAP_KEY) {
       this.setData({
         configured: false,
@@ -338,6 +341,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'weather');
     var now = this.data.now;
     return {
       title: this.data.cityName + ' ' + (now ? now.temperature + '°C ' + now.weather : '天气预报'),

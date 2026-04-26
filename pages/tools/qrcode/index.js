@@ -1,4 +1,9 @@
+var analytics = require('../../../utils/analytics');
 Page({
+  onLoad: function() {
+    analytics.trackPage('qrcode');
+    analytics.trackToolUse('qrcode');
+  },
   data: {
     text: '',
     showQR: false

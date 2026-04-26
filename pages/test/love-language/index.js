@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/test/love-language/index.js
 const questions = [
   { id: 1, text: '你更希望伴侣怎样表达爱意？', a: '经常说"我爱你"和甜蜜的话', b: '给你一个温暖的拥抱', da: 'W', db: 'T' },
@@ -36,6 +37,10 @@ const langInfo = {
 };
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('love-language');
+    analytics.trackToolUse('love-language');
+  },
   data: {
     currentQuestion: 0,
     showResult: false,

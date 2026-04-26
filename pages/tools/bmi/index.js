@@ -1,5 +1,10 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/bmi/index.js
 Page({
+  onLoad: function() {
+    analytics.trackPage('bmi');
+    analytics.trackToolUse('bmi');
+  },
   data: {
     gender: 'male',
     height: '',
@@ -99,6 +104,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'bmi');
     return { title: 'BMI健康计算器 - 了解你的身体指标', path: '/pages/tools/bmi/index' };
   }
 });

@@ -1,4 +1,9 @@
+var analytics = require('../../../utils/analytics');
 Page({
+  onLoad: function() {
+    analytics.trackPage('random');
+    analytics.trackToolUse('random');
+  },
   data: {
     min: 1,
     max: 100,

@@ -1,4 +1,9 @@
+var analytics = require('../../../utils/analytics');
 Page({
+  onLoad: function() {
+    analytics.trackPage('calculator');
+    analytics.trackToolUse('calculator');
+  },
   data: {
     display: '0',
     expression: '',

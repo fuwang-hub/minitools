@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/ai/acrostic/index.js
 const poemLib = {
   2: [
@@ -39,6 +40,10 @@ function generatePoem(text) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('acrostic');
+    analytics.trackToolUse('acrostic');
+  },
   data: {
     inputText: '',
     showResult: false,

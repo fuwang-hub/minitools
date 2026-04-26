@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/test/fun/index.js
 const tests = [
   { id: 'mental-age', name: '心理年龄测试', emoji: '🧒', color: '#8B5CF6', desc: '你的心理年龄是多少？',
@@ -74,6 +75,10 @@ const tests = [
 ];
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('fun');
+    analytics.trackToolUse('fun');
+  },
   data: {
     mode: 'list',
     tests: tests.map(t => ({ id: t.id, name: t.name, emoji: t.emoji, color: t.color, desc: t.desc })),

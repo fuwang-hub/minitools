@@ -1,12 +1,17 @@
 // pages/login/index.js
 // 微信新版登录：button open-type="chooseAvatar" + input type="nickname"
 var app = getApp();
+var analytics = require('../../utils/analytics');
 
 Page({
   data: {
     avatarUrl: '',
     nickName: '',
     defaultAvatar: '/images/default-avatar.png'
+  },
+
+  onLoad: function() {
+    analytics.trackPage('login');
   },
 
   // 选择头像（微信原生头像选择器）
@@ -46,6 +51,7 @@ Page({
 
         // 保存到全局
         app.setUserInfo(userInfo);
+        analytics.trackRegister(userInfo);
 
         wx.showToast({
           title: '登录成功',

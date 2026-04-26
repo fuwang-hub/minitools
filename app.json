@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/profile/index",
     "pages/login/index",
+    "pages/admin/index",
     "pages/tools/weather/index",
     "pages/tools/calculator/index",
     "pages/tools/coin/index",

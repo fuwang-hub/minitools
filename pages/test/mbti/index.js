@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 const questions = [
   { text: '在社交场合中，你更倾向于：', options: ['主动结识新朋友', '等待别人来找自己'], dimension: 'EI' },
   { text: '获取信息时，你更关注：', options: ['具体的事实和细节', '整体的概念和可能性'], dimension: 'SN' },
@@ -125,6 +126,10 @@ const mbtiData = {
 };
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('mbti');
+    analytics.trackToolUse('mbti');
+  },
   data: {
     questions,
     currentQ: 0,

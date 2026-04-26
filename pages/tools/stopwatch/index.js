@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/stopwatch/index.js
 function pad2(n) { return n < 10 ? '0' + n : '' + n; }
 
@@ -11,6 +12,10 @@ function formatMs(ms) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('stopwatch');
+    analytics.trackToolUse('stopwatch');
+  },
   data: {
     mode: 'stopwatch', // stopwatch / timer
     // 秒表
@@ -168,6 +173,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'stopwatch');
     return { title: '秒表计时器', path: '/pages/tools/stopwatch/index' };
   }
 });

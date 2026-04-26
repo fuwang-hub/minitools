@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 Page({
   data: {
     password: '',

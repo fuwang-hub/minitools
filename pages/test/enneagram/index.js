@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/test/enneagram/index.js
 const questions = [
   { id: 1, text: '在团队中，你通常扮演什么角色？', options: ['追求完美的质检员', '帮助他人的协调者', '推动目标的执行者'], types: [1, 2, 3] },
@@ -60,6 +61,10 @@ const typeInfo = {
 };
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('enneagram');
+    analytics.trackToolUse('enneagram');
+  },
   data: {
     currentQuestion: 0,
     answers: [],

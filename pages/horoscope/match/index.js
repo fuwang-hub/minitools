@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/horoscope/match/index.js
 const signs = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
 const emojis = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
@@ -63,6 +64,10 @@ function getMatchResult(s1, s2) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('match');
+    analytics.trackToolUse('match');
+  },
   data: {
     signs: signs.map((name, i) => ({ name, emoji: emojis[i], index: i })),
     sign1: -1,

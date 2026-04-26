@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/exchange/index.js
 // 使用免费汇率API: https://open.er-api.com (无需Key，每日更新)
 var CURRENCIES = [
@@ -33,7 +34,9 @@ Page({
     rates: null // 缓存的汇率数据
   },
 
-  onLoad: function () { this.fetchRates(); },
+  onLoad: function () {
+    analytics.trackPage('exchange');
+    analytics.trackToolUse('exchange'); this.fetchRates(); },
 
   fetchRates: function () {
     var that = this;
@@ -131,6 +134,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'exchange');
     return { title: '汇率换算 - 实时汇率查询', path: '/pages/tools/exchange/index' };
   }
 });

@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/ledger/index.js
 var CATEGORIES = {
   expense: [
@@ -51,6 +52,8 @@ Page({
   },
 
   onLoad: function () {
+    analytics.trackPage('ledger');
+    analytics.trackToolUse('ledger');
     this.loadRecords();
   },
 
@@ -216,6 +219,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'ledger');
     return { title: '记账本 - 轻松管理每一笔', path: '/pages/tools/ledger/index' };
   }
 });

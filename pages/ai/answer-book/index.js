@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/ai/answer-book/index.js
 const answers = [
   { text: '是的', emoji: '✅', type: 'positive' },
@@ -32,6 +33,10 @@ const bgColors = {
 };
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('answer-book');
+    analytics.trackToolUse('answer-book');
+  },
   data: {
     question: '',
     phase: 'input', // input, thinking, result

@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/countdown/index.js
 function pad2(n) { return n < 10 ? '0' + n : '' + n; }
 function getToday() { var d = new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
@@ -23,7 +24,9 @@ Page({
     today: getToday()
   },
 
-  onLoad: function () { this.loadEvents(); },
+  onLoad: function () {
+    analytics.trackPage('countdown');
+    analytics.trackToolUse('countdown'); this.loadEvents(); },
   onShow: function () { this.loadEvents(); },
 
   loadEvents: function () {
@@ -113,6 +116,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'countdown');
     return { title: '倒数日 - 记录每一个重要时刻', path: '/pages/tools/countdown/index' };
   }
 });

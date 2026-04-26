@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/metaphysics/name/index.js
 function getStrokes(char) {
   const code = char.charCodeAt(0);
@@ -37,6 +38,10 @@ function analyzeHanzi(name) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('name');
+    analytics.trackToolUse('name');
+  },
   data: {
     surname: '',
     givenName: '',

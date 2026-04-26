@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/ai/name-gen/index.js
 const surnames = ['慕容','上官','欧阳','司马','诸葛','东方','南宫','西门','北堂','独孤','轩辕','皇甫','令狐','公孙','夏侯','尉迟','长孙','宇文','端木','百里','云','林','苏','沈','顾','萧','叶','温','谢','陆','白','楚','江','柳','凌','秦','慕','容','裴','季','方','许','程','韩'];
 const maleChars = [['逸','轩','辰','泽','瑾','瑜','煜','霆','昊','宸'],['风','云','霄','天','岳','渊','烨','曜','翊','廷'],['清','明','景','耀','峻','朗','墨','尘','澈','寒']];
@@ -24,6 +25,10 @@ function genName(gender, style) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('name-gen');
+    analytics.trackToolUse('name-gen');
+  },
   data: {
     gender: 'male',
     style: '古典',

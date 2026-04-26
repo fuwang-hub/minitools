@@ -1,3 +1,5 @@
+var analytics = require('./utils/analytics');
+
 App({
   globalData: {
     adUnitIds: {
@@ -10,8 +12,11 @@ App({
     userInfo: null
   },
 
-  onLaunch: function() {
+  onLaunch: function(options) {
     this.globalData.launchTime = Date.now();
+
+    // 数据埋点：记录会话
+    analytics.trackSession(options ? options.scene : 0);
 
     // 缓存系统信息
     try {
@@ -25,12 +30,19 @@ App({
     this._cleanExpiredCache();
   },
 
-  onShow: function() {
+  onShow: function(options) {
     var cost = Date.now() - this.globalData.launchTime;
     if (cost > 0 && cost < 30000) {
       console.log('[性能] 启动耗时: ' + cost + 'ms');
     }
+    // 每次回到前台也记录会话
+    if (cost > 30000) {
+      analytics.trackSession(options ? options.scene : 0);
+    }
   },
+
+  // ========== 数据埋点 ==========
+  analytics: analytics,
 
   // ========== 登录管理 ==========
 

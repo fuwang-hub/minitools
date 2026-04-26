@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/ruler/index.js
 // 手机屏幕变尺子
 Page({
@@ -16,6 +17,8 @@ Page({
   },
 
   onLoad: function () {
+    analytics.trackPage('ruler');
+    analytics.trackToolUse('ruler');
     this.initRuler();
   },
 
@@ -111,6 +114,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'ruler');
     return { title: '手机尺子 - 随身测量工具', path: '/pages/tools/ruler/index' };
   }
 });

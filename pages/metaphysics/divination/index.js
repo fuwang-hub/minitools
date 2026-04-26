@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/metaphysics/divination/index.js
 const signPool = [
   { num: 1, type: '上上签', poem: '日出东方照四方，前途光明万里长', meaning: '诸事顺利，心想事成。无论是事业还是感情，都将迎来好的转机。', advice: '把握当下机会，大胆行动。' },
@@ -19,6 +20,10 @@ function getTypeColor(type) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('divination');
+    analytics.trackToolUse('divination');
+  },
   data: {
     phase: 'ready',
     shakeCount: 0,
@@ -66,6 +71,7 @@ Page({
   },
 
   onShareAppMessage: function() {
+    analytics.trackShare('friend', 'divination');
     var result = this.data.result;
     if (result) return { title: '我求到了' + result.type + '，你也来试试！', path: '/pages/metaphysics/divination/index' };
     return { title: '求签问卦 - 探索命运的指引', path: '/pages/metaphysics/divination/index' };

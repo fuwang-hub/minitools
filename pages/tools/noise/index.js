@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/tools/noise/index.js
 // 使用微信小程序 RecorderManager 获取音量
 var LEVELS = [
@@ -36,6 +37,8 @@ Page({
   _frameCallback: null,
 
   onLoad: function () {
+    analytics.trackPage('noise');
+    analytics.trackToolUse('noise');
     this._recorder = wx.getRecorderManager();
     var that = this;
 
@@ -138,6 +141,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    analytics.trackShare('friend', 'noise');
     return { title: '噪音检测 - 实时分贝测量', path: '/pages/tools/noise/index' };
   }
 });

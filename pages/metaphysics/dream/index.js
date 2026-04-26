@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/metaphysics/dream/index.js
 const dreamDB = {
   '蛇': { emoji: '🐍', meaning: '主财运，梦见蛇往往预示着财运亨通或有意外之财。', luck: '吉', detail: '梦见蛇缠身表示有人暗恋你；梦见被蛇咬表示近期有贵人相助；梦见打蛇表示能战胜困难。', advice: '近期适合做投资理财，但要理性决策。' },
@@ -20,6 +21,10 @@ const dreamDB = {
 const defaultResult = { emoji: '🔮', meaning: '此梦境比较特殊，需要结合个人具体情况分析。', luck: '平', detail: '每个梦境都有其独特的含义，建议关注梦中的情感体验，那往往才是真正的寓意所在。', advice: '保持良好的心态，注意休息和放松。' };
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('dream');
+    analytics.trackToolUse('dream');
+  },
   data: {
     keyword: '',
     hotWords: ['蛇', '水', '飞', '考试', '钱', '猫', '狗', '房子', '花', '结婚', '牙齿', '下雨'],

@@ -1,3 +1,4 @@
+var analytics = require('../../../utils/analytics');
 // pages/metaphysics/zodiac-match/index.js
 const zodiacList = [
   { name: '鼠', emoji: '🐭', year: '1996, 2008, 2020' },
@@ -35,6 +36,10 @@ function getMatch(z1, z2) {
 }
 
 Page({
+  onLoad: function() {
+    analytics.trackPage('zodiac-match');
+    analytics.trackToolUse('zodiac-match');
+  },
   data: {
     zodiacList,
     z1: -1, z2: -1,
