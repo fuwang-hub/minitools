@@ -1,14 +1,14 @@
 var analytics = require('../../../utils/analytics');
 // pages/horoscope/match/index.js
-const signs = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
-const emojis = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+var signs = ['白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座','水瓶座','双鱼座'];
+var emojis = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
 
 // 星座元素
-const elements = { 0:'火',1:'土',2:'风',3:'水',4:'火',5:'土',6:'风',7:'水',8:'火',9:'土',10:'风',11:'水' };
-const elemColors = { '火':'#EF4444', '土':'#A16207', '风':'#0EA5E9', '水':'#6366F1' };
+var elements = { 0:'火',1:'土',2:'风',3:'水',4:'火',5:'土',6:'风',7:'水',8:'火',9:'土',10:'风',11:'水' };
+var elemColors = { '火':'#EF4444', '土':'#A16207', '风':'#0EA5E9', '水':'#6366F1' };
 
 // 配对评分矩阵 (简化版本，对称矩阵)
-const matchScores = [
+var matchScores = [
 //白 金 双 巨 狮 处 秤 蝎 射 摩 瓶 鱼
   [75,55,80,50,95,60,85,45,90,55,80,65], // 白羊
   [55,80,60,85,65,92,70,88,50,90,55,82], // 金牛
@@ -24,7 +24,7 @@ const matchScores = [
   [65,82,62,95,48,85,55,95,52,88,62,78]  // 双鱼
 ];
 
-const matchDescs = {
+var matchDescs = {
   high: [
     '天生一对！你们的星座组合默契十足，相处起来自然融洽，是令人羡慕的组合。',
     '绝佳搭配！你们能互相欣赏对方的优点，感情基础非常牢固。',
@@ -43,10 +43,10 @@ const matchDescs = {
 };
 
 function getMatchResult(s1, s2) {
-  const score = matchScores[s1][s2];
-  const elem1 = elements[s1], elem2 = elements[s2];
-  const sameElem = elem1 === elem2;
-  let level, desc;
+  var score = matchScores[s1][s2];
+  var elem1 = elements[s1], elem2 = elements[s2];
+  var sameElem = elem1 === elem2;
+  var level, desc;
   if (score >= 85) { level = 'high'; desc = matchDescs.high[Math.floor(Math.random() * 3)]; }
   else if (score >= 60) { level = 'mid'; desc = matchDescs.mid[Math.floor(Math.random() * 3)]; }
   else { level = 'low'; desc = matchDescs.low[Math.floor(Math.random() * 3)]; }
@@ -66,10 +66,11 @@ function getMatchResult(s1, s2) {
 Page({
   onLoad: function() {
     analytics.trackPage('match');
+    analytics.startStay('match');
     analytics.trackToolUse('match');
   },
   data: {
-    signs: signs.map((name, i) => ({ name, emoji: emojis[i], index: i })),
+    signs: signs.map(function(name, i) { return { name: name, emoji: emojis[i], index: i }; }),
     sign1: -1,
     sign2: -1,
     selecting: 1,
@@ -77,9 +78,9 @@ Page({
     result: null
   },
 
-  selectSign(e) {
-    const { index } = e.currentTarget.dataset;
-    const { selecting } = this.data;
+  selectSign: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var selecting = this.data.selecting;
     if (selecting === 1) {
       this.setData({ sign1: index, selecting: 2 });
     } else {
@@ -88,23 +89,30 @@ Page({
     }
   },
 
-  doMatch(s1, s2) {
-    const result = getMatchResult(s1, s2);
+  doMatch: function(s1, s2) {
+    var result = getMatchResult(s1, s2);
     this.setData({ showResult: true, result });
   },
 
-  restart() {
+  restart: function() {
     this.setData({ sign1: -1, sign2: -1, selecting: 1, showResult: false, result: null });
   },
 
-  onShareAppMessage() {
-    const { sign1, sign2, result } = this.data;
+  onHide: function() { analytics.endStay('match'); },
+
+
+  onUnload: function() { analytics.endStay('match'); },
+
+
+
+  onShareAppMessage: function() {
+    var sign1 = this.data.sign1; var sign2 = this.data.sign2; var result = this.data.result;
     if (result) {
       return { title: signs[sign1] + ' ❤️ ' + signs[sign2] + ' 配对指数' + result.score + '%', path: '/pages/horoscope/match/index' };
     }
     return { title: '星座配对测试', path: '/pages/horoscope/match/index' };
-  }
-,
+  },
+
   onShareTimeline: function() {
     var share = require("../../../utils/share");
     return share.buildTimelineConfig("horoscope-match", {});

@@ -88,4 +88,7 @@
   </block>
 
   <ad-banner />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">BMI身体质量指数计算器，输入身高体重自动计算BMI值、体脂率、基础代谢率、每日饮水量推荐，健康体重管理。</view>
 </view>

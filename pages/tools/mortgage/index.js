@@ -31,6 +31,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('mortgage');
+    analytics.startStay('mortgage');
     analytics.trackToolUse('mortgage');
     this.calcLoanAmount();
   },
@@ -220,6 +221,13 @@ Page({
     }
     this.setData({ detailMonths: details, showDetail: true });
   },
+
+  onHide: function() { analytics.endStay('mortgage'); },
+
+
+  onUnload: function() { analytics.endStay('mortgage'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'mortgage');

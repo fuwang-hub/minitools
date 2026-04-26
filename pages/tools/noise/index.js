@@ -38,6 +38,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('noise');
+    analytics.startStay('noise');
     analytics.trackToolUse('noise');
     this._recorder = wx.getRecorderManager();
     var that = this;
@@ -139,6 +140,13 @@ Page({
       clearInterval(this._timer);
     }
   },
+
+  onHide: function() { analytics.endStay('noise'); },
+
+
+  onUnload: function() { analytics.endStay('noise'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'noise');

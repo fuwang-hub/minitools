@@ -96,6 +96,7 @@ Page({
 
   onLoad: function() {
     analytics.trackPage('weekly');
+    analytics.startStay('weekly');
     analytics.trackToolUse('weekly');
     this.setData({ weekRange: getWeekRange() });
   },
@@ -110,6 +111,13 @@ Page({
     this.setData({ selectedSign: index, result: result });
   },
 
+  onHide: function() { analytics.endStay('weekly'); },
+
+
+  onUnload: function() { analytics.endStay('weekly'); },
+
+
+
   onShareAppMessage: function() {
     analytics.trackShare('friend', 'weekly');
     var selectedSign = this.data.selectedSign;
@@ -117,8 +125,8 @@ Page({
       return { title: signs[selectedSign] + '本周运势，快来看看！', path: '/pages/horoscope/weekly/index' };
     }
     return { title: '本周星座运势查询', path: '/pages/horoscope/weekly/index' };
-  }
-,
+  },
+
   onShareTimeline: function() {
     var share = require("../../../utils/share");
     return share.buildTimelineConfig("daily", {});

@@ -309,6 +309,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('weather');
+    analytics.startStay('weather');
     analytics.trackToolUse('weather');
     if (!AMAP_KEY) {
       this.setData({
@@ -339,6 +340,13 @@ Page({
     this.loadWeather();
     wx.stopPullDownRefresh();
   },
+
+  onHide: function() { analytics.endStay('weather'); },
+
+
+  onUnload: function() { analytics.endStay('weather'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'weather');

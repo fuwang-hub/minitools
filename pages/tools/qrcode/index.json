@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "二维码生成",
+  "navigationBarTitleText": "二维码生成器-免费在线制作",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
   },

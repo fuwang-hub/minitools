@@ -36,6 +36,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('exchange');
+    analytics.startStay('exchange');
     analytics.trackToolUse('exchange'); this.fetchRates(); },
 
   fetchRates: function () {
@@ -132,6 +133,13 @@ Page({
     this.setData({ fromIdx: to, toIdx: from, fromAmount: this.data.toAmount, toAmount: this.data.fromAmount, rates: null });
     this.fetchRates();
   },
+
+  onHide: function() { analytics.endStay('exchange'); },
+
+
+  onUnload: function() { analytics.endStay('exchange'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'exchange');

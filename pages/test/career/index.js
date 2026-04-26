@@ -1,6 +1,6 @@
 var analytics = require('../../../utils/analytics');
 // pages/test/career/index.js
-const questions = [
+var questions = [
   { id: 1, text: '你更喜欢哪种工作环境？', options: ['户外或动手操作的环境', '安静的研究室或实验室', '充满创意和自由的空间', '需要与人互动交流的场所', '有明确目标和竞争的团队', '有秩序有规则的办公室'] },
   { id: 2, text: '休息日你最想做什么？', options: ['做手工/运动/户外', '看书/研究/解谜', '画画/写作/设计', '和朋友聚会/志愿活动', '组织活动/谈合作', '整理房间/做计划'] },
   { id: 3, text: '你最擅长什么？', options: ['动手能力强', '逻辑分析强', '想象力丰富', '善于沟通协调', '领导和说服', '细心有条理'] },
@@ -9,7 +9,7 @@ const questions = [
   { id: 6, text: '你理想的同事是：', options: ['踏实能干的', '聪明博学的', '有趣有个性的', '温暖友善的', '有干劲有野心的', '靠谱守规矩的'] }
 ];
 
-const careerTypes = {
+var careerTypes = {
   R: { name: '实干型', emoji: '🔧', color: '#059669', title: '脚踏实地的行动派',
     desc: '你喜欢动手操作，擅长用实际行动解决问题。你重视结果，不喜欢空谈。',
     careers: ['工程师', '建筑师', '技术工人', '运动教练', '厨师', '农业技术员', '机械师'],
@@ -36,14 +36,18 @@ const careerTypes = {
     traits: ['细心严谨', '有条理', '守规则', '执行力强'] }
 };
 
-const typeKeys = ['R', 'I', 'A', 'S', 'E', 'C'];
+var typeKeys = ['R', 'I', 'A', 'S', 'E', 'C'];
 
 Page({
   onLoad: function() {
+    this.setData({ questions: questions });
     analytics.trackPage('career');
+    analytics.startStay('career');
+    analytics.trackFunnelStart('career');
     analytics.trackToolUse('career');
   },
   data: {
+    questions: [],
     currentQuestion: 0,
     answers: [],
     showResult: false,
@@ -52,10 +56,10 @@ Page({
     progress: 0
   },
 
-  handleAnswer(e) {
-    const { index } = e.currentTarget.dataset;
-    const { currentQuestion, answers } = this.data;
-    const newAnswers = [...answers, index];
+  handleAnswer: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var currentQuestion = this.data.currentQuestion; var answers = this.data.answers;
+    var newAnswers = answers.concat([index]);
 
     if (currentQuestion < questions.length - 1) {
       this.setData({
@@ -68,42 +72,52 @@ Page({
     }
   },
 
-  calculateResult(answers) {
-    const scores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
-    answers.forEach(ansIdx => {
+  calculateResult: function(answers) {
+    var scores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
+    answers.forEach(function(ansIdx) {
       scores[typeKeys[ansIdx]] += 1;
     });
 
-    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-    const mainType = sorted[0][0];
-    const subType = sorted[1][0];
+    var sorted = Object.keys(scores).map(function(k) { return [k, scores[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+    var mainType = sorted[0][0];
+    var subType = sorted[1][0];
 
     this.setData({
       showResult: true,
+      _funnelDone: true,
       progress: 100,
       result: careerTypes[mainType],
       subResult: careerTypes[subType],
       hollandCode: mainType + subType + sorted[2][0]
     });
+    analytics.trackFunnelComplete('career');
+    analytics.trackResultView('career');
   },
 
-  restart() {
+  restart: function() {
     this.setData({ currentQuestion: 0, answers: [], showResult: false, result: null, subResult: null, progress: 0 });
   },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('career'); },
+
+
+  onUnload: function() { analytics.endStay('career'); },
+
+
+
+  onShareAppMessage: function() {
     var share = require('../../../utils/share');
     var r = this.data.result || {};
     return share.buildShareConfig('career', { result: r.name || '' }, '/pages/test/career/index');
   },
 
-  onShareTimeline() {
+  onShareTimeline: function() {
     var share = require('../../../utils/share');
     var r = this.data.result || {};
     return share.buildTimelineConfig('career', { result: r.name || '' });
   },
 
-  showPoster() {
+  showPoster: function() {
     var r = this.data.result || {};
     this.setData({
       showPoster: true,
@@ -115,6 +129,6 @@ Page({
     });
   },
 
-  closePoster() { this.setData({ showPoster: false }); },
-  onUnlocked() { this.setData({ detailUnlocked: true }); }
+  closePoster: function() { this.setData({ showPoster: false }); },
+  onUnlocked: function() { this.setData({ detailUnlocked: true }); }
 });

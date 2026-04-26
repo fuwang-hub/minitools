@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "日期计算",
+  "navigationBarTitleText": "日期计算器-天数倒计时推算",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner"
   },

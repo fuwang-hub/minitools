@@ -1,12 +1,6 @@
 <!--pages/metaphysics/name/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📝</text>
-    <text class="hero-title">姓名测试</text>
-    <text class="hero-desc">五格数理 · 姓名评分</text>
-  </view>
-
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="form-card">
       <view class="input-group">
         <text class="input-label">姓氏</text>
@@ -67,4 +61,7 @@
       <button class="btn-share" open-type="share">分享结果</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">姓名测试打分工具，输入姓名查看五格数理分析、总格人格地格外格得分、名字吉凶寓意解读。</view>
 </view>

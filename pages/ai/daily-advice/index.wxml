@@ -1,53 +1,90 @@
 <!--pages/ai/daily-advice/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📿</text>
-    <text class="hero-title">今日宜忌</text>
-    <text class="hero-desc">{{today.year}}年{{today.month}}月{{today.day}}日 周{{today.weekday}}</text>
-    <text class="hero-lunar">{{lunar}}</text>
+
+  <!-- 日期头部 -->
+  <view class="date-header">
+    <view class="date-main">
+      <text class="date-day">{{today.day}}</text>
+      <view class="date-right">
+        <text class="date-ym">{{today.year}}年{{today.month}}月</text>
+        <text class="date-week">星期{{today.weekday}}</text>
+      </view>
+    </view>
+    <text class="date-lunar">{{lunar}}</text>
   </view>
 
-  <view class="score-section">
-    <view class="score-ring">
+  <!-- 今日指数 -->
+  <view class="score-card">
+    <view class="score-circle">
       <text class="score-num">{{overallScore}}</text>
-      <text class="score-label">今日指数</text>
+      <text class="score-unit">分</text>
     </view>
-    <text class="mood-text">今日心情：{{mood}}</text>
-  </view>
-
-  <view class="yi-ji-card">
-    <view class="yi-section">
-      <text class="section-title yi-title">✅ 宜</text>
-      <view class="tag-list">
-        <text class="yi-tag" wx:for="{{yiList}}" wx:key="index">{{item}}</text>
-      </view>
-    </view>
-    <view class="divider"></view>
-    <view class="ji-section">
-      <text class="section-title ji-title">❌ 忌</text>
-      <view class="tag-list">
-        <text class="ji-tag" wx:for="{{jiList}}" wx:key="index">{{item}}</text>
+    <view class="score-info">
+      <text class="score-title">今日运势指数</text>
+      <text class="score-mood">{{mood}}</text>
+      <view class="score-bar">
+        <view class="score-fill" style="width: {{overallScore}}%;"></view>
       </view>
     </view>
   </view>
 
-  <view class="lucky-card">
-    <text class="lucky-title">🍀 今日幸运</text>
-    <view class="lucky-row">
-      <view class="lucky-item"><text class="l-label">幸运色</text><text class="l-value">{{luckyColor}}</text></view>
-      <view class="lucky-item"><text class="l-label">幸运数</text><text class="l-value">{{luckyNum}}</text></view>
-      <view class="lucky-item"><text class="l-label">方位</text><text class="l-value">{{luckyDir}}</text></view>
+  <!-- 宜 -->
+  <view class="card yi-card">
+    <view class="card-header">
+      <text class="card-icon yi-icon">✅</text>
+      <text class="card-label">今日宜做</text>
+    </view>
+    <view class="tag-list">
+      <view class="yi-tag" wx:for="{{yiList}}" wx:key="index">
+        <text>{{item}}</text>
+      </view>
     </view>
   </view>
 
+  <!-- 忌 -->
+  <view class="card ji-card">
+    <view class="card-header">
+      <text class="card-icon ji-icon">❌</text>
+      <text class="card-label">今日忌做</text>
+    </view>
+    <view class="tag-list">
+      <view class="ji-tag" wx:for="{{jiList}}" wx:key="index">
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 幸运三宫格 -->
+  <view class="lucky-grid">
+    <view class="lucky-item color-item">
+      <text class="lucky-icon">🎨</text>
+      <text class="lucky-val">{{luckyColor}}</text>
+      <text class="lucky-label">幸运色</text>
+    </view>
+    <view class="lucky-item num-item">
+      <text class="lucky-icon">🔢</text>
+      <text class="lucky-val">{{luckyNum}}</text>
+      <text class="lucky-label">幸运数</text>
+    </view>
+    <view class="lucky-item dir-item">
+      <text class="lucky-icon">🧭</text>
+      <text class="lucky-val">{{luckyDir}}</text>
+      <text class="lucky-label">方位</text>
+    </view>
+  </view>
+
+  <!-- 每日一言 -->
   <view class="quote-card">
-    <text class="quote-icon">💬</text>
+    <text class="quote-mark">"</text>
     <text class="quote-text">{{quote}}</text>
+    <text class="quote-mark end">"</text>
   </view>
 
-  <view class="share-section">
-    <button class="btn-share" open-type="share">分享今日运势</button>
-  </view>
+  <!-- 分享 -->
+  <button class="share-btn" open-type="share">📤 分享今日运势</button>
 
-  <ad wx:if="{{false}}" unit-id="adunit-xxx" ad-type="banner"></ad>
+  <ad-banner />
+
+  <!-- SEO -->
+  <view class="seo-text" aria-hidden="true">今日宜忌黄历查询，每日更新宜做和忌做事项，综合运势评分，开运建议。</view>
 </view>

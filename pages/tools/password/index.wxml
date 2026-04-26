@@ -1,10 +1,5 @@
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🔑</text>
-    <text class="hero-title">密码生成器</text>
-  </view>
-
-  <!-- 密码展示 -->
+<!-- 密码展示 -->
   <view class="card password-card">
     <text class="password-text" bindtap="onCopy">{{password || '点击下方按钮生成'}}</text>
     <text class="copy-hint" wx:if="{{password}}">点击复制</text>
@@ -72,4 +67,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">随机密码生成器工具，自定义长度和字符类型，一键生成高强度安全密码，密码强度实时检测。</view>
 </view>

@@ -1,11 +1,6 @@
 <!--pages/ai/name-gen/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🏯</text>
-    <text class="hero-title">古风名字</text>
-    <text class="hero-desc">生成唯美古风名字</text>
-  </view>
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="form-card">
       <text class="form-label">选择性别</text>
       <view class="gender-row">
@@ -34,4 +29,7 @@
       <button class="btn-share" open-type="share">分享</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">古风名字生成器，AI生成唯美古风名字，支持男女性别和诗意侠气淡雅等风格选择。</view>
 </view>

@@ -1,10 +1,5 @@
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📅</text>
-    <text class="hero-title">日期计算</text>
-  </view>
-
-  <!-- Tab -->
+<!-- Tab -->
   <view class="tab-bar">
     <view class="tab-item {{mode === 'diff' ? 'active' : ''}}" bindtap="switchMode" data-mode="diff">
       <text>日期差</text>
@@ -78,4 +73,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">日期计算器工具，计算两个日期之间的天数差、从某日期推算若干天后的日期、目标日倒计时。</view>
 </view>

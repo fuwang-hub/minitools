@@ -26,6 +26,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('countdown');
+    analytics.startStay('countdown');
     analytics.trackToolUse('countdown'); this.loadEvents(); },
   onShow: function () { this.loadEvents(); },
 
@@ -114,6 +115,13 @@ Page({
       }
     });
   },
+
+  onHide: function() { analytics.endStay('countdown'); },
+
+
+  onUnload: function() { analytics.endStay('countdown'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'countdown');

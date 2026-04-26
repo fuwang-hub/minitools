@@ -72,4 +72,7 @@
   </view>
 
   <ad-banner />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">环境噪音检测仪工具，利用手机麦克风实时测量环境分贝值，波形图直观显示，6级噪音评级参考。</view>
 </view>

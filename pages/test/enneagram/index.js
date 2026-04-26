@@ -1,6 +1,7 @@
 var analytics = require('../../../utils/analytics');
 // pages/test/enneagram/index.js
-const questions = [
+
+var QUESTIONS = [
   { id: 1, text: '在团队中，你通常扮演什么角色？', options: ['追求完美的质检员', '帮助他人的协调者', '推动目标的执行者'], types: [1, 2, 3] },
   { id: 2, text: '面对压力时，你最可能：', options: ['变得更加挑剔和焦虑', '寻求他人安慰和支持', '更加努力工作'], types: [1, 2, 3] },
   { id: 3, text: '你最看重什么？', options: ['独特性和深度', '安全感和忠诚', '自由和快乐'], types: [4, 6, 7] },
@@ -12,7 +13,7 @@ const questions = [
   { id: 9, text: '你的工作风格是：', options: ['注重细节力求完美', '高效目标导向', '灵活多变富有创意'], types: [1, 3, 7] }
 ];
 
-const typeInfo = {
+var TYPE_INFO = {
   1: { name: '完美主义者', wing: '改革者', emoji: '✨', color: '#8B5CF6',
     traits: ['原则性强', '有责任感', '追求完美', '自律严格'],
     strengths: '你有强烈的是非观和道德感，做事认真负责，追求卓越品质。',
@@ -63,96 +64,121 @@ const typeInfo = {
 Page({
   onLoad: function() {
     analytics.trackPage('enneagram');
+    analytics.startStay('enneagram');
+    analytics.trackFunnelStart('enneagram');
     analytics.trackToolUse('enneagram');
+    this.setData({ questions: QUESTIONS });
   },
+
   data: {
+    questions: [],
     currentQuestion: 0,
     answers: [],
     showResult: false,
+    showPoster: false,
+    posterData: {},
+    detailUnlocked: false,
     result: null,
     progress: 0
   },
 
-  handleAnswer(e) {
-    const { index } = e.currentTarget.dataset;
-    const { currentQuestion, answers } = this.data;
-    const newAnswers = [...answers, index];
+  handleAnswer: function(e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var currentQuestion = this.data.currentQuestion;
+    var newAnswers = this.data.answers.concat([index]);
 
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < QUESTIONS.length - 1) {
       this.setData({
         currentQuestion: currentQuestion + 1,
         answers: newAnswers,
-        progress: Math.round(((currentQuestion + 1) / questions.length) * 100)
+        progress: Math.round(((currentQuestion + 1) / QUESTIONS.length) * 100)
       });
     } else {
-      this.calculateResult(newAnswers);
+      this._calculateResult(newAnswers);
     }
   },
 
-  calculateResult(answers) {
-    const scores = {};
-    for (let i = 1; i <= 9; i++) scores[i] = 0;
+  _calculateResult: function(answers) {
+    var scores = {};
+    for (var i = 1; i <= 9; i++) scores[i] = 0;
 
-    answers.forEach((ansIdx, qIdx) => {
-      const q = questions[qIdx];
-      const t = q.types[ansIdx];
+    answers.forEach(function(ansIdx, qIdx) {
+      var q = QUESTIONS[qIdx];
+      var t = q.types[ansIdx];
       scores[t] += 2;
-      // 相邻类型也加分
-      q.types.forEach((type, i) => {
+      q.types.forEach(function(type, i) {
         if (i !== ansIdx) scores[type] += 0.5;
       });
     });
 
-    let maxType = 1, maxScore = 0;
-    Object.keys(scores).forEach(t => {
-      if (scores[t] > maxScore) { maxScore = scores[t]; maxType = parseInt(t); }
-    });
+    var maxType = 1, maxScore = 0;
+    for (var t = 1; t <= 9; t++) {
+      if (scores[t] > maxScore) { maxScore = scores[t]; maxType = t; }
+    }
 
-    // 找翼型
-    const wing1 = maxType === 1 ? 9 : maxType - 1;
-    const wing2 = maxType === 9 ? 1 : maxType + 1;
-    const wingType = scores[wing1] >= scores[wing2] ? wing1 : wing2;
+    // 翼型
+    var wing1 = maxType === 1 ? 9 : maxType - 1;
+    var wing2 = maxType === 9 ? 1 : maxType + 1;
+    var wingType = scores[wing1] >= scores[wing2] ? wing1 : wing2;
 
-    const info = typeInfo[maxType];
+    var info = TYPE_INFO[maxType];
     this.setData({
       showResult: true,
+      _funnelDone: true,
       progress: 100,
       result: {
         type: maxType,
         wingType: wingType,
-        ...info
+        name: info.name,
+        emoji: info.emoji,
+        color: info.color,
+        traits: info.traits,
+        strengths: info.strengths,
+        weaknesses: info.weaknesses,
+        advice: info.advice,
+        desc: info.strengths
       }
     });
+    analytics.trackFunnelComplete('enneagram');
+    analytics.trackResultView('enneagram');
   },
 
-  restart() {
+  restart: function() {
     this.setData({ currentQuestion: 0, answers: [], showResult: false, result: null, progress: 0 });
   },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('enneagram'); },
+
+
+  onUnload: function() { analytics.endStay('enneagram'); },
+
+
+
+  onShareAppMessage: function() {
+    analytics.trackShare('friend', 'enneagram');
     var share = require('../../../utils/share');
     var r = this.data.result || {};
     return share.buildShareConfig('enneagram', { result: r.name || '' }, '/pages/test/enneagram/index');
   },
 
-  onShareTimeline() {
+  onShareTimeline: function() {
     var share = require('../../../utils/share');
     var r = this.data.result || {};
     return share.buildTimelineConfig('enneagram', { result: r.name || '' });
   },
 
-  showPoster() {
+  showPoster: function() {
     var r = this.data.result || {};
     this.setData({
       showPoster: true,
       posterData: {
         emoji: r.emoji || '🔢', title: '九型人格测试', subtitle: '我的人格类型',
-        result: r.type || '', highlight: r.name || '', desc: r.desc || '',
+        result: '第' + r.type + '型', highlight: r.name || '', desc: r.strengths || '',
         qrTip: '扫一扫，测测你是九型中的哪一型！'
       }
     });
   },
 
-  closePoster() { this.setData({ showPoster: false }); },
-  onUnlocked() { this.setData({ detailUnlocked: true }); }
+  closePoster: function() { this.setData({ showPoster: false }); },
+  onUnlocked: function() { this.setData({ detailUnlocked: true }); }
 });

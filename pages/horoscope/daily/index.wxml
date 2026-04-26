@@ -1,11 +1,5 @@
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">⭐</text>
-    <text class="hero-title">今日运势</text>
-    <text class="hero-desc">{{today}}</text>
-  </view>
-
-  <!-- 星座选择 -->
+<!-- 星座选择 -->
   <scroll-view scroll-x class="zodiac-scroll">
     <view class="zodiac-list">
       <view class="zodiac-item {{activeZodiac === index ? 'active' : ''}}"
@@ -97,4 +91,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">十二星座今日运势查询，白羊座金牛座双子座巨蟹座狮子座处女座天秤座天蝎座射手座摩羯座水瓶座双鱼座每日运程。</view>
 </view>

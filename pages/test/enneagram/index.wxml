@@ -2,13 +2,7 @@
 <view class="page-container">
   <!-- 测试页面 -->
   <block wx:if="{{!showResult}}">
-    <view class="hero">
-      <text class="hero-emoji">🔮</text>
-      <text class="hero-title">九型人格测试</text>
-      <text class="hero-desc">探索你的核心性格类型</text>
-    </view>
-
-    <view class="progress-bar">
+<view class="progress-bar">
       <view class="progress-fill" style="width: {{progress}}%;"></view>
     </view>
     <text class="progress-text">{{currentQuestion + 1}} / 9</text>
@@ -62,4 +56,7 @@
 
     <ad wx:if="{{false}}" unit-id="adunit-xxx" ad-type="banner"></ad>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">九型人格免费测试，9道题快速测出你的核心性格类型，1号到9号人格特征、翼型分析、成长建议。</view>
 </view>

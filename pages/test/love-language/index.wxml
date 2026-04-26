@@ -1,12 +1,7 @@
 <!--pages/test/love-language/index.wxml-->
 <view class="page-container">
   <block wx:if="{{!showResult}}">
-    <view class="hero">
-      <text class="hero-emoji">💕</text>
-      <text class="hero-title">爱情语言测试</text>
-      <text class="hero-desc">发现你独特的爱情表达方式</text>
-    </view>
-    <view class="progress-bar"><view class="progress-fill" style="width: {{progress}}%; background: linear-gradient(90deg, #EC4899, #F472B6);"></view></view>
+<view class="progress-bar"><view class="progress-fill" style="width: {{progress}}%; background: linear-gradient(90deg, #EC4899, #F472B6);"></view></view>
     <text class="progress-text">{{currentQuestion + 1}} / 10</text>
     <view class="question-card">
       <text class="question-text">{{questions[currentQuestion].text}}</text>
@@ -63,4 +58,7 @@
       <button class="btn-share" open-type="share">分享结果</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">五种爱情语言免费测试，了解你的爱情表达方式，肯定的言辞、服务的行动、真心的礼物、精心的时刻、身体的接触。</view>
 </view>

@@ -1,6 +1,6 @@
 var analytics = require('../../../utils/analytics');
 // pages/test/love-language/index.js
-const questions = [
+var questions = [
   { id: 1, text: '你更希望伴侣怎样表达爱意？', a: '经常说"我爱你"和甜蜜的话', b: '给你一个温暖的拥抱', da: 'W', db: 'T' },
   { id: 2, text: '什么让你感觉最被爱？', a: '收到精心准备的礼物', b: '对方放下手机专心陪你', da: 'G', db: 'Q' },
   { id: 3, text: '你更喜欢哪种约会方式？', a: '一起做家务聊天', b: '收到一束意外的花', da: 'A', db: 'G' },
@@ -13,7 +13,7 @@ const questions = [
   { id: 10, text: '什么让你觉得最幸福？', a: '周末一起宅家看电影', b: '对方默默替你分担压力', da: 'Q', db: 'A' }
 ];
 
-const langInfo = {
+var langInfo = {
   W: { name: '肯定的言语', emoji: '💬', color: '#EC4899', en: 'Words of Affirmation',
     desc: '你的爱情语言是甜蜜的话语。你需要听到"我爱你"、赞美和鼓励，文字和语言是你感受爱意的主要方式。',
     tips: ['多对你的伴侣说"我爱你"', '真诚地赞美对方', '写小纸条或发甜蜜的消息', '在朋友面前夸奖对方', '吵架时注意言辞，避免伤人'],
@@ -38,10 +38,14 @@ const langInfo = {
 
 Page({
   onLoad: function() {
+    this.setData({ questions: questions });
     analytics.trackPage('love-language');
+    analytics.startStay('love-language');
+    analytics.trackFunnelStart('love-language');
     analytics.trackToolUse('love-language');
   },
   data: {
+    questions: [],
     currentQuestion: 0,
     showResult: false,
     result: null,
@@ -49,54 +53,64 @@ Page({
     progress: 0
   },
 
-  chooseOption(e) {
-    const { option } = e.currentTarget.dataset;
-    const { currentQuestion } = this.data;
-    const q = questions[currentQuestion];
-    const type = option === 'a' ? q.da : q.db;
+  chooseOption: function(e) {
+    var option = e.currentTarget.dataset.option;
+    var currentQuestion = this.data.currentQuestion;
+    var q = questions[currentQuestion];
+    var type = option === 'a' ? q.da : q.db;
 
-    const scores = this.data.scores || { W: 0, T: 0, G: 0, Q: 0, A: 0 };
+    var scores = this.data.scores || { W: 0, T: 0, G: 0, Q: 0, A: 0 };
     scores[type]++;
 
     if (currentQuestion < questions.length - 1) {
       this.setData({
         currentQuestion: currentQuestion + 1,
-        scores,
+        scores: scores,
         progress: Math.round(((currentQuestion + 1) / questions.length) * 100)
       });
     } else {
-      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-      const allResults = sorted.map(([k, v]) => ({
-        ...langInfo[k],
+      var sorted = Object.keys(scores).map(function(k) { return [k, scores[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+      var allResults = sorted.map(function(item) { var k = item[0]; var v = item[1]; return {
+        name: langInfo[k].name, emoji: langInfo[k].emoji, desc: langInfo[k].desc, tip: langInfo[k].tip,
         score: v,
         percent: Math.round((v / questions.length) * 100)
-      }));
+      }; });
       this.setData({
         showResult: true,
+      _funnelDone: true,
         progress: 100,
         result: langInfo[sorted[0][0]],
-        allResults
+        allResults: allResults
       });
+    analytics.trackFunnelComplete('love-language');
+    analytics.trackResultView('love-language');
     }
   },
 
-  restart() {
+  restart: function() {
     this.setData({ currentQuestion: 0, showResult: false, result: null, allResults: [], scores: { W: 0, T: 0, G: 0, Q: 0, A: 0 }, progress: 0 });
   },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('love-language'); },
+
+
+  onUnload: function() { analytics.endStay('love-language'); },
+
+
+
+  onShareAppMessage: function() {
     var share = require('../../../utils/share');
     var r = this.data.result || {};
     return share.buildShareConfig('love-language', { result: r.name || '' }, '/pages/test/love-language/index');
   },
 
-  onShareTimeline() {
+  onShareTimeline: function() {
     var share = require('../../../utils/share');
     var r = this.data.result || {};
     return share.buildTimelineConfig('love-language', { result: r.name || '' });
   },
 
-  showPoster() {
+  showPoster: function() {
     var r = this.data.result || {};
     this.setData({
       showPoster: true,
@@ -108,6 +122,6 @@ Page({
     });
   },
 
-  closePoster() { this.setData({ showPoster: false }); },
-  onUnlocked() { this.setData({ detailUnlocked: true }); }
+  closePoster: function() { this.setData({ showPoster: false }); },
+  onUnlocked: function() { this.setData({ detailUnlocked: true }); }
 });

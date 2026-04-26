@@ -10,6 +10,11 @@ Page({
     retention: {},
     todayStats: {},
     eventLog: [],
+    stayStats: [],
+    funnelStats: [],
+    resultShareStats: [],
+    checkinDist: {},
+    userRatio: {},
     showEvents: false,
     showExport: false,
     exportData: ''
@@ -48,7 +53,12 @@ Page({
       adStats: adStats,
       retention: retention,
       todayStats: todayStats,
-      eventLog: eventLog.reverse()
+      eventLog: eventLog.reverse(),
+      stayStats: analytics.getStayStats().slice(0, 10),
+      funnelStats: analytics.getFunnelStats(),
+      resultShareStats: analytics.getResultShareStats(),
+      checkinDist: analytics.getCheckinDistribution(),
+      userRatio: analytics.getNewOldRatio()
     });
   },
 

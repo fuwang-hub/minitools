@@ -1,11 +1,5 @@
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🪙</text>
-    <text class="hero-title">抛硬币</text>
-    <text class="hero-desc">让命运帮你做决定</text>
-  </view>
-
-  <!-- 硬币展示 -->
+<!-- 硬币展示 -->
   <view class="coin-area">
     <view class="coin {{flipping ? 'flipping' : ''}}">
       <text class="coin-face">{{result === null ? '?' : (result === 0 ? '正' : '反')}}</text>
@@ -56,4 +50,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">在线抛硬币决策工具，模拟真实硬币翻转动画，帮你做随机选择决定，支持统计和历史记录。</view>
 </view>

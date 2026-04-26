@@ -1,10 +1,5 @@
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📱</text>
-    <text class="hero-title">二维码生成</text>
-  </view>
-
-  <view class="card">
+<view class="card">
     <text class="label">输入内容</text>
     <textarea class="text-area" placeholder="输入文本或链接，生成二维码"
               value="{{text}}" bindinput="onInput" maxlength="500" />
@@ -29,4 +24,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">免费二维码生成器工具，输入文字或网址一键生成二维码图片，支持保存到手机相册。</view>
 </view>

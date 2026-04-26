@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "生辰八字",
+  "navigationBarTitleText": "生辰八字-四柱排盘五行查询",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

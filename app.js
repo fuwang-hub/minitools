@@ -17,6 +17,7 @@ App({
 
     // 数据埋点：记录会话
     analytics.trackSession(options ? options.scene : 0);
+    analytics.getNewOldRatio(); // 记录新老用户
 
     // 缓存系统信息
     try {

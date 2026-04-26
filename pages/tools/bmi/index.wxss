@@ -1,6 +1,5 @@
 /* pages/tools/bmi/index.wxss */
-.page-immersive { min-height: 100vh; padding-bottom: 40rpx; }
-.form-card { margin: 20rpx 30rpx; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 28rpx; }
+.form-card { margin: 20rpx 30rpx; background: #FFFFFF; border-radius: 24rpx; padding: 28rpx; }
 .gender-row { display: flex; gap: 16rpx; margin-bottom: 20rpx; }
 .gender-btn { flex: 1; text-align: center; padding: 20rpx; border: 2rpx solid #e5e7eb; border-radius: 16rpx; font-size: 30rpx; color: #6b7280; }
 .gender-btn.active { border-color: #059669; color: #059669; background: #ecfdf5; font-weight: 600; }
@@ -9,9 +8,9 @@
 .input-label { font-size: 28rpx; color: #374151; width: 100rpx; }
 .input-field { flex: 1; text-align: right; font-size: 32rpx; color: #1f2937; font-weight: 500; }
 .input-unit { font-size: 24rpx; color: #9ca3af; margin-left: 8rpx; width: 50rpx; }
-.calc-btn { margin: 24rpx 30rpx; height: 88rpx; line-height: 88rpx; text-align: center; background: rgba(255,255,255,0.95); color: #059669; font-size: 32rpx; font-weight: 600; border-radius: 44rpx; }
+.calc-btn { margin: 24rpx 30rpx; height: 88rpx; line-height: 88rpx; text-align: center; background: #FFFFFF; color: #059669; font-size: 32rpx; font-weight: 600; border-radius: 44rpx; }
 .calc-btn:active { opacity: 0.8; }
-.result-card { margin: 16rpx 30rpx; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 28rpx; }
+.result-card { margin: 16rpx 30rpx; background: #FFFFFF; border-radius: 24rpx; padding: 28rpx; }
 .bmi-card { }
 .bmi-header { display: flex; align-items: center; gap: 20rpx; }
 .bmi-emoji { font-size: 60rpx; }
@@ -31,7 +30,7 @@
 .ideal-text { font-size: 26rpx; color: #374151; display: block; margin-top: 16rpx; }
 .advice-text { font-size: 26rpx; color: #059669; display: block; margin-top: 8rpx; font-weight: 500; }
 .metrics-grid { display: flex; gap: 12rpx; margin: 16rpx 30rpx; }
-.metric-card { flex: 1; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 24rpx 16rpx; text-align: center; }
+.metric-card { flex: 1; background: #FFFFFF; border-radius: 24rpx; padding: 24rpx 16rpx; text-align: center; }
 .m-icon { font-size: 36rpx; display: block; }
 .m-label { font-size: 22rpx; color: #6b7280; display: block; margin: 8rpx 0 4rpx; }
 .m-value { font-size: 36rpx; font-weight: 700; display: block; color: #1f2937; }

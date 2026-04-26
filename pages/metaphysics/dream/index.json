@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "周公解梦",
+  "navigationBarTitleText": "周公解梦-梦境寓意大全",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

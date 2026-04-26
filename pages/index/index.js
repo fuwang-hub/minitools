@@ -4,6 +4,7 @@ var ALL_MODULES = [
     id: 'tools', emoji: '🔧', name: '实用工具',
     desc: '天气、计算器、房贷、记账、汇率...日常必备',
     color1: '#667eea', color2: '#764ba2',
+    iconBg: '#EBF0FF',
     tools: [
       { id: 'weather', emoji: '🌤️', name: '天气预报', path: '/pages/tools/weather/index', tags: '天气温度气温' },
       { id: 'calculator', emoji: '🧮', name: '计算器', path: '/pages/tools/calculator/index', tags: '计算加减乘除' },
@@ -20,6 +21,7 @@ var ALL_MODULES = [
       { id: 'random', emoji: '🎲', name: '随机数', path: '/pages/tools/random/index', tags: '随机数字抽签' },
       { id: 'qrcode', emoji: '📱', name: '二维码', path: '/pages/tools/qrcode/index', tags: '二维码生成扫码' },
       { id: 'date-calc', emoji: '📅', name: '日期计算', path: '/pages/tools/date-calc/index', tags: '日期倒计时天数' },
+      { id: 'calendar', emoji: '🗓️', name: '万年历', path: '/pages/tools/calendar/index', tags: '万年历农历公历日历节日' },
       { id: 'password', emoji: '🔑', name: '密码生成', path: '/pages/tools/password/index', tags: '密码生成随机' }
     ]
   },
@@ -27,6 +29,7 @@ var ALL_MODULES = [
     id: 'test', emoji: '🔮', name: '娱乐测试',
     desc: '探索你的性格、职业倾向和爱情语言',
     color1: '#7c5ce0', color2: '#9b7ff0',
+    iconBg: '#FEF0E8',
     tools: [
       { id: 'mbti', emoji: '🧠', name: 'MBTI', path: '/pages/test/mbti/index', tags: 'MBTI性格人格测试' },
       { id: 'enneagram', emoji: '🔢', name: '九型人格', path: '/pages/test/enneagram/index', tags: '九型人格性格' },
@@ -39,6 +42,7 @@ var ALL_MODULES = [
     id: 'horoscope', emoji: '⭐', name: '星座运势',
     desc: '每日运势、星座配对、星盘分析',
     color1: '#5a67d8', color2: '#7f8cf5',
+    iconBg: '#F0E8FE',
     tools: [
       { id: 'daily', emoji: '🌅', name: '今日运势', path: '/pages/horoscope/daily/index', tags: '星座运势今日每日' },
       { id: 'weekly', emoji: '📆', name: '本周运势', path: '/pages/horoscope/weekly/index', tags: '星座运势本周每周' },
@@ -50,6 +54,7 @@ var ALL_MODULES = [
     id: 'metaphysics', emoji: '🔮', name: '传统玄学',
     desc: '姓名测试、生辰八字、周公解梦',
     color1: '#805ad5', color2: '#b794f4',
+    iconBg: '#FEE8E8',
     tools: [
       { id: 'name', emoji: '📝', name: '姓名测试', path: '/pages/metaphysics/name/index', tags: '姓名测试打分' },
       { id: 'bazi', emoji: '🏮', name: '生辰八字', path: '/pages/metaphysics/bazi/index', tags: '八字生辰五行' },
@@ -62,6 +67,7 @@ var ALL_MODULES = [
     id: 'ai', emoji: '🤖', name: 'AI 工具',
     desc: '藏头诗、古风名字、答案之书',
     color1: '#6b5ce7', color2: '#a78bfa',
+    iconBg: '#E8FEF0',
     tools: [
       { id: 'acrostic', emoji: '📜', name: '藏头诗', path: '/pages/ai/acrostic/index', tags: '藏头诗诗词古诗' },
       { id: 'name-gen', emoji: '🏯', name: '古风名字', path: '/pages/ai/name-gen/index', tags: '古风名字取名' },
@@ -82,6 +88,7 @@ ALL_MODULES.forEach(function(m) {
 Page({
   onLoad: function() {
     analytics.trackPage('index');
+    analytics.startStay('index');
     analytics.trackToolUse('index');
   },
   data: {
@@ -120,6 +127,7 @@ Page({
         points: result.points
       });
       wx.showToast({ title: result.msg, icon: 'none', duration: 2000 });
+      analytics.trackCheckinStreak(result.streak);
       // 签到后请求订阅消息（需要在微信后台配置模板ID后取消注释）
       // checkin.requestSubscribe('你的模板ID');
     } else {
@@ -181,6 +189,13 @@ Page({
   },
 
   onModuleTap: function() {},
+
+  onHide: function() { analytics.endStay('index'); },
+
+
+  onUnload: function() { analytics.endStay('index'); },
+
+
 
   onShareAppMessage: function() {
     analytics.trackShare('friend', 'index');

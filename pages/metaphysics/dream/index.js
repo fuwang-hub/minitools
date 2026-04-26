@@ -1,6 +1,6 @@
 var analytics = require('../../../utils/analytics');
 // pages/metaphysics/dream/index.js
-const dreamDB = {
+var dreamDB = {
   '蛇': { emoji: '🐍', meaning: '主财运，梦见蛇往往预示着财运亨通或有意外之财。', luck: '吉', detail: '梦见蛇缠身表示有人暗恋你；梦见被蛇咬表示近期有贵人相助；梦见打蛇表示能战胜困难。', advice: '近期适合做投资理财，但要理性决策。' },
   '水': { emoji: '💧', meaning: '主情感和财运。清水为吉，浑水为需谨慎。', luck: '半吉', detail: '梦见清澈的水表示心情愉快；梦见洪水表示可能有大的变动；梦见在水中游泳表示事业顺利。', advice: '注意控制情绪，保持内心平静。' },
   '飞': { emoji: '🕊️', meaning: '主自由和突破，表示你渴望摆脱束缚。', luck: '吉', detail: '梦见自己飞翔表示事业将有突破；梦见飞得很高表示目标远大；梦见掉下来表示需要脚踏实地。', advice: '大胆追求目标，但要注意方法和步骤。' },
@@ -18,11 +18,12 @@ const dreamDB = {
   '车': { emoji: '🚗', meaning: '主人生方向和控制感。', luck: '半吉', detail: '梦见开车表示掌控人生方向；梦见车祸表示需要放慢脚步；梦见新车表示新的机遇。', advice: '掌握好人生方向，不要急于求成。' }
 };
 
-const defaultResult = { emoji: '🔮', meaning: '此梦境比较特殊，需要结合个人具体情况分析。', luck: '平', detail: '每个梦境都有其独特的含义，建议关注梦中的情感体验，那往往才是真正的寓意所在。', advice: '保持良好的心态，注意休息和放松。' };
+var defaultResult = { emoji: '🔮', meaning: '此梦境比较特殊，需要结合个人具体情况分析。', luck: '平', detail: '每个梦境都有其独特的含义，建议关注梦中的情感体验，那往往才是真正的寓意所在。', advice: '保持良好的心态，注意休息和放松。' };
 
 Page({
   onLoad: function() {
     analytics.trackPage('dream');
+    analytics.startStay('dream');
     analytics.trackToolUse('dream');
   },
   data: {
@@ -33,38 +34,45 @@ Page({
     searchWord: ''
   },
 
-  onInput(e) { this.setData({ keyword: e.detail.value }); },
+  onInput: function(e) { this.setData({ keyword: e.detail.value }); },
 
-  searchDream() {
-    const kw = this.data.keyword.trim();
+  searchDream: function() {
+    var kw = this.data.keyword.trim();
     if (!kw) { wx.showToast({ title: '请输入梦境关键词', icon: 'none' }); return; }
     this.doSearch(kw);
   },
 
-  tapHot(e) {
-    const { word } = e.currentTarget.dataset;
+  tapHot: function(e) {
+    var word = e.currentTarget.dataset.word;
     this.setData({ keyword: word });
     this.doSearch(word);
   },
 
-  doSearch(kw) {
-    let result = null;
-    for (const key in dreamDB) {
+  doSearch: function(kw) {
+    var result = null;
+    for (var key in dreamDB) {
       if (kw.includes(key) || key.includes(kw)) {
-        result = { key, ...dreamDB[key] };
+        result = { key: key, meaning: dreamDB[key].meaning, luck: dreamDB[key].luck, advice: dreamDB[key].advice };
         break;
       }
     }
-    if (!result) result = { key: kw, ...defaultResult };
+    if (!result) result = { key: kw, meaning: defaultResult.meaning, luck: defaultResult.luck, advice: defaultResult.advice };
     this.setData({ showResult: true, result, searchWord: kw });
   },
 
-  restart() { this.setData({ keyword: '', showResult: false, result: null }); },
+  restart: function() { this.setData({ keyword: '', showResult: false, result: null }); },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('dream'); },
+
+
+  onUnload: function() { analytics.endStay('dream'); },
+
+
+
+  onShareAppMessage: function() {
     return { title: '周公解梦 - 解读你的梦境密码', path: '/pages/metaphysics/dream/index' };
-  }
-,
+  },
+
   onShareTimeline: function() {
     var share = require("../../../utils/share");
     return share.buildTimelineConfig("dream", {});

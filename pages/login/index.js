@@ -12,6 +12,7 @@ Page({
 
   onLoad: function() {
     analytics.trackPage('login');
+    analytics.startStay('login');
   },
 
   // 选择头像（微信原生头像选择器）

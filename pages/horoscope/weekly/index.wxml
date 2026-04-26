@@ -1,12 +1,6 @@
 <!--pages/horoscope/weekly/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📅</text>
-    <text class="hero-title">本周运势</text>
-    <text class="hero-desc">{{weekRange}}</text>
-  </view>
-
-  <view class="sign-grid" wx:if="{{selectedSign < 0}}">
+<view class="sign-grid" wx:if="{{selectedSign < 0}}">
     <view class="sign-item" wx:for="{{signs}}" wx:key="index" bindtap="selectSign" data-index="{{item.index}}">
       <text class="sign-emoji">{{item.emoji}}</text>
       <text class="sign-name">{{item.name}}</text>
@@ -67,4 +61,7 @@
   </block>
 
   <ad wx:if="{{false}}" unit-id="adunit-xxx" ad-type="banner"></ad>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">十二星座本周运势预测，爱情事业财运健康综合运势详细分析，幸运数字幸运颜色。</view>
 </view>

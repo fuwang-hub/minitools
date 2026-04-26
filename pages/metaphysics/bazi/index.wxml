@@ -1,12 +1,6 @@
 <!--pages/metaphysics/bazi/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">☯️</text>
-    <text class="hero-title">生辰八字</text>
-    <text class="hero-desc">天干地支 · 五行命理</text>
-  </view>
-
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="form-card">
       <text class="form-title">输入出生信息</text>
       <view class="form-row">
@@ -78,4 +72,7 @@
       <button class="btn-share" open-type="share">分享结果</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">生辰八字在线排盘，输入出生年月日时自动排出四柱八字，五行分析、天干地支、五行缺什么。</view>
 </view>

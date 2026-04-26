@@ -44,4 +44,7 @@
   </view>
 
   <ad-banner />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">手机尺子在线测量工具，利用手机屏幕模拟真实尺子，支持厘米和英寸切换，方便随时测量物体长度。</view>
 </view>

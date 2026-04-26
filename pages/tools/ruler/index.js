@@ -18,6 +18,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('ruler');
+    analytics.startStay('ruler');
     analytics.trackToolUse('ruler');
     this.initRuler();
   },
@@ -112,6 +113,13 @@ Page({
     wx.showToast({ title: '校准完成', icon: 'success' });
     this.initRuler();
   },
+
+  onHide: function() { analytics.endStay('ruler'); },
+
+
+  onUnload: function() { analytics.endStay('ruler'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'ruler');

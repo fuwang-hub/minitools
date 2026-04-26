@@ -15,7 +15,7 @@
 .sign-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border-radius: 24rpx; padding: 40rpx; text-align: center; border: 2rpx solid #fecaca; }
 .sign-num { font-size: 28rpx; color: #9ca3af; display: block; }
 .sign-type { font-size: 44rpx; font-weight: bold; display: block; margin: 12rpx 0; }
-.sign-poem { background: rgba(255,255,255,0.6); border-radius: 16rpx; padding: 24rpx; margin-top: 16rpx; }
+.sign-poem { background: #F5F7FA; border-radius: 16rpx; padding: 24rpx; margin-top: 16rpx; }
 .poem-text { font-size: 30rpx; color: #374151; line-height: 1.8; font-style: italic; }
 .result-card { margin: 16rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05); }
 .disclaimer { text-align: center; margin: 20rpx 30rpx; }

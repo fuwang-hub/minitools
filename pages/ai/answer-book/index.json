@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "答案之书",
+  "navigationBarTitleText": "答案之书-在线翻书占卜",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

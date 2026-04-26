@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "星座配对",
+  "navigationBarTitleText": "星座配对-恋爱匹配度测试",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

@@ -1,6 +1,6 @@
 var analytics = require('../../../utils/analytics');
 // pages/metaphysics/divination/index.js
-const signPool = [
+var signPool = [
   { num: 1, type: '上上签', poem: '日出东方照四方，前途光明万里长', meaning: '诸事顺利，心想事成。无论是事业还是感情，都将迎来好的转机。', advice: '把握当下机会，大胆行动。' },
   { num: 2, type: '上吉签', poem: '春风得意马蹄疾，一朝看尽长安花', meaning: '运势旺盛，有贵人相助。近期做事会事半功倍。', advice: '积极进取，但不要骄傲自满。' },
   { num: 3, type: '上吉签', poem: '云开见月明如镜，渐觉天机报好音', meaning: '困境即将过去，光明就在前方。坚持下去会有好结果。', advice: '保持耐心，好运将至。' },
@@ -22,6 +22,7 @@ function getTypeColor(type) {
 Page({
   onLoad: function() {
     analytics.trackPage('divination');
+    analytics.startStay('divination');
     analytics.trackToolUse('divination');
   },
   data: {
@@ -70,13 +71,20 @@ Page({
     this.setData({ phase: 'ready', result: null });
   },
 
+  onHide: function() { analytics.endStay('divination'); },
+
+
+  onUnload: function() { analytics.endStay('divination'); },
+
+
+
   onShareAppMessage: function() {
     analytics.trackShare('friend', 'divination');
     var result = this.data.result;
     if (result) return { title: '我求到了' + result.type + '，你也来试试！', path: '/pages/metaphysics/divination/index' };
     return { title: '求签问卦 - 探索命运的指引', path: '/pages/metaphysics/divination/index' };
-  }
-,
+  },
+
   onShareTimeline: function() {
     var share = require("../../../utils/share");
     return share.buildTimelineConfig("divination", {});

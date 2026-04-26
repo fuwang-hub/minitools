@@ -1,44 +1,310 @@
 /* pages/tools/mortgage/index.wxss */
-.page-immersive { min-height: 100vh; padding-bottom: 40rpx; }
-.type-bar { display: flex; margin: 20rpx 30rpx; background: rgba(255,255,255,0.1); border-radius: 16rpx; padding: 6rpx; }
-.type-btn { flex: 1; text-align: center; padding: 18rpx 0; font-size: 26rpx; color: rgba(255,255,255,0.7); border-radius: 12rpx; }
-.type-btn.active { background: #fff; color: #1e3a5f; font-weight: 600; }
-.form-card { margin: 16rpx 30rpx; background: rgba(255,255,255,0.12); border-radius: 24rpx; padding: 8rpx 30rpx; backdrop-filter: blur(10px); }
-.form-row { display: flex; align-items: center; justify-content: space-between; padding: 24rpx 0; border-bottom: 1rpx solid rgba(255,255,255,0.08); }
-.form-row:last-child { border-bottom: none; }
-.form-label { font-size: 28rpx; color: #fff; flex-shrink: 0; width: 170rpx; }
-.form-input-wrap { display: flex; align-items: center; flex: 1; justify-content: flex-end; }
-.form-input { text-align: right; color: #fff; font-size: 30rpx; font-weight: 500; width: 200rpx; }
-.form-unit { font-size: 24rpx; color: rgba(255,255,255,0.6); margin-left: 8rpx; width: 60rpx; }
-.picker-value { font-size: 30rpx; color: #fff; font-weight: 500; }
-.repay-row { flex-direction: column; align-items: flex-start; gap: 16rpx; }
-.repay-btns { display: flex; gap: 16rpx; width: 100%; }
-.repay-btn { flex: 1; text-align: center; padding: 16rpx 0; font-size: 26rpx; color: rgba(255,255,255,0.7); border: 2rpx solid rgba(255,255,255,0.3); border-radius: 12rpx; }
-.repay-btn.active { background: rgba(255,255,255,0.2); border-color: #fff; color: #fff; font-weight: 600; }
-.calc-btn { margin: 24rpx 30rpx; height: 88rpx; line-height: 88rpx; text-align: center; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); color: #fff; font-size: 32rpx; font-weight: 600; border-radius: 44rpx; }
-.calc-btn:active { opacity: 0.8; }
-.result-card { margin: 16rpx 30rpx; background: rgba(255,255,255,0.95); border-radius: 24rpx; padding: 32rpx; color: #1f2937; }
-.result-header { margin-bottom: 16rpx; }
-.result-tag { font-size: 24rpx; background: #dbeafe; color: #1e40af; padding: 6rpx 16rpx; border-radius: 8rpx; }
-.result-main { text-align: center; padding: 20rpx 0; }
-.result-label { font-size: 26rpx; color: #6b7280; display: block; }
-.result-amount { font-size: 56rpx; font-weight: 700; color: #dc2626; display: block; margin: 8rpx 0; }
-.result-sub { font-size: 26rpx; color: #6b7280; display: block; }
-.result-grid { display: flex; border-top: 1rpx solid #f3f4f6; padding-top: 20rpx; margin-top: 16rpx; }
-.grid-item { flex: 1; text-align: center; }
-.g-value { font-size: 30rpx; font-weight: 600; color: #1f2937; display: block; }
-.g-label { font-size: 22rpx; color: #9ca3af; display: block; margin-top: 4rpx; }
-.combo-detail { margin-top: 16rpx; padding-top: 16rpx; border-top: 1rpx solid #f3f4f6; }
-.combo-row { display: flex; align-items: center; gap: 16rpx; padding: 8rpx 0; }
-.c-name { font-size: 26rpx; color: #1e40af; font-weight: 500; width: 80rpx; }
-.c-monthly { font-size: 26rpx; color: #374151; flex: 1; }
-.c-interest { font-size: 24rpx; color: #6b7280; }
-.detail-toggle { text-align: center; padding: 20rpx 0 8rpx; font-size: 26rpx; color: #3b82f6; }
-.detail-table { margin-top: 12rpx; }
-.table-header { display: flex; background: #f9fafb; border-radius: 8rpx; padding: 12rpx 0; }
-.th { flex: 1; text-align: center; font-size: 22rpx; color: #6b7280; font-weight: 600; }
-.table-row { display: flex; padding: 12rpx 0; border-bottom: 1rpx solid #f9fafb; }
-.td { flex: 1; text-align: center; font-size: 22rpx; color: #374151; }
-.tips-card { margin: 16rpx 30rpx; background: rgba(255,255,255,0.08); border-radius: 24rpx; padding: 24rpx; }
-.tips-title { font-size: 28rpx; color: #fff; font-weight: 600; display: block; margin-bottom: 12rpx; }
-.tips-text { font-size: 24rpx; color: rgba(255,255,255,0.7); display: block; line-height: 2; }
+/* 对齐全局设计规范：白底 + 蓝色强调 */
+
+/* 贷款类型切换栏 */
+.tab-bar {
+  display: flex;
+  margin: 20rpx 30rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 6rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: 26rpx;
+  color: #999;
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+
+.tab-item.active {
+  background: #4F6EF6;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 表单卡片 */
+.form-card {
+  margin: 16rpx 30rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 4rpx 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 表单行 */
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid #F0F2F5;
+}
+
+.field-row:last-child {
+  border-bottom: none;
+}
+
+.field-label {
+  font-size: 28rpx;
+  color: #333;
+  flex-shrink: 0;
+  width: 170rpx;
+  font-weight: 500;
+}
+
+.field-input-area {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.field-input {
+  text-align: right;
+  color: #1A1A1A;
+  font-size: 30rpx;
+  font-weight: 500;
+  width: 200rpx;
+  height: auto;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.field-unit {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 8rpx;
+  width: 60rpx;
+  flex-shrink: 0;
+}
+
+.field-picker {
+  font-size: 30rpx;
+  color: #1A1A1A;
+  font-weight: 500;
+}
+
+.picker-arrow {
+  font-size: 20rpx;
+  color: #ccc;
+  margin-left: 4rpx;
+}
+
+/* 还款方式 */
+.repay-field {
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 16rpx;
+}
+
+.repay-field .field-label {
+  width: 100%;
+  margin-bottom: 4rpx;
+}
+
+.repay-toggle {
+  display: flex;
+  gap: 16rpx;
+  width: 100%;
+}
+
+.repay-opt {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: 26rpx;
+  color: #999;
+  border: 2rpx solid #EAEEF3;
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+
+.repay-opt.active {
+  background: #F0F4FF;
+  border-color: #4F6EF6;
+  color: #4F6EF6;
+  font-weight: 600;
+}
+
+/* 计算按钮 */
+.calc-btn {
+  margin: 24rpx 30rpx;
+}
+
+/* === 结果区域 === */
+.result-section {
+  animation: fadeIn 0.3s ease;
+}
+
+/* 月供高亮卡片（蓝色渐变底） */
+.result-card-highlight {
+  margin: 20rpx 30rpx;
+  background: linear-gradient(135deg, #4F6EF6, #6C8AFF);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  color: #fff;
+  text-align: center;
+}
+
+.res-tag-wrap {
+  margin-bottom: 16rpx;
+}
+
+.res-tag {
+  font-size: 22rpx;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.res-label {
+  font-size: 26rpx;
+  opacity: 0.9;
+  display: block;
+}
+
+.res-amount {
+  font-size: 60rpx;
+  font-weight: 700;
+  display: block;
+  margin: 8rpx 0;
+  letter-spacing: 2rpx;
+}
+
+.res-sub {
+  font-size: 24rpx;
+  opacity: 0.8;
+  display: block;
+}
+
+/* 贷款明细白卡片 */
+.stat-grid {
+  display: flex;
+  padding-bottom: 20rpx;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+  display: block;
+}
+
+.stat-value.highlight {
+  color: #EF4444;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  margin-top: 4rpx;
+}
+
+/* 组合贷分项 */
+.combo-section {
+  border-top: 1rpx solid #F0F2F5;
+  padding-top: 16rpx;
+  margin-top: 4rpx;
+}
+
+.combo-item {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.combo-name {
+  font-size: 26rpx;
+  color: #4F6EF6;
+  font-weight: 600;
+  width: 80rpx;
+}
+
+.combo-val {
+  font-size: 26rpx;
+  color: #333;
+  flex: 1;
+}
+
+.combo-ext {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 还款明细 */
+.detail-btn {
+  text-align: center;
+  padding: 20rpx 0 4rpx;
+  font-size: 26rpx;
+  color: #4F6EF6;
+  border-top: 1rpx solid #F0F2F5;
+  margin-top: 16rpx;
+}
+
+.detail-table {
+  margin-top: 16rpx;
+}
+
+.tb-head {
+  display: flex;
+  background: #F5F7FA;
+  border-radius: 8rpx;
+  padding: 14rpx 0;
+}
+
+.tb-th {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  color: #666;
+  font-weight: 600;
+}
+
+.tb-row {
+  display: flex;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #F9FAFB;
+}
+
+.tb-td {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  color: #333;
+}
+
+/* 提示卡片 */
+.tips-card {
+  margin: 20rpx 30rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 24rpx 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.tips-title {
+  font-size: 28rpx;
+  color: #1A1A1A;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.tips-item {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  line-height: 2;
+}

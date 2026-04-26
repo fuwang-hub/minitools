@@ -7,15 +7,67 @@
     },
     {
       "action": "allow",
-      "page": "pages/tools/weather/index"
-    },
-    {
-      "action": "allow",
       "page": "pages/tools/calculator/index"
     },
     {
       "action": "allow",
-      "page": "pages/horoscope/daily/index"
+      "page": "pages/tools/weather/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/mortgage/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/bmi/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/exchange/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/converter/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/qrcode/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/countdown/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/date-calc/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/password/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/stopwatch/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/noise/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/ruler/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/ledger/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/random/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/tools/coin/index"
     },
     {
       "action": "allow",
@@ -23,7 +75,71 @@
     },
     {
       "action": "allow",
+      "page": "pages/test/enneagram/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/test/career/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/test/love-language/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/test/fun/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/horoscope/daily/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/horoscope/weekly/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/horoscope/match/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/horoscope/chart/index"
+    },
+    {
+      "action": "allow",
       "page": "pages/metaphysics/dream/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/metaphysics/name/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/metaphysics/bazi/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/metaphysics/divination/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/metaphysics/zodiac-match/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/ai/acrostic/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/ai/name-gen/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/ai/answer-book/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/ai/daily-advice/index"
     },
     {
       "action": "disallow",

@@ -14,6 +14,7 @@ function formatMs(ms) {
 Page({
   onLoad: function() {
     analytics.trackPage('stopwatch');
+    analytics.startStay('stopwatch');
     analytics.trackToolUse('stopwatch');
   },
   data: {
@@ -171,6 +172,13 @@ Page({
     clearInterval(this._swTimer);
     clearInterval(this._tmTimer);
   },
+
+  onHide: function() { analytics.endStay('stopwatch'); },
+
+
+  onUnload: function() { analytics.endStay('stopwatch'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'stopwatch');

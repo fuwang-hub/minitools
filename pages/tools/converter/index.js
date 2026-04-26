@@ -1,5 +1,5 @@
 var analytics = require('../../../utils/analytics');
-const categories = [
+var categories = [
   {
     key: 'length', name: '长度',
     units: [
@@ -66,6 +66,7 @@ const categories = [
 Page({
   onLoad: function() {
     analytics.trackPage('converter');
+    analytics.startStay('converter');
     analytics.trackToolUse('converter');
   },
   data: {
@@ -78,8 +79,8 @@ Page({
     toValue: '0'
   },
 
-  onTabChange(e) {
-    const index = e.currentTarget.dataset.index;
+  onTabChange: function(e) {
+    var index = e.currentTarget.dataset.index;
     this.setData({
       activeTab: index,
       currentUnits: categories[index].units,
@@ -90,23 +91,23 @@ Page({
     });
   },
 
-  onFromChange(e) {
+  onFromChange: function(e) {
     this.setData({ fromIndex: Number(e.detail.value) });
     this._convert();
   },
 
-  onToChange(e) {
+  onToChange: function(e) {
     this.setData({ toIndex: Number(e.detail.value) });
     this._convert();
   },
 
-  onInputChange(e) {
+  onInputChange: function(e) {
     this.setData({ fromValue: e.detail.value });
     this._convert();
   },
 
-  onSwap() {
-    const { fromIndex, toIndex, toValue } = this.data;
+  onSwap: function() {
+    var fromIndex = this.data.fromIndex; var toIndex = this.data.toIndex; var toValue = this.data.toValue;
     this.setData({
       fromIndex: toIndex,
       toIndex: fromIndex,
@@ -115,18 +116,18 @@ Page({
     this._convert();
   },
 
-  _convert() {
-    const { currentUnits, fromIndex, toIndex, fromValue, activeTab } = this.data;
-    const val = parseFloat(fromValue);
+  _convert: function() {
+    var { currentUnits, fromIndex, toIndex, fromValue, activeTab } = this.data;
+    var val = parseFloat(fromValue);
     if (isNaN(val)) {
       this.setData({ toValue: '0' });
       return;
     }
 
-    const from = currentUnits[fromIndex];
-    const to = currentUnits[toIndex];
+    var from = currentUnits[fromIndex];
+    var to = currentUnits[toIndex];
 
-    let result;
+    var result;
     if (categories[activeTab].key === 'temperature') {
       result = this._convertTemp(val, from.factor, to.factor);
     } else {
@@ -138,9 +139,9 @@ Page({
     });
   },
 
-  _convertTemp(val, from, to) {
+  _convertTemp: function(val, from, to) {
     // 先转为摄氏度
-    let celsius;
+    var celsius;
     if (from === 'C') celsius = val;
     else if (from === 'F') celsius = (val - 32) * 5 / 9;
     else celsius = val - 273.15;

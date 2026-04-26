@@ -1,13 +1,7 @@
 <!--pages/test/career/index.wxml-->
 <view class="page-container">
   <block wx:if="{{!showResult}}">
-    <view class="hero">
-      <text class="hero-emoji">💼</text>
-      <text class="hero-title">职业倾向测试</text>
-      <text class="hero-desc">发现最适合你的职业方向</text>
-    </view>
-
-    <view class="progress-bar">
+<view class="progress-bar">
       <view class="progress-fill" style="width: {{progress}}%; background: linear-gradient(90deg, #F59E0B, #F97316);"></view>
     </view>
     <text class="progress-text">{{currentQuestion + 1}} / 6</text>
@@ -63,4 +57,7 @@
       <button class="btn-share" open-type="share">分享结果</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">Holland职业倾向免费测试，发现你最适合的职业方向，实际型、研究型、艺术型、社会型、企业型、常规型。</view>
 </view>

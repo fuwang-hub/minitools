@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "求签算卦",
+  "navigationBarTitleText": "在线求签-观音灵签抽签",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

@@ -2,6 +2,7 @@ var analytics = require('../../../utils/analytics');
 Page({
   onLoad: function() {
     analytics.trackPage('calculator');
+    analytics.startStay('calculator');
     analytics.trackToolUse('calculator');
   },
   data: {
@@ -13,9 +14,9 @@ Page({
     activeOp: ''
   },
 
-  onDigit(e) {
-    const digit = e.currentTarget.dataset.digit;
-    const { display, waitingForOperand } = this.data;
+  onDigit: function(e) {
+    var digit = e.currentTarget.dataset.digit;
+    var display = this.data.display; var waitingForOperand = this.data.waitingForOperand;
 
     if (waitingForOperand) {
       this.setData({
@@ -30,8 +31,8 @@ Page({
     }
   },
 
-  onDot() {
-    const { display, waitingForOperand } = this.data;
+  onDot: function() {
+    var display = this.data.display; var waitingForOperand = this.data.waitingForOperand;
     if (waitingForOperand) {
       this.setData({ display: '0.', waitingForOperand: false, activeOp: '' });
     } else if (display.indexOf('.') === -1) {
@@ -39,7 +40,7 @@ Page({
     }
   },
 
-  onClear() {
+  onClear: function() {
     this.setData({
       display: '0',
       expression: '',
@@ -50,8 +51,8 @@ Page({
     });
   },
 
-  onToggleSign() {
-    const { display } = this.data;
+  onToggleSign: function() {
+    var display = this.data.display;
     if (display !== '0') {
       this.setData({
         display: display.charAt(0) === '-' ? display.substr(1) : '-' + display
@@ -59,21 +60,21 @@ Page({
     }
   },
 
-  onPercent() {
-    const { display } = this.data;
-    const val = parseFloat(display);
+  onPercent: function() {
+    var display = this.data.display;
+    var val = parseFloat(display);
     if (val !== 0) {
       this.setData({ display: String(val / 100) });
     }
   },
 
-  onOperator(e) {
-    const nextOp = e.currentTarget.dataset.op;
-    const { display, operator, previousValue } = this.data;
-    const inputValue = parseFloat(display);
+  onOperator: function(e) {
+    var nextOp = e.currentTarget.dataset.op;
+    var display = this.data.display; var operator = this.data.operator; var previousValue = this.data.previousValue;
+    var inputValue = parseFloat(display);
 
     if (previousValue !== null && operator && !this.data.waitingForOperand) {
-      const result = this._calculate(previousValue, inputValue, operator);
+      var result = this._calculate(previousValue, inputValue, operator);
       this.setData({
         display: this._formatResult(result),
         expression: this._formatResult(result) + ' ' + this._opSymbol(nextOp),
@@ -93,12 +94,12 @@ Page({
     }
   },
 
-  onEquals() {
-    const { display, operator, previousValue } = this.data;
+  onEquals: function() {
+    var display = this.data.display; var operator = this.data.operator; var previousValue = this.data.previousValue;
     if (operator === null || previousValue === null) return;
 
-    const inputValue = parseFloat(display);
-    const result = this._calculate(previousValue, inputValue, operator);
+    var inputValue = parseFloat(display);
+    var result = this._calculate(previousValue, inputValue, operator);
 
     this.setData({
       display: this._formatResult(result),
@@ -110,7 +111,7 @@ Page({
     });
   },
 
-  _calculate(a, b, op) {
+  _calculate: function(a, b, op) {
     switch (op) {
       case '+': return a + b;
       case '-': return a - b;
@@ -120,12 +121,12 @@ Page({
     }
   },
 
-  _opSymbol(op) {
-    const map = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+  _opSymbol: function(op) {
+    var map = { '+': '+', '-': '−', '*': '×', '/': '÷' };
     return map[op] || op;
   },
 
-  _formatResult(val) {
+  _formatResult: function(val) {
     if (Number.isInteger(val)) return String(val);
     return String(Math.round(val * 100000000) / 100000000);
   }

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "BMI健康计算",
+  "navigationBarTitleText": "BMI计算器-体重健康测试",
   "navigationBarBackgroundColor": "#FFFFFF",
   "navigationBarTextStyle": "black",
   "usingComponents": {

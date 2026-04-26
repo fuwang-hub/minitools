@@ -1,10 +1,5 @@
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📐</text>
-    <text class="hero-title">单位换算</text>
-  </view>
-
-  <!-- 分类 Tab -->
+<!-- 分类 Tab -->
   <view class="tab-bar">
     <view class="tab-item {{activeTab === index ? 'active' : ''}}"
           wx:for="{{categories}}" wx:key="key"
@@ -43,4 +38,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">万能单位换算工具，支持长度、重量、温度、面积、体积、速度六大类单位在线换算。</view>
 </view>

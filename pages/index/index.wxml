@@ -50,11 +50,11 @@
         </view>
         <text class="module-desc">{{item.desc}}</text>
       </view>
-      <!-- 工具网格（白色卡片） -->
+      <!-- 工具网格 -->
       <view class="tool-grid">
         <view class="tool-item" wx:for="{{item.tools}}" wx:for-item="tool" wx:key="id"
               catchtap="onToolTap" data-path="{{tool.path}}">
-          <view class="tool-icon-wrap">
+          <view class="tool-icon-wrap" style="background: {{item.iconBg}};">
             <text class="tool-emoji">{{tool.emoji}}</text>
           </view>
           <text class="tool-name">{{tool.name}}</text>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "古风名字",
+  "navigationBarTitleText": "古风名字生成-唯美取名",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

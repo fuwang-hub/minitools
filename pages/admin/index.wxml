@@ -1,12 +1,6 @@
 <!--pages/admin/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📊</text>
-    <text class="hero-title">数据看板</text>
-    <text class="hero-desc">实时数据分析</text>
-  </view>
-
-  <!-- 核心指标 -->
+<!-- 核心指标 -->
   <view class="card">
     <text class="card-title">📈 核心指标</text>
     <view class="metrics-grid">
@@ -200,6 +194,60 @@
       <view class="event-item" wx:for="{{eventLog}}" wx:key="index">
         <text class="event-time">{{item.time}}</text>
         <text class="event-name">{{item.event}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页面停留时长 -->
+  <view class="result-card" wx:if="{{stayStats.length > 0}}">
+    <text class="card-title">⏱️ 页面停留时长 Top10</text>
+    <view class="rank-item" wx:for="{{stayStats}}" wx:key="page">
+      <text class="rank-idx">{{index + 1}}</text>
+      <text class="rank-name">{{item.page}}</text>
+      <text class="rank-val">{{item.avgSeconds}}s</text>
+      <text class="rank-sub">{{item.visits}}次</text>
+    </view>
+  </view>
+
+  <!-- 功能完成率（漏斗） -->
+  <view class="result-card" wx:if="{{funnelStats.length > 0}}">
+    <text class="card-title">📊 测试完成率</text>
+    <view class="funnel-item" wx:for="{{funnelStats}}" wx:key="name">
+      <text class="funnel-name">{{item.name}}</text>
+      <view class="funnel-bar-bg">
+        <view class="funnel-bar-fill" style="width: {{item.rate}}%;"></view>
+      </view>
+      <text class="funnel-rate">{{item.rate}}%</text>
+      <text class="funnel-detail">{{item.completes}}/{{item.starts}}</text>
+    </view>
+  </view>
+
+  <!-- 结果分享率 -->
+  <view class="result-card" wx:if="{{resultShareStats.length > 0}}">
+    <text class="card-title">📤 结果分享率</text>
+    <view class="rank-item" wx:for="{{resultShareStats}}" wx:key="tool">
+      <text class="rank-idx">{{index + 1}}</text>
+      <text class="rank-name">{{item.tool}}</text>
+      <text class="rank-val">{{item.rate}}%</text>
+      <text class="rank-sub">{{item.shares}}/{{item.views}}</text>
+    </view>
+  </view>
+
+  <!-- 新老用户占比 -->
+  <view class="result-card" wx:if="{{userRatio.new !== undefined}}">
+    <text class="card-title">👥 用户类型分布</text>
+    <view class="user-ratio">
+      <view class="ratio-item new-user">
+        <text class="ratio-val">{{userRatio.new || 0}}</text>
+        <text class="ratio-label">新用户</text>
+      </view>
+      <view class="ratio-item returning-user">
+        <text class="ratio-val">{{userRatio.returning || 0}}</text>
+        <text class="ratio-label">回访</text>
+      </view>
+      <view class="ratio-item active-user">
+        <text class="ratio-val">{{userRatio.active || 0}}</text>
+        <text class="ratio-label">活跃</text>
       </view>
     </view>
   </view>

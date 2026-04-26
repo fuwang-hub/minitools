@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "今日运势",
+  "navigationBarTitleText": "今日星座运势-12星座每日运程",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

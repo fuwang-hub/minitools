@@ -320,3 +320,14 @@ page {
 .mt-30 { margin-top: 30rpx; }
 .mb-20 { margin-bottom: 20rpx; }
 .mb-30 { margin-bottom: 30rpx; }
+
+/* === SEO 隐藏文本（搜索引擎可见，用户不可见） === */
+.seo-text {
+  position: absolute;
+  width: 1rpx;
+  height: 1rpx;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  opacity: 0;
+  pointer-events: none;
+}

@@ -1,6 +1,6 @@
 var analytics = require('../../../utils/analytics');
 // pages/ai/acrostic/index.js
-const poemLib = {
+var poemLib = {
   2: [
     ['{0}日风光好', '{1}来万事兴'],
     ['{0}风送暖入屠苏', '{1}水千山总是情'],
@@ -23,17 +23,17 @@ const poemLib = {
 };
 
 function generatePoem(text) {
-  const chars = text.split('');
-  const len = chars.length;
-  const templates = poemLib[Math.min(len, 5)] || poemLib[3];
-  const tpl = templates[Math.floor(Math.random() * templates.length)];
+  var chars = text.split('');
+  var len = chars.length;
+  var templates = poemLib[Math.min(len, 5)] || poemLib[3];
+  var tpl = templates[Math.floor(Math.random() * templates.length)];
   
-  const lines = [];
-  for (let i = 0; i < Math.min(len, tpl.length); i++) {
+  var lines = [];
+  for (var i = 0; i < Math.min(len, tpl.length); i++) {
     lines.push(tpl[i].replace('{' + i + '}', chars[i]));
   }
   // 如果输入超过模板长度，补充额外行
-  for (let i = tpl.length; i < len; i++) {
+  for (var i = tpl.length; i < len; i++) {
     lines.push(chars[i] + '意悠悠韵味长');
   }
   return lines;
@@ -42,6 +42,7 @@ function generatePoem(text) {
 Page({
   onLoad: function() {
     analytics.trackPage('acrostic');
+    analytics.startStay('acrostic');
     analytics.trackToolUse('acrostic');
   },
   data: {
@@ -51,10 +52,10 @@ Page({
     history: []
   },
 
-  onInput(e) { this.setData({ inputText: e.detail.value }); },
+  onInput: function(e) { this.setData({ inputText: e.detail.value }); },
 
-  generate() {
-    const text = this.data.inputText.trim();
+  generate: function() {
+    var text = this.data.inputText.trim();
     if (!text) { wx.showToast({ title: '请输入藏头文字', icon: 'none' }); return; }
     if (text.length < 2 || text.length > 8) { wx.showToast({ title: '请输入2-8个字', icon: 'none' }); return; }
 
@@ -66,17 +67,24 @@ Page({
     this.setData({ showResult: true, poemLines: poemLines, poemDisplay: poemDisplay, history: history });
   },
 
-  copyPoem() {
-    const text = this.data.poemLines.join('\n');
+  copyPoem: function() {
+    var text = this.data.poemLines.join('\n');
     wx.setClipboardData({ data: text, success() { wx.showToast({ title: '已复制' }); } });
   },
 
-  restart() { this.setData({ inputText: '', showResult: false, poemLines: [] }); },
+  restart: function() { this.setData({ inputText: '', showResult: false, poemLines: [] }); },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('acrostic'); },
+
+
+  onUnload: function() { analytics.endStay('acrostic'); },
+
+
+
+  onShareAppMessage: function() {
     return { title: '我用藏头诗表白，你也来试试！', path: '/pages/ai/acrostic/index' };
-  }
-,
+  },
+
   onShareTimeline: function() {
     var share = require("../../../utils/share");
     return share.buildTimelineConfig("acrostic", {});

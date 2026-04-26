@@ -1,6 +1,4 @@
-.hero { padding: 40rpx 32rpx; text-align: center; }
-.hero-emoji { font-size: 56rpx; display: block; margin-bottom: 8rpx; }
-.hero-title { font-size: 36rpx; font-weight: 700; color: #fff; display: block; }
+/* hero: 使用全局样式 */
 
 .result-area { text-align: center; padding: 48rpx 0 32rpx; }
 .result-number {

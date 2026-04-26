@@ -1,12 +1,7 @@
 <!--pages/ai/answer-book/index.wxml-->
 <view class="page-container">
   <block wx:if="{{phase === 'input'}}">
-    <view class="hero">
-      <text class="hero-emoji">📖</text>
-      <text class="hero-title">答案之书</text>
-      <text class="hero-desc">心中默想问题，翻开书页</text>
-    </view>
-    <view class="input-card">
+<view class="input-card">
       <text class="input-hint">在心中想一个问题...</text>
       <textarea class="input-area" placeholder="输入你的问题（选填）" value="{{question}}" bindinput="onInput" maxlength="100" />
       <button class="btn-ask" bindtap="askQuestion">✨ 翻开答案之书</button>
@@ -41,4 +36,7 @@
       <button class="btn-share" open-type="share">分享答案</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">答案之书在线翻阅，心中默念问题翻开书页获取答案，有趣的随机决策占卜工具。</view>
 </view>

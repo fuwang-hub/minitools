@@ -1,11 +1,6 @@
 <!--pages/metaphysics/zodiac-match/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🧧</text>
-    <text class="hero-title">属相配对</text>
-    <text class="hero-desc">十二生肖缘分测试</text>
-  </view>
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="pair-display">
       <view class="pair-item {{z1 >= 0 ? 'selected' : ''}}">
         <text class="pair-emoji">{{z1 >= 0 ? zodiacList[z1].emoji : '?'}}</text>
@@ -40,4 +35,7 @@
       <button class="btn-share" open-type="share">分享结果</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">十二生肖属相配对测试，查看两个属相的婚配指数，六合三合相冲相害分析。</view>
 </view>

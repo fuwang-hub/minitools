@@ -53,6 +53,7 @@ Page({
 
   onLoad: function () {
     analytics.trackPage('ledger');
+    analytics.startStay('ledger');
     analytics.trackToolUse('ledger');
     this.loadRecords();
   },
@@ -217,6 +218,13 @@ Page({
 
     this.setData({ statCategories: list, statTotal: total.toFixed(2) });
   },
+
+  onHide: function() { analytics.endStay('ledger'); },
+
+
+  onUnload: function() { analytics.endStay('ledger'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'ledger');

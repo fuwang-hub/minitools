@@ -1,5 +1,5 @@
 var analytics = require('../../../utils/analytics');
-const questions = [
+var questions = [
   { text: '在社交场合中，你更倾向于：', options: ['主动结识新朋友', '等待别人来找自己'], dimension: 'EI' },
   { text: '获取信息时，你更关注：', options: ['具体的事实和细节', '整体的概念和可能性'], dimension: 'SN' },
   { text: '做决策时，你更依赖：', options: ['逻辑分析和客观数据', '个人感受和价值观'], dimension: 'TF' },
@@ -10,7 +10,7 @@ const questions = [
   { text: '你的日常生活更像：', options: ['有规律有条理', '随性而为灵活多变'], dimension: 'JP' }
 ];
 
-const mbtiData = {
+var mbtiData = {
   INTJ: {
     name: '建筑师', emoji: '🏛️',
     desc: '独立自主的战略思想家，善于将创意转化为实际的行动方案。你天生具有领导力，总能透过现象看到事物的本质。',
@@ -127,10 +127,14 @@ const mbtiData = {
 
 Page({
   onLoad: function() {
+    this.setData({ questions: questions });
     analytics.trackPage('mbti');
+    analytics.startStay('mbti');
+    analytics.trackFunnelStart('mbti');
     analytics.trackToolUse('mbti');
   },
   data: {
+    questions: [],
     questions,
     currentQ: 0,
     answers: [],
@@ -142,32 +146,35 @@ Page({
     detailUnlocked: false
   },
 
-  onAnswer(e) {
-    const index = e.currentTarget.dataset.index;
-    const { currentQ, answers } = this.data;
-    const newAnswers = [...answers, index];
+  onAnswer: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var currentQ = this.data.currentQ; var answers = this.data.answers;
+    var newAnswers = answers.concat([index]);
 
     if (currentQ < questions.length - 1) {
       this.setData({ currentQ: currentQ + 1, answers: newAnswers });
     } else {
-      const result = this._calculate(newAnswers);
+      var result = this._calculate(newAnswers);
       this.setData({
         answers: newAnswers,
         showResult: true,
-        result,
+      _funnelDone: true,
+        result: result,
         resultInfo: mbtiData[result]
       });
+    analytics.trackFunnelComplete('mbti');
+    analytics.trackResultView('mbti');
 
       // 触发插屏广告
-      const util = require('../../../utils/util');
+      var util = require('../../../utils/util');
       util.showInterstitialAd();
     }
   },
 
-  _calculate(answers) {
-    const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-    questions.forEach((q, i) => {
-      const dim = q.dimension;
+  _calculate: function(answers) {
+    var scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+    questions.forEach(function(q, i) {
+      var dim = q.dimension;
       if (answers[i] === 0) {
         scores[dim[0]]++;
       } else {
@@ -183,7 +190,7 @@ Page({
     );
   },
 
-  onRestart() {
+  onRestart: function() {
     this.setData({
       currentQ: 0,
       answers: [],
@@ -193,11 +200,18 @@ Page({
     });
   },
 
-  onShare() {
+  onShare: function() {
     wx.showShareMenu({ withShareTicket: true, menus: ['shareAppMessage', 'shareTimeline'] });
   },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('mbti'); },
+
+
+  onUnload: function() { analytics.endStay('mbti'); },
+
+
+
+  onShareAppMessage: function() {
     var share = require('../../../utils/share');
     return share.buildShareConfig('mbti', {
       result: this.data.result,
@@ -205,7 +219,7 @@ Page({
     }, '/pages/test/mbti/index');
   },
 
-  onShareTimeline() {
+  onShareTimeline: function() {
     var share = require('../../../utils/share');
     return share.buildTimelineConfig('mbti', {
       result: this.data.result,
@@ -213,7 +227,7 @@ Page({
     });
   },
 
-  showPoster() {
+  showPoster: function() {
     var info = this.data.resultInfo || {};
     this.setData({
       showPoster: true,
@@ -229,7 +243,7 @@ Page({
     });
   },
 
-  closePoster() { this.setData({ showPoster: false }); },
+  closePoster: function() { this.setData({ showPoster: false }); },
 
-  onUnlocked() { this.setData({ detailUnlocked: true }); }
+  onUnlocked: function() { this.setData({ detailUnlocked: true }); }
 });

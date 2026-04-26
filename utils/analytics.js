@@ -530,16 +530,214 @@ function addEvent(data, event, eventData) {
     data: eventData,
     time: now()
   });
-  // 只保留最近200条
   if (data.eventLog.length > 200) {
     data.eventLog = data.eventLog.slice(-200);
   }
 }
 
+// ========== 新增指标 ==========
+
+/**
+ * 页面停留时长
+ * 在 onLoad 调用 startStay，onUnload/onHide 调用 endStay
+ */
+var _stayTimers = {};
+
+function startStay(pageName) {
+  _stayTimers[pageName] = Date.now();
+}
+
+function endStay(pageName) {
+  var start = _stayTimers[pageName];
+  if (!start) return;
+  var duration = Math.round((Date.now() - start) / 1000); // 秒
+  delete _stayTimers[pageName];
+  if (duration < 1 || duration > 3600) return; // 排除异常值
+
+  var data = getData();
+  data.stayTime = data.stayTime || {};
+  if (!data.stayTime[pageName]) {
+    data.stayTime[pageName] = { total: 0, count: 0 };
+  }
+  data.stayTime[pageName].total += duration;
+  data.stayTime[pageName].count += 1;
+
+  addEvent(data, 'page_stay', { page: pageName, duration: duration });
+  saveData(data);
+
+  try {
+    wx.reportAnalytics('page_stay', { page_name: pageName, duration: duration });
+  } catch (e) {}
+}
+
+/**
+ * 获取停留时长统计
+ */
+function getStayStats() {
+  var data = getData();
+  var stay = data.stayTime || {};
+  var list = Object.keys(stay).map(function(k) {
+    return {
+      page: k,
+      avgSeconds: Math.round(stay[k].total / stay[k].count),
+      totalSeconds: stay[k].total,
+      visits: stay[k].count
+    };
+  });
+  list.sort(function(a, b) { return b.avgSeconds - a.avgSeconds; });
+  return list;
+}
+
+/**
+ * 功能完成率
+ * 在测试类页面开始时调用 trackFunnelStart，完成时调用 trackFunnelComplete
+ */
+function trackFunnelStart(funnelName) {
+  var data = getData();
+  data.funnels = data.funnels || {};
+  if (!data.funnels[funnelName]) {
+    data.funnels[funnelName] = { starts: 0, completes: 0 };
+  }
+  data.funnels[funnelName].starts += 1;
+  saveData(data);
+
+  try {
+    wx.reportAnalytics('funnel_start', { funnel: funnelName });
+  } catch (e) {}
+}
+
+function trackFunnelComplete(funnelName) {
+  var data = getData();
+  data.funnels = data.funnels || {};
+  if (!data.funnels[funnelName]) {
+    data.funnels[funnelName] = { starts: 0, completes: 0 };
+  }
+  data.funnels[funnelName].completes += 1;
+  addEvent(data, 'funnel_complete', { funnel: funnelName });
+  saveData(data);
+
+  try {
+    wx.reportAnalytics('funnel_complete', { funnel: funnelName });
+  } catch (e) {}
+}
+
+/**
+ * 获取漏斗数据
+ */
+function getFunnelStats() {
+  var data = getData();
+  var funnels = data.funnels || {};
+  var list = Object.keys(funnels).map(function(k) {
+    var f = funnels[k];
+    return {
+      name: k,
+      starts: f.starts,
+      completes: f.completes,
+      rate: f.starts > 0 ? Math.round((f.completes / f.starts) * 100) : 0
+    };
+  });
+  list.sort(function(a, b) { return b.starts - a.starts; });
+  return list;
+}
+
+/**
+ * 结果分享率
+ * 在测试结果页展示时调用 trackResultView，分享时调用 trackResultShare
+ */
+function trackResultView(toolName) {
+  var data = getData();
+  data.resultStats = data.resultStats || {};
+  if (!data.resultStats[toolName]) {
+    data.resultStats[toolName] = { views: 0, shares: 0 };
+  }
+  data.resultStats[toolName].views += 1;
+  saveData(data);
+}
+
+function trackResultShare(toolName) {
+  var data = getData();
+  data.resultStats = data.resultStats || {};
+  if (!data.resultStats[toolName]) {
+    data.resultStats[toolName] = { views: 0, shares: 0 };
+  }
+  data.resultStats[toolName].shares += 1;
+  saveData(data);
+
+  try {
+    wx.reportAnalytics('result_share', { tool: toolName });
+  } catch (e) {}
+}
+
+/**
+ * 获取结果分享率数据
+ */
+function getResultShareStats() {
+  var data = getData();
+  var stats = data.resultStats || {};
+  var list = Object.keys(stats).map(function(k) {
+    var s = stats[k];
+    return {
+      tool: k,
+      views: s.views,
+      shares: s.shares,
+      rate: s.views > 0 ? Math.round((s.shares / s.views) * 100) : 0
+    };
+  });
+  list.sort(function(a, b) { return b.views - a.views; });
+  return list;
+}
+
+/**
+ * 签到连续天数分布
+ */
+function trackCheckinStreak(streak) {
+  var data = getData();
+  data.checkinStreaks = data.checkinStreaks || {};
+  var bucket = streak <= 1 ? '1天' : streak <= 3 ? '2-3天' : streak <= 7 ? '4-7天' : streak <= 14 ? '8-14天' : streak <= 30 ? '15-30天' : '30天+';
+  data.checkinStreaks[bucket] = (data.checkinStreaks[bucket] || 0) + 1;
+  saveData(data);
+}
+
+function getCheckinDistribution() {
+  var data = getData();
+  return data.checkinStreaks || {};
+}
+
+/**
+ * 新老用户判断
+ */
+function isNewUser() {
+  var data = getData();
+  return data.visitDays.length <= 1;
+}
+
+function getUserType() {
+  var data = getData();
+  var days = data.visitDays.length;
+  if (days <= 1) return 'new';        // 新用户
+  if (days <= 3) return 'returning';   // 回访用户
+  return 'active';                     // 活跃用户
+}
+
+function getNewOldRatio() {
+  var data = getData();
+  data.userTypeLog = data.userTypeLog || {};
+  var d = today();
+  data.userTypeLog[d] = getUserType();
+  saveData(data);
+
+  var log = data.userTypeLog;
+  var counts = { new: 0, returning: 0, active: 0 };
+  Object.keys(log).forEach(function(k) {
+    counts[log[k]] = (counts[log[k]] || 0) + 1;
+  });
+  return counts;
+}
+
 // ========== 导出 ==========
 
 module.exports = {
-  // 埋点方法
+  // 基础埋点
   trackSession: trackSession,
   trackPage: trackPage,
   trackToolUse: trackToolUse,
@@ -550,7 +748,18 @@ module.exports = {
   trackRegister: trackRegister,
   trackLogin: trackLogin,
   trackCheckin: trackCheckin,
-  
+
+  // 新增指标
+  startStay: startStay,
+  endStay: endStay,
+  trackFunnelStart: trackFunnelStart,
+  trackFunnelComplete: trackFunnelComplete,
+  trackResultView: trackResultView,
+  trackResultShare: trackResultShare,
+  trackCheckinStreak: trackCheckinStreak,
+  isNewUser: isNewUser,
+  getUserType: getUserType,
+
   // 查询方法
   getOverview: getOverview,
   getToolRanking: getToolRanking,
@@ -560,7 +769,12 @@ module.exports = {
   getShareStats: getShareStats,
   getAdStats: getAdStats,
   getRetention: getRetention,
-  
+  getStayStats: getStayStats,
+  getFunnelStats: getFunnelStats,
+  getResultShareStats: getResultShareStats,
+  getCheckinDistribution: getCheckinDistribution,
+  getNewOldRatio: getNewOldRatio,
+
   // 管理方法
   reportToServer: reportToServer,
   exportData: exportData,

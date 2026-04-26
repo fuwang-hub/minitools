@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "汇率换算",
+  "navigationBarTitleText": "汇率换算-实时汇率计算器",
   "navigationBarBackgroundColor": "#FFFFFF",
   "navigationBarTextStyle": "black",
   "usingComponents": {

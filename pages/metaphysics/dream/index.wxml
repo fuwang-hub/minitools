@@ -1,12 +1,6 @@
 <!--pages/metaphysics/dream/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🌙</text>
-    <text class="hero-title">周公解梦</text>
-    <text class="hero-desc">解读梦境的神秘密码</text>
-  </view>
-
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="search-card">
       <view class="search-box">
         <input class="search-input" placeholder="输入梦境关键词，如：蛇、飞、水" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="searchDream" />
@@ -52,4 +46,7 @@
       <button class="btn-share" open-type="share">分享解读</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">周公解梦大全在线查询，搜索梦境关键词查看解梦结果，涵盖动物人物自然事物等分类。</view>
 </view>

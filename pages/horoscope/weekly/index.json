@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "本周运势",
+  "navigationBarTitleText": "本周星座运势-每周运程预测",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

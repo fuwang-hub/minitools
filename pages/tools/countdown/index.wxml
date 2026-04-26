@@ -77,4 +77,7 @@
       </view>
     </view>
   </view>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">倒数日纪念日工具，记录生日、纪念日、考试、假期等重要日期，支持倒计时和已过天数统计。</view>
 </view>

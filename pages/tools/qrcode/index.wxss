@@ -1,6 +1,4 @@
-.hero { padding: 40rpx 32rpx; text-align: center; }
-.hero-emoji { font-size: 56rpx; display: block; margin-bottom: 8rpx; }
-.hero-title { font-size: 36rpx; font-weight: 700; color: #fff; display: block; }
+/* hero: 使用全局样式 */
 
 .label { font-size: 28rpx; color: #666; display: block; margin-bottom: 12rpx; }
 .text-area {

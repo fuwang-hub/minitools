@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "姓名测试",
+  "navigationBarTitleText": "姓名测试打分-名字吉凶分析",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

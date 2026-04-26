@@ -2,12 +2,7 @@
 <view class="page-container">
   <!-- 测试列表 -->
   <block wx:if="{{mode === 'list'}}">
-    <view class="hero">
-      <text class="hero-emoji">🎮</text>
-      <text class="hero-title">趣味测试</text>
-      <text class="hero-desc">选择一个测试开始吧</text>
-    </view>
-    <view class="test-list">
+<view class="test-list">
       <view class="test-item" wx:for="{{tests}}" wx:key="id" bindtap="selectTest" data-id="{{item.id}}">
         <text class="test-emoji">{{item.emoji}}</text>
         <view class="test-info">
@@ -21,10 +16,6 @@
 
   <!-- 答题 -->
   <block wx:if="{{mode === 'test' && !showResult}}">
-    <view class="hero">
-      <text class="hero-emoji">{{currentTest.emoji}}</text>
-      <text class="hero-title">{{currentTest.name}}</text>
-    </view>
     <view class="progress-bar"><view class="progress-fill" style="width: {{progress}}%; background: {{currentTest.color}};"></view></view>
     <text class="progress-text">{{currentQuestion + 1}} / {{currentTest.questions.length}}</text>
     <view class="question-card">
@@ -55,4 +46,7 @@
       <text>← 返回测试列表</text>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">趣味心理测试合集，测测你的心理年龄、前世身份、隐藏超能力，轻松有趣。</view>
 </view>

@@ -1,27 +1,260 @@
 /* pages/ai/daily-advice/index.wxss */
-.hero-lunar { font-size: 24rpx; opacity: 0.8; display: block; margin-top: 4rpx; }
-.score-section { text-align: center; padding: 30rpx; }
-.score-ring { width: 160rpx; height: 160rpx; border-radius: 50%; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border: 8rpx solid #059669; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; }
-.score-num { font-size: 52rpx; font-weight: bold; color: #059669; line-height: 1; }
-.score-label { font-size: 22rpx; color: #059669; }
-.mood-text { font-size: 28rpx; color: #374151; margin-top: 16rpx; }
-.yi-ji-card { margin: 0 30rpx; background: #fff; border-radius: 24rpx; padding: 32rpx; box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06); }
-.yi-section, .ji-section { }
-.divider { height: 1rpx; background: #f3f4f6; margin: 24rpx 0; }
-.section-title { font-size: 32rpx; font-weight: 600; display: block; margin-bottom: 16rpx; }
-.yi-title { color: #059669; }
-.ji-title { color: #dc2626; }
-.tag-list { display: flex; flex-wrap: wrap; gap: 12rpx; }
-.yi-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #dcfce7; color: #059669; border-radius: 24rpx; }
-.ji-tag { font-size: 28rpx; padding: 10rpx 24rpx; background: #fef2f2; color: #dc2626; border-radius: 24rpx; }
-.lucky-card { margin: 20rpx 30rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; }
-.lucky-title { font-size: 30rpx; font-weight: 600; color: #1f2937; display: block; margin-bottom: 16rpx; }
-.lucky-row { display: flex; gap: 16rpx; }
-.lucky-item { flex: 1; text-align: center; background: #fef9c3; border-radius: 16rpx; padding: 20rpx 12rpx; }
-.l-label { font-size: 22rpx; color: #92400e; display: block; }
-.l-value { font-size: 28rpx; font-weight: 600; color: #1f2937; display: block; margin-top: 6rpx; }
-.quote-card { margin: 20rpx 30rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); border-radius: 24rpx; padding: 32rpx; text-align: center; }
-.quote-icon { font-size: 40rpx; display: block; margin-bottom: 12rpx; }
-.quote-text { font-size: 28rpx; color: #374151; line-height: 1.8; font-style: italic; }
-.share-section { margin: 24rpx 30rpx; }
-.btn-share { height: 88rpx; line-height: 88rpx; background: linear-gradient(135deg, #4F6EF6, #6C8AFF); color: #fff; border-radius: 44rpx; font-size: 30rpx; }
+
+/* 日期头部 */
+.date-header {
+  padding: 32rpx 30rpx 24rpx;
+  text-align: center;
+}
+
+.date-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.date-day {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: #4F6EF6;
+  line-height: 1;
+}
+
+.date-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.date-ym {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.date-week {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+.date-lunar {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  margin-top: 4rpx;
+}
+
+/* 今日指数 */
+.score-card {
+  margin: 0 30rpx 20rpx;
+  background: linear-gradient(135deg, #4F6EF6, #6C8AFF);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 28rpx;
+}
+
+.score-circle {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 4rpx solid rgba(255, 255, 255, 0.4);
+}
+
+.score-num {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.score-unit {
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.score-info {
+  flex: 1;
+}
+
+.score-title {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+}
+
+.score-mood {
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: 600;
+  display: block;
+  margin-top: 6rpx;
+}
+
+.score-bar {
+  height: 8rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4rpx;
+  margin-top: 12rpx;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 4rpx;
+  transition: width 0.5s;
+}
+
+/* 宜忌卡片 */
+.card {
+  margin: 16rpx 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-icon {
+  font-size: 32rpx;
+}
+
+.card-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.yi-card {
+  border-left: 8rpx solid #10B981;
+}
+
+.ji-card {
+  border-left: 8rpx solid #EF4444;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.yi-tag {
+  padding: 12rpx 28rpx;
+  background: #ECFDF5;
+  color: #059669;
+  border-radius: 32rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.ji-tag {
+  padding: 12rpx 28rpx;
+  background: #FEF2F2;
+  color: #DC2626;
+  border-radius: 32rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 幸运三宫格 */
+.lucky-grid {
+  display: flex;
+  gap: 12rpx;
+  margin: 16rpx 30rpx;
+}
+
+.lucky-item {
+  flex: 1;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 24rpx 12rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.lucky-icon {
+  font-size: 36rpx;
+  display: block;
+}
+
+.lucky-val {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1A1A1A;
+  display: block;
+  margin-top: 8rpx;
+}
+
+.lucky-label {
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  margin-top: 4rpx;
+}
+
+.color-item { border-top: 6rpx solid #F472B6; }
+.num-item { border-top: 6rpx solid #FBBF24; }
+.dir-item { border-top: 6rpx solid #60A5FA; }
+
+/* 每日一言 */
+.quote-card {
+  margin: 16rpx 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.quote-mark {
+  font-size: 56rpx;
+  color: #E5E7EB;
+  font-family: Georgia, serif;
+  line-height: 1;
+  display: block;
+}
+
+.quote-mark.end {
+  text-align: right;
+  margin-top: -8rpx;
+}
+
+.quote-text {
+  font-size: 28rpx;
+  color: #4B5563;
+  line-height: 1.8;
+  display: block;
+  padding: 0 16rpx;
+}
+
+/* 分享按钮 */
+.share-btn {
+  margin: 24rpx 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #4F6EF6, #6C8AFF);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(79, 110, 246, 0.3);
+}
+
+.share-btn::after { border: none; }
+.share-btn:active { opacity: 0.85; }

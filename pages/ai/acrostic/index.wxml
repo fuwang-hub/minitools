@@ -1,11 +1,6 @@
 <!--pages/ai/acrostic/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">📜</text>
-    <text class="hero-title">藏头诗</text>
-    <text class="hero-desc">输入文字，生成专属诗句</text>
-  </view>
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="form-card">
       <text class="form-hint">输入2-8个字，生成藏头诗</text>
       <input class="input-field" placeholder="如：我爱你、生日快乐" value="{{inputText}}" bindinput="onInput" maxlength="8" />
@@ -33,4 +28,7 @@
       <button class="btn-share" open-type="share">分享</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">AI藏头诗生成器，输入文字自动生成藏头诗，支持五言七言格式，一键分享。</view>
 </view>

@@ -162,7 +162,6 @@
 .tool-icon-wrap {
   width: 96rpx;
   height: 96rpx;
-  background: #F0F4FF;
   border-radius: 24rpx;
   display: flex;
   align-items: center;

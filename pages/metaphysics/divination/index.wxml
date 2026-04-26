@@ -1,12 +1,6 @@
 <!--pages/metaphysics/divination/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🏮</text>
-    <text class="hero-title">求签问卦</text>
-    <text class="hero-desc">心诚则灵 · 签文指引</text>
-  </view>
-
-  <block wx:if="{{phase === 'ready'}}">
+<block wx:if="{{phase === 'ready'}}">
     <view class="altar">
       <text class="altar-emoji">🏮</text>
       <text class="altar-text">心中默念所求之事</text>
@@ -66,4 +60,7 @@
       <button class="btn-share" open-type="share">分享签文</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">在线求签抽签工具，模拟观音灵签求签过程，虔诚摇签获取签文和解签建议。</view>
 </view>

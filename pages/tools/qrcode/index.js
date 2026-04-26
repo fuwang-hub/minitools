@@ -2,6 +2,7 @@ var analytics = require('../../../utils/analytics');
 Page({
   onLoad: function() {
     analytics.trackPage('qrcode');
+    analytics.startStay('qrcode');
     analytics.trackToolUse('qrcode');
   },
   data: {
@@ -9,12 +10,12 @@ Page({
     showQR: false
   },
 
-  onInput(e) {
+  onInput: function(e) {
     this.setData({ text: e.detail.value });
   },
 
-  onGenerate() {
-    const { text } = this.data;
+  onGenerate: function() {
+    var text = this.data.text;
     if (!text.trim()) {
       wx.showToast({ title: '请输入内容', icon: 'none' });
       return;
@@ -23,21 +24,23 @@ Page({
     this.setData({ showQR: true });
 
     // 用 canvas 绘制一个基于文本哈希的二维码图案
-    setTimeout(() => {
-      this._drawQR(text);
+    var that = this;
+
+    setTimeout(function() {
+      that._drawQR(text);
     }, 100);
   },
 
-  _drawQR(text) {
-    const ctx = wx.createCanvasContext('qrCanvas', this);
-    const size = 200;
-    const modules = 21;
-    const cellSize = size / modules;
+  _drawQR: function(text) {
+    var ctx = wx.createCanvasContext('qrCanvas', this);
+    var size = 200;
+    var modules = 21;
+    var cellSize = size / modules;
 
     // 简单哈希生成伪二维码图案
-    const hash = this._hashCode(text);
-    const bits = [];
-    for (let i = 0; i < modules * modules; i++) {
+    var hash = this._hashCode(text);
+    var bits = [];
+    for (var i = 0; i < modules * modules; i++) {
       bits.push(((hash * (i + 1) * 31) % 100) > 45 ? 1 : 0);
     }
 
@@ -47,8 +50,8 @@ Page({
 
     // 绘制模块
     ctx.setFillStyle('#333333');
-    for (let row = 0; row < modules; row++) {
-      for (let col = 0; col < modules; col++) {
+    for (var row = 0; row < modules; row++) {
+      for (var col = 0; col < modules; col++) {
         // 定位图案 - 三个角
         if (this._isFinderPattern(row, col, modules)) {
           ctx.setFillStyle('#333333');
@@ -70,7 +73,7 @@ Page({
     ctx.draw();
   },
 
-  _isFinderPattern(row, col, modules) {
+  _isFinderPattern: function(row, col, modules) {
     // 左上角
     if (row < 7 && col < 7) return true;
     // 右上角
@@ -80,8 +83,8 @@ Page({
     return false;
   },
 
-  _drawFinder(ctx, x, y, cellSize) {
-    const s = cellSize * 7;
+  _drawFinder: function(ctx, x, y, cellSize) {
+    var s = cellSize * 7;
     // 外框
     ctx.setFillStyle('#333333');
     ctx.fillRect(x, y, s, s);
@@ -93,26 +96,26 @@ Page({
     ctx.fillRect(x + cellSize * 2, y + cellSize * 2, s - cellSize * 4, s - cellSize * 4);
   },
 
-  _hashCode(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
+  _hashCode: function(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+      var char = str.charCodeAt(i);
       hash = ((hash << 5) - hash) + char;
       hash = hash & hash;
     }
     return Math.abs(hash);
   },
 
-  onSave() {
-    wx.canvasToTempFilePath({
+  onSave: function() {
+    wx.canvasToTempFilePathfunction({
       canvasId: 'qrCanvas',
-      success: (res) => {
-        wx.saveImageToPhotosAlbum({
+      success: function(res) {
+        wx.saveImageToPhotosAlbumfunction({
           filePath: res.tempFilePath,
-          success: () => {
+          success: function() {
             wx.showToast({ title: '已保存到相册', icon: 'success' });
           },
-          fail: () => {
+          fail: function() {
             wx.showToast({ title: '保存失败', icon: 'none' });
           }
         });
@@ -120,7 +123,14 @@ Page({
     }, this);
   },
 
-  onShareAppMessage() {
+  onHide: function() { analytics.endStay('qrcode'); },
+
+
+  onUnload: function() { analytics.endStay('qrcode'); },
+
+
+
+  onShareAppMessage: function() {
     return { title: '二维码生成器', path: '/pages/tools/qrcode/index' };
   }
 });

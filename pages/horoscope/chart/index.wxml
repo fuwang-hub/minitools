@@ -1,12 +1,6 @@
 <!--pages/horoscope/chart/index.wxml-->
 <view class="page-container">
-  <view class="hero">
-    <text class="hero-emoji">🌌</text>
-    <text class="hero-title">星盘查询</text>
-    <text class="hero-desc">探索你的星象密码</text>
-  </view>
-
-  <block wx:if="{{!showResult}}">
+<block wx:if="{{!showResult}}">
     <view class="form-card">
       <text class="form-title">输入出生信息</text>
 
@@ -108,4 +102,7 @@
       <button class="btn-share" open-type="share">分享星盘</button>
     </view>
   </block>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">个人星盘查询工具，输入出生日期时间地点，查看太阳星座月亮星座上升星座，行星落座分析。</view>
 </view>

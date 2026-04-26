@@ -61,4 +61,7 @@
     <text class="tip-text">💡 汇率数据来自 ExchangeRate API，每日更新</text>
     <text class="tip-text">⚠️ 实际交易汇率以银行柜台为准</text>
   </view>
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">实时汇率换算工具，支持美元欧元日元英镑等16种主要货币在线换算，汇率每日更新。</view>
 </view>

@@ -105,4 +105,7 @@
   </block>
 
   <ad-banner />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">简洁记账本工具，支持收入支出分类记录、月度统计、分类占比分析，本地存储安全可靠。</view>
 </view>

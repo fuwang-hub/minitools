@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "职业倾向",
+  "navigationBarTitleText": "职业倾向测试-Holland职业测评",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster",

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "藏头诗",
+  "navigationBarTitleText": "藏头诗生成器-AI作诗工具",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

@@ -88,4 +88,7 @@
   </block>
 
   <ad-banner />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">在线秒表计时器工具，支持秒表计次和倒计时两种模式，精确到毫秒，预设时间快捷设置。</view>
 </view>

@@ -1,10 +1,4 @@
-.hero {
-  padding: 48rpx 32rpx;
-  text-align: center;
-}
-.hero-emoji { font-size: 64rpx; display: block; margin-bottom: 12rpx; }
-.hero-title { font-size: 40rpx; font-weight: 700; color: #fff; display: block; }
-.hero-desc { font-size: 26rpx; color: rgba(255,255,255,0.8); display: block; margin-top: 8rpx; }
+/* hero: 使用全局样式 */
 
 /* 硬币 */
 .coin-area {

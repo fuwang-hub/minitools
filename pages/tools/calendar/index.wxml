@@ -1,0 +1,68 @@
+<!--pages/tools/calendar/index.wxml-->
+<view class="page-container">
+
+  <!-- 月份导航 -->
+  <view class="month-nav">
+    <view class="nav-btn" bindtap="prevMonth">
+      <text class="nav-arrow">◀</text>
+    </view>
+    <view class="month-center" bindtap="goToday">
+      <text class="month-text">{{monthStr}}</text>
+      <text class="lunar-year">{{lunarYear}} {{lunarShengXiao}}年</text>
+    </view>
+    <view class="nav-btn" bindtap="nextMonth">
+      <text class="nav-arrow">▶</text>
+    </view>
+  </view>
+
+  <!-- 星期表头 -->
+  <view class="week-header">
+    <text class="week-name {{index === 0 || index === 6 ? 'weekend' : ''}}" wx:for="{{weekNames}}" wx:key="index">{{item}}</text>
+  </view>
+
+  <!-- 日历网格 -->
+  <view class="calendar-grid">
+    <view class="day-cell {{item.empty ? 'empty' : ''}} {{item.isToday ? 'today' : ''}} {{selectedDay.day === item.day ? 'selected' : ''}} {{item.isWeekend ? 'weekend' : ''}}"
+          wx:for="{{days}}" wx:key="index"
+          bindtap="onDayTap" data-day="{{item.day}}">
+      <text class="day-num" wx:if="{{!item.empty}}">{{item.day}}</text>
+      <text class="day-lunar {{item.isFestival ? 'festival' : ''}}" wx:if="{{!item.empty}}">{{item.lunar}}</text>
+    </view>
+  </view>
+
+  <!-- 选中日期详情 -->
+  <view class="detail-card" wx:if="{{selectedDay}}">
+    <view class="detail-header">
+      <view class="detail-date">
+        <text class="detail-day">{{selectedDay.day}}</text>
+        <view class="detail-meta">
+          <text class="detail-solar">{{selectedDay.year}}年{{selectedDay.month}}月 {{selectedDay.weekday}}</text>
+          <text class="detail-lunar">农历 {{selectedLunar.monthStr}}{{selectedLunar.dayStr}}</text>
+        </view>
+      </view>
+      <view class="detail-ganchi">
+        <text class="ganchi-text">{{selectedLunar.ganZhi}}</text>
+        <text class="shengxiao-text">🐲 {{selectedLunar.shengXiao}}年</text>
+      </view>
+    </view>
+
+    <!-- 节日/节气 -->
+    <view class="festival-list" wx:if="{{selectedFestivals.length > 0}}">
+      <view class="festival-item {{item.type}}" wx:for="{{selectedFestivals}}" wx:key="name">
+        <text class="fest-icon">{{item.type === 'solar' ? '🎉' : item.type === 'lunar' ? '🏮' : '🌿'}}</text>
+        <text class="fest-name">{{item.name}}</text>
+        <text class="fest-type">{{item.type === 'solar' ? '公历节日' : item.type === 'lunar' ? '农历节日' : '节气'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 回到今天 -->
+  <view class="today-btn" bindtap="goToday">
+    <text>📅 回到今天</text>
+  </view>
+
+  <ad-banner />
+
+  <!-- SEO -->
+  <view class="seo-text" aria-hidden="true">万年历在线查询工具，公历农历对照，支持农历日期转换、传统节日节气查询、干支纪年生肖查询。</view>
+</view>

@@ -3,6 +3,7 @@ var analytics = require('../../../utils/analytics');
 Page({
   onLoad: function() {
     analytics.trackPage('bmi');
+    analytics.startStay('bmi');
     analytics.trackToolUse('bmi');
   },
   data: {
@@ -102,6 +103,13 @@ Page({
       }
     });
   },
+
+  onHide: function() { analytics.endStay('bmi'); },
+
+
+  onUnload: function() { analytics.endStay('bmi'); },
+
+
 
   onShareAppMessage: function () {
     analytics.trackShare('friend', 'bmi');

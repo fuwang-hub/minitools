@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "星盘查询",
+  "navigationBarTitleText": "星盘查询-出生星盘分析",
   "usingComponents": {
     "ad-banner": "/components/ad-banner/ad-banner",
     "share-poster": "/components/share-poster/share-poster"

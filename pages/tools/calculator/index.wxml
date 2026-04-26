@@ -39,4 +39,7 @@
   </view>
 
   <ad-banner type="banner" />
+
+  <!-- SEO: 搜索引擎索引文本 -->
+  <view class="seo-text" aria-hidden="true">免费在线计算器工具，支持加减乘除四则运算、百分比计算，iOS风格科学计算器，简洁好用。</view>
 </view>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "天气预报",
+  "navigationBarTitleText": "天气预报-实时天气查询",
   "navigationBarBackgroundColor": "#4F6EF6",
   "navigationBarTextStyle": "white",
   "enablePullDownRefresh": true,

@@ -3,25 +3,32 @@
     "pages/index/index",
     "pages/profile/index",
     "pages/login/index",
-    "pages/admin/index",
-    "pages/tools/weather/index",
-    "pages/tools/calculator/index",
-    "pages/tools/coin/index",
-    "pages/tools/converter/index",
-    "pages/tools/qrcode/index",
-    "pages/tools/random/index",
-    "pages/tools/date-calc/index",
-    "pages/tools/password/index",
-    "pages/tools/mortgage/index",
-    "pages/tools/bmi/index",
-    "pages/tools/ledger/index",
-    "pages/tools/countdown/index",
-    "pages/tools/exchange/index",
-    "pages/tools/stopwatch/index",
-    "pages/tools/ruler/index",
-    "pages/tools/noise/index"
+    "pages/admin/index"
   ],
   "subpackages": [
+    {
+      "root": "pages/tools",
+      "name": "tools",
+      "pages": [
+        "weather/index",
+        "calculator/index",
+        "coin/index",
+        "converter/index",
+        "qrcode/index",
+        "random/index",
+        "date-calc/index",
+        "password/index",
+        "mortgage/index",
+        "bmi/index",
+        "ledger/index",
+        "countdown/index",
+        "exchange/index",
+        "stopwatch/index",
+        "ruler/index",
+        "noise/index",
+        "calendar/index"
+      ]
+    },
     {
       "root": "pages/test",
       "name": "test",
@@ -88,7 +95,7 @@
   "preloadRule": {
     "pages/index/index": {
       "network": "all",
-      "packages": ["test", "horoscope", "metaphysics", "ai"]
+      "packages": ["tools", "test", "horoscope", "metaphysics", "ai"]
     }
   },
   "window": {
